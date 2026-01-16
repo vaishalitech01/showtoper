@@ -8,7 +8,7 @@ const NRIServices = () => {
 
       {/* Content Text */}
       <div className="space-y-2">
-        <p className="text-gray-700 text-md leading-relaxed text-justify md:text-left">
+        <p className="text-gray-700 text-md leading-relaxed text-justify lg:text-left">
           We provide better, excellent, and different service from what is usual
           especially to NRI's. As we have huge team exclusively for NRI clients,
           We understand your demand and desire deeply and provides you with

@@ -21,7 +21,7 @@ const Footer = () => {
 
       {/* Lower Section: Disclaimer */}
       <div className="bg-[#eef6ff] px-6 py-10 md:px-20 mb-6">
-        <div className="max-w-6xl mx-auto text-center leading-relaxed text-xs md:text-base">
+        <div className="max-w-6xl mx-auto text-center leading-relaxed text-xs lg:text-base">
           <p className="mb-4">
             <span className="font-bold">Disclaimer:</span> The content is for information purposes only and does not constitute an offer to avail of any service. Prices mentioned are subject to change without notice and properties mentioned are subject to availability. Images for representation purpose only. This is not the official website. Website maintained by Authorized Channel Partner Maha Rera. We may share data with rera registered brokers/companies for further procession.
           </p>

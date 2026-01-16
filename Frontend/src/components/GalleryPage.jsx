@@ -34,12 +34,12 @@ const Gallery = () => {
     <section className="py-4 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
-        <h2 className="text-3xl md:text-4xl font-semibold text-slate-800 text-center mb-16">
+        <h2 className="text-3xl lg:text-4xl font-semibold text-slate-800 text-center mb-16">
           Satyam Show Stopper Gallery
         </h2>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {galleryImages.map((image) => (
             <div 
               key={image.id} 

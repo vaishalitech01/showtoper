@@ -19,10 +19,10 @@ const Hero = ({ onRequestCallBack}) => {
   <div id="hero" className="font-sans text-gray-800">
     
     {/* Wrapper */}
-    <div className="relative w-full flex flex-col md:block">
+    <div className="relative w-full flex flex-col lg:block">
 
       {/* Image Section */}
-      <div className="relative h-[40vh] md:h-[85vh] w-full overflow-hidden">
+      <div className="relative h-[50vh] lg:h-[85vh] w-full overflow-hidden">
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
@@ -47,7 +47,7 @@ const Hero = ({ onRequestCallBack}) => {
       <div className="
         bg-white p-4 shadow-2xl rounded-lg
         w-[90%] mx-auto mt-4
-        md:absolute md:top-6 md:left-6 md:mt-0 md:max-w-sm md:z-10
+        lg:absolute lg:top-6 lg:left-6 lg:mt-0 lg:max-w-sm lg:z-10
       ">
         <div className="text-center space-y-2 flex flex-col items-center">
 
@@ -55,7 +55,7 @@ const Hero = ({ onRequestCallBack}) => {
             Launching Soon
           </p>
 
-          <h1 className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">
+          <h1 className="text-xl lg:text-2xl font-bold text-slate-900 leading-tight">
             SATYAM METRO SHOWSTOPPER
           </h1>
 
@@ -80,7 +80,7 @@ const Hero = ({ onRequestCallBack}) => {
             2, 3 & 4 BHK Luxuries Apartments
           </p>
 
-          <div className="text-xl md:text-2xl font-bold text-slate-900">
+          <div className="text-xl lg:text-2xl font-bold text-slate-900">
             ₹ On Request
           </div>
 

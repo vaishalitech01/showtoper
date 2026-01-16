@@ -89,7 +89,7 @@ const Location = () => {
       </div>
 
       {/* Connectivity Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6 px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-6 px-8">
         {locationData.map((section, index) => (
           <div key={index} className="flex flex-col">
             <h3 className="text-xl font-bold text-slate-900 border-b border-gray-300 pb-3 mb-6">

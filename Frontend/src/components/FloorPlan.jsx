@@ -23,7 +23,7 @@ const FloorPlan = ({ onOfferPriceClick }) => {
         Satyam Metro Showstopper Floor Plans
       </h2>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-10">
+      <div className="flex flex-col lg:flex-row justify-center items-center gap-10">
         {plans.map((plan, index) => (
           <div 
             key={index} 

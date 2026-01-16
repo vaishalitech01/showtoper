@@ -95,7 +95,7 @@ const handleSubmit = async (e) => {
 
 
   return (
-    <div className="block md:hidden bg-white p-4 shadow-lg">
+    <div className="block lg:hidden bg-white p-4 shadow-lg">
 
       <h2 className="text-center text-black text-md font-medium mb-4">
         Pre-Register for Best Offers
@@ -158,7 +158,7 @@ const handleSubmit = async (e) => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-[#A67C48] text-white py-2 rounded-full font-medium"
+          className="w-full animated-gradient text-white py-2 rounded-full font-medium"
         >
           {loading ? "Submitting..." : "Submit"}
         </button>
