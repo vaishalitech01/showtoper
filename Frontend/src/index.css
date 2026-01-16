@@ -24,3 +24,20 @@
         background-position: 0% 50%;
     }
 }
+
+/* Hero Swiper Custom Styles */
+.hero-swiper .swiper-pagination-bullet {
+    background: white;
+    opacity: 0.6;
+    width: 8px;
+    height: 8px;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: white;
+}
+
+.hero-swiper .swiper-pagination {
+    bottom: 15px;
+}

@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import image1 from "../assets/1.png";
 import image2 from "../assets/2.png";
 import image3 from "../assets/3.jpeg";
@@ -10,7 +10,7 @@ import image7 from "../assets/7.png";
 import image8 from "../assets/8.png";
 
 import "swiper/css";
-import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 
 const Hero = ({ onRequestCallBack}) => {
   const images = [image1, image2, image3, image4, image5, image6, image7, image8];
@@ -20,15 +20,14 @@ const Hero = ({ onRequestCallBack}) => {
     
     {/* Wrapper */}
     <div className="relative w-full flex flex-col lg:block">
-
       {/* Image Section */}
       <div className="relative md:h-[50vh] h-[25vh] lg:h-[85vh] sm:h-[25vh]  w-full overflow-hidden">
         <Swiper
-          modules={[Autoplay, EffectFade]}
-          effect="fade"
+          modules={[Autoplay, Pagination]}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           loop={true}
-          className="h-full w-full"
+          pagination={{ clickable: true }}
+          className="h-full w-full hero-swiper"
         >
           {images.map((src, index) => (
             <SwiperSlide key={index}>
