@@ -6,7 +6,7 @@ const MobileFooter = () => {
   return (
     <>
       {/* Fixed Footer */}
-      <div className="fixed bottom-0 left-0 w-full bg-[#A67C48] border-t shadow-lg flex lg:hidden z-50">
+      <div className="fixed bottom-0 left-0 w-full animated-gradient border-t shadow-lg flex lg:hidden z-50">
         <a
           href={contactConfig.propertyLocation.googleMapsUrl}
           target="_blank"

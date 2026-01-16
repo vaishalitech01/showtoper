@@ -22,7 +22,7 @@ const Hero = ({ onRequestCallBack}) => {
     <div className="relative w-full flex flex-col lg:block">
 
       {/* Image Section */}
-      <div className="relative h-[50vh] lg:h-[85vh] w-full overflow-hidden">
+      <div className="relative md:h-[50vh] h-[25vh] lg:h-[85vh] sm:h-[25vh]  w-full overflow-hidden">
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
