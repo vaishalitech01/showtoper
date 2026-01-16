@@ -41,3 +41,7 @@
 .hero-swiper .swiper-pagination {
     bottom: 15px;
 }
+
+.embossed-shadow {
+    box-shadow: inset 2px 2px 5px rgba(158, 114, 66, 0.2), inset -2px -2px 5px rgba(240, 144, 81, 0.1);
+}
