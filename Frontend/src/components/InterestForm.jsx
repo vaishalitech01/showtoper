@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns } from '../key/key';
 import axios from 'axios';
-
+import logo from "../assets/showstopper-logo.webp";
 const baseurl = import.meta.env.VITE_BASE_API_URL;
 
 const InterestForm = ({ onClose }) => {
@@ -134,7 +134,7 @@ const handleSubmit = async (e) => {
         <div className="px-8 pt-6 pb-10 flex flex-col items-center">
 
           {/* Logo */}
-          <div className="mb-6 bg-black p-4 rounded-sm border border-yellow-600/50 w-full max-w-[320px] text-center shadow-lg">
+          {/* <div className="mb-6 bg-black p-4 rounded-sm border border-yellow-600/50 w-full max-w-[320px] text-center shadow-lg">
             <div className="text-[10px] tracking-[0.3em] text-gray-300 uppercase">
               Codename
             </div>
@@ -144,7 +144,12 @@ const handleSubmit = async (e) => {
             <div className="text-[10px] tracking-[0.2em] text-gray-300 uppercase border-t border-gray-700 mt-1 pt-1">
               Navi - Mumbai
             </div>
-          </div>
+          </div> */}
+           <img
+              src={logo}
+              alt="Satyam Metro Showstopper Logo"
+              className="h-15 w-46 mb-4 border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200"
+            />
 
           <p className="text-gray-700 font-medium mb-6 text-center">
             Please Enter Your Details To Learn More About This Project
