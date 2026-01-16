@@ -32,7 +32,7 @@ const Hero = ({ onRequestCallBack}) => {
           {images.map((src, index) => (
             <SwiperSlide key={index}>
               <div
-                className="h-full w-full bg-cover bg-center scale-105"
+                className="h-full w-full bg-cover bg-center scale-100"
                 style={{ backgroundImage: `url('${src}')` }}
               >
                 <div className="absolute inset-0 bg-black/20" />
