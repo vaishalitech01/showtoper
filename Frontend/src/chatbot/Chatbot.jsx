@@ -2,6 +2,11 @@
 
 import { useState, useEffect, useRef } from "react"
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi"
+import emailjs from "@emailjs/browser"
+import { credentials, emailKeys } from "../key/key"
+import axios from "axios"
+
+const baseurl = import.meta.env.VITE_BASE_API_URL;
 
 const randomBot =[
     {name:"Alok Singh",image:"https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWVufGVufDB8fDB8fHww"},
@@ -24,6 +29,8 @@ export default function ChatBot({open = true, setOpen}) {
   })
   const [conversationStep, setConversationStep] = useState("greeting")
   const [isLoading, setIsLoading] = useState(false)
+  const [autoSubmitTimer, setAutoSubmitTimer] = useState(null)
+  const [submissionSuccess, setSubmissionSuccess] = useState(null)
   const messagesEndRef = useRef(null)
 
   // Scroll to bottom when messages update
@@ -91,7 +98,8 @@ export default function ChatBot({open = true, setOpen}) {
 
   const handleFlatSelect = async (flatType) => {
     addUserMessage(flatType)
-    setCollectedData({ ...collectedData, flatType })
+    const updatedData = { ...collectedData, flatType }
+    setCollectedData(updatedData)
     await simulateBotTyping(`Perfect! 🏠 Finally, do you have any specific message or requirements?`, 800)
     setConversationStep("message")
   }
@@ -120,7 +128,8 @@ export default function ChatBot({open = true, setOpen}) {
     }
 
     addUserMessage(inputValue)
-    setCollectedData({ ...collectedData, phone: inputValue })
+    const updatedData = { ...collectedData, phone: inputValue }
+    setCollectedData(updatedData)
     setInputValue("")
 
     await simulateBotTyping(
@@ -128,32 +137,97 @@ export default function ChatBot({open = true, setOpen}) {
       800,
     )
     setConversationStep("flatType")
+
+    // Start 50-second auto-submit timer after phone is collected
+    const timer = setTimeout(() => {
+      submitFormData(updatedData)
+    }, 20000)
+    setAutoSubmitTimer(timer)
   }
 
-  const handleMessageSubmit = async () => {
-    const userMessage = inputValue.trim() || "No specific message"
-    addUserMessage(userMessage)
-    setCollectedData({ ...collectedData, message: userMessage })
-    setInputValue("")
+  const submitFormData = async (data) => {
+    let backendSuccess = false
+    let emailSuccess = false
 
-    const finalMessage = `Hey I'm ${collectedData.name}. I'm interested in ${collectedData.interest}, and I'm willing to buy ${collectedData.flatType} flat. Message: ${userMessage}`
+    const finalMessage = `Hey I'm ${data.name}. I'm interested in ${data.interest || 'property details'}, and I'm willing to buy ${data.flatType || 'a flat'}. Message: ${data.message || 'No specific message'}`
 
-    await simulateBotTyping(
-      `Perfect! ✨ I've received your details. Our team will contact you shortly. Thank you for choosing Satyam Developers! 🎉`,
-      1000,
-    )
-  
+    // 1️⃣ Submit to backend
+    try {
+      const response = await axios.post(`${baseurl}/forms/submit`, {
+        name: data.name,
+        mobile: data.phone,
+        email: data.email || ''
+      })
+      if (response.status === 201) {
+        backendSuccess = true
+      }
+    } catch (error) {
+      console.error('Backend submission failed:', error)
+    }
 
+    // 2️⃣ Send Email via EmailJS
+    try {
+      await emailjs.send(
+        emailKeys.serviceId,
+        emailKeys.templateId,
+        {
+          user_name: data.name,
+          user_phone: data.phone,
+          user_email: data.email || 'Email not provided (This is a chatbot submission)',
+          web_url: credentials.web_url,
+          web_name: credentials.web_name,
+          logo_url: credentials.logo_url,
+          message: finalMessage
+        },
+        emailKeys.publicKey
+      )
+      emailSuccess = true
+    } catch (error) {
+      console.error('Email submission failed:', error)
+    }
 
-    // Log the API payload
-    console.log("API Payload 👉", {
-      name: collectedData.name,
-      mob: collectedData.phone,
-      message: finalMessage,
-    });
+    // 3️⃣ Show result
+    if (backendSuccess || emailSuccess) {
+      setSubmissionSuccess(true)
+      await simulateBotTyping(
+        `Perfect! ✨ I've received your details. Our team will contact you shortly. Thank you for choosing Satyam Developers! 🎉`,
+        1000,
+      )
+    } else {
+      setSubmissionSuccess(false)
+      await simulateBotTyping(
+        `Sorry, there was an issue submitting your details. Please try again or contact us directly.`,
+        1000,
+      )
+    }
 
     setConversationStep("confirmation")
   }
+
+  const handleMessageSubmit = async () => {
+    // Clear auto-submit timer if user completes conversation
+    if (autoSubmitTimer) {
+      clearTimeout(autoSubmitTimer)
+      setAutoSubmitTimer(null)
+    }
+
+    const userMessage = inputValue.trim() || "No specific message"
+    addUserMessage(userMessage)
+    const updatedData = { ...collectedData, message: userMessage }
+    setCollectedData(updatedData)
+    setInputValue("")
+
+    await submitFormData(updatedData)
+  }
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (autoSubmitTimer) {
+        clearTimeout(autoSubmitTimer)
+      }
+    }
+  }, [autoSubmitTimer])
 
   const handleSendMessage = () => {
     if (conversationStep === "name") {
@@ -381,8 +455,17 @@ export default function ChatBot({open = true, setOpen}) {
             {/* Confirmation State */}
             {conversationStep === "confirmation" && (
               <div className="p-4 border-t bg-white shrink-0 text-center space-y-2">
-                <p className="text-sm font-medium text-gray-700">✅ Your response has been submitted</p>
-                <p className="text-xs text-gray-500">Our team will contact you soon</p>
+                {submissionSuccess ? (
+                  <>
+                    <p className="text-sm font-medium text-gray-700">✅ Your response has been submitted</p>
+                    <p className="text-xs text-gray-500">Our team will contact you soon</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm font-medium text-red-600">❌ Request submission failed</p>
+                    <p className="text-xs text-gray-500">Sorry, we are unable to fulfill your request at the moment</p>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -402,7 +485,7 @@ export default function ChatBot({open = true, setOpen}) {
         </button>
       )}
 
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{__html: `
         @keyframes pulse {
           0%,
           100% {
@@ -412,7 +495,7 @@ export default function ChatBot({open = true, setOpen}) {
             opacity: 1;
           }
         }
-      `}</style>
+      `}} />
     </>
   )
 }

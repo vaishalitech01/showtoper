@@ -1,13 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
-import image1 from "../assets/1.jpg";
-import image2 from "../assets/2.jpg";
-import image3 from "../assets/3.jpg";
-import image4 from "../assets/4.jpg";
+import image1 from "../assets/1.png";
+import image2 from "../assets/2.png";
+import image3 from "../assets/3.jpeg";
+import image4 from "../assets/4.png";
 import image5 from "../assets/5.jpg";
 import image6 from "../assets/6.jpg";
-import image7 from "../assets/7.jpg";
-import image8 from "../assets/8.jpg";
+import image7 from "../assets/7.png";
+import image8 from "../assets/8.png";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -65,7 +65,7 @@ const Hero = ({ onRequestCallBack}) => {
           </div>
 
           {/* Offer Box */}
-          <div className="bg-[#de9051] p-3 rounded-md text-white w-full shadow-lg">
+          <div className="animated-gradient  p-3 rounded-md text-white w-full shadow-lg">
             <div className="flex flex-col gap-2 border-2 border-dashed border-white p-2 text-left">
               <p className="flex gap-2">
                 ◆ EOI Offer 7X Return
@@ -84,7 +84,7 @@ const Hero = ({ onRequestCallBack}) => {
             ₹ On Request
           </div>
 
-          <button onClick={onRequestCallBack} className="bg-[#A67C48] text-white py-2 px-4 rounded-md font-semibold hover:bg-[#8e693c] transition-colors shadow-lg flex items-center gap-2 hover:cursor-pointer">
+          <button onClick={onRequestCallBack} className="animated-gradient text-white py-2 px-4 rounded-md font-semibold transition-colors flex items-center gap-2 hover:cursor-pointer">
             Download Brochure
           </button>
 

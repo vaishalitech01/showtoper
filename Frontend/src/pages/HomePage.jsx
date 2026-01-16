@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import About from "../components/About";
 import Hero from "../components/Hero";
 import Price from "../components/Price";
@@ -15,10 +15,61 @@ import BrochureForm from "../components/BrochureForm";
 import OfferPriceForm from "../components/OfferPriceForm";
 import InterestForm from '../components/InterestForm';
 
+// Popup timing configuration
+const INITIAL_POPUP_DELAY = 3000; // 3 seconds
+const REPEAT_POPUP_INTERVAL = 10000; // 10 seconds
+
 const HomePage = () => {
     const [isInterestFormOpen, setIsInterestFormOpen] = useState(false);
-      const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-      const [isOfferPriceFormOpen, setIsOfferPriceFormOpen] = useState(false);
+    const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
+    const [isOfferPriceFormOpen, setIsOfferPriceFormOpen] = useState(false);
+
+    useEffect(() => {
+      console.log('HomePage mounted - useEffect running');
+      
+      // Check if form was already submitted
+      const submitted = localStorage.getItem('interestFormSubmitted');
+      console.log('Form submitted status:', submitted);
+      
+      if (submitted === 'true') {
+        console.log('Form already submitted, skipping popup');
+        return;
+      }
+
+      console.log('Setting up timers...');
+      
+      // Show form after 3 seconds on initial load
+      const initialTimer = setTimeout(() => {
+        console.log('Initial timer fired - opening form');
+        setIsInterestFormOpen(true);
+      }, INITIAL_POPUP_DELAY);
+
+      // Then show every 10 seconds
+      const repeatTimer = setInterval(() => {
+        console.log('Repeat timer fired');
+        const isSubmitted = localStorage.getItem('interestFormSubmitted');
+        if (isSubmitted !== 'true') {
+          console.log('Opening form from repeat timer');
+          setIsInterestFormOpen(true);
+        }
+      }, REPEAT_POPUP_INTERVAL);
+
+      return () => {
+        console.log('Cleaning up timers');
+        clearTimeout(initialTimer);
+        clearInterval(repeatTimer);
+      };
+    }, []);
+
+    const handleInterestFormClose = (submitted = false) => {
+      console.log('Closing form, submitted:', submitted);
+      setIsInterestFormOpen(false);
+      if (submitted) {
+        console.log('Saving to localStorage');
+        localStorage.setItem('interestFormSubmitted', 'true');
+      }
+    };
+
   return (
     <>
     {/* <Header onBrochureClick={() => setIsBrochureFormOpen(true)} /> */}
@@ -28,7 +79,7 @@ const HomePage = () => {
 
         <Hero onRequestCallBack={() => setIsInterestFormOpen(true)} />
            {isInterestFormOpen && (
-        <InterestForm onClose={() => setIsInterestFormOpen(false)} />
+        <InterestForm onClose={handleInterestFormClose} />
       )}
         <MobileForm />
         <About />

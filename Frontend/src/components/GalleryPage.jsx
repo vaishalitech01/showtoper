@@ -1,5 +1,5 @@
 import React from 'react';
-import interior1 from '../assets/Gallery/interior1.png';
+import interior1 from '../assets/Gallery/interior1.jpg';
 import interior2 from '../assets/Gallery/interior2.jpg';
 import interior3 from '../assets/Gallery/interior3.webp';
 import interior4 from '../assets/Gallery/interior4.webp';

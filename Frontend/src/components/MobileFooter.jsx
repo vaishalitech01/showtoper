@@ -7,10 +7,15 @@ const MobileFooter = () => {
     <>
       {/* Fixed Footer */}
       <div className="fixed bottom-0 left-0 w-full bg-[#A67C48] border-t shadow-lg flex md:hidden z-50">
-        <button className="w-1/3 flex items-center justify-center gap-2 py-3 text-white font-semibold">
+        <a
+          href={contactConfig.propertyLocation.googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-1/3 flex items-center justify-center gap-2 py-3 text-white font-semibold"
+        >
           <MapPin size={18} />
           SITE VISIT
-        </button>
+        </a>
         <a
           href={`https://wa.me/${contactConfig.phoneNumber}?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
           target="_blank"

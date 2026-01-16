@@ -112,7 +112,7 @@ const Price = ({ onOfferPriceClick }) => {
 
           <button
             onClick={onOfferPriceClick}
-            className="mt-6 w-full bg-[#C68A55] text-white px-6 py-4 lg:py-3 rounded-full text-md font-semibold shadow-md hover:bg-[#b07848] transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+            className="mt-6 w-full animated-gradient text-white px-6 py-4 lg:py-3 rounded-full text-md font-semibold shadow-md hover:bg-[#b07848] transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
           >
             Complete Costing Details
           </button>

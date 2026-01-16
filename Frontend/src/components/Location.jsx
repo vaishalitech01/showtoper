@@ -1,4 +1,6 @@
 import React from 'react';
+import { contactConfig } from '../config/credential';
+import image2 from '../assets/2.png';
 
 const Location = () => {
   const locationData = [
@@ -62,14 +64,28 @@ const Location = () => {
       </div>
 
       {/* Map Section */}
-      <div className="w-full h-112.5 rounded-lg overflow-hidden border border-gray-200 shadow-sm mb-6">
+      <div className="w-full h-112.5 rounded-lg overflow-hidden border border-gray-200 shadow-sm mb-6 relative">
         <iframe
           title="Satyam Metro Showstopper Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.3123456789!2d73.067!3d19.034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzAyLjQiTiA3M8KwMDQnMDEuMiJF!5e0!3m2!1sen!2sin!4v1234567890"
+          src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.234!2d${contactConfig.propertyLocation.longitude}!3d${contactConfig.propertyLocation.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzUwLjIiTiA3M8KwMDQnMjQuMSJF!5e0!3m2!1sen!2sin!4v1234567890`}
           className="w-full h-full border-0"
           allowFullScreen=""
           loading="lazy"
         ></iframe>
+        
+        {/* Custom Marker Overlay */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full pointer-events-none z-10">
+          <div className="relative">
+            <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#A67C48] shadow-lg animate-bounce">
+              <img 
+                src={image2} 
+                alt="Property Location" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-[#A67C48]"></div>
+          </div>
+        </div>
       </div>
 
       {/* Connectivity Grid */}

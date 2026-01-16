@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<users>
+  <user>[YOUR-BING-VERIFICATION-CODE]</user>
+</users>
+
+<!-- 
+To verify your site with Bing Webmaster Tools:
+1. Go to https://www.bing.com/webmasters
+2. Add your site
+3. Choose XML file verification
+4. Replace [YOUR-BING-VERIFICATION-CODE] with the code provided
+-->
