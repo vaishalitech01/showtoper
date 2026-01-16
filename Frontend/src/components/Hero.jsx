@@ -24,7 +24,7 @@ const Hero = ({ onRequestCallBack}) => {
       <div className="relative md:h-[50vh] h-[25vh] lg:h-[85vh] sm:h-[25vh]  w-full overflow-hidden">
         <Swiper
           modules={[Autoplay, Pagination]}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={true}
           pagination={{ clickable: true }}
           className="h-full w-full hero-swiper"
