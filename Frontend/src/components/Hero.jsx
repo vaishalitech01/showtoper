@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const Hero = ({ onRequestCallBack}) => {
-  const images = [image1, image2, image3, image4, image5, image6, image7, image8];
+  const images = [image1, image2, image3, image4, image6, image7, image8];
 
   return (
   <div id="hero" className="font-sans text-gray-800">
