@@ -3,12 +3,12 @@ import Form from "../database/models/Form.js";
 export const submitForm = async (req, res) => {
   try {
     console.log("Request Body:", req.body);
-    const { name, email, mobile, message } = req.body;
-    console.log("Parsed Data:", { name, email, mobile, message });
+    const { name, email, mobile, message, source } = req.body;
+    console.log("Parsed Data:", { name, email, mobile, message, source });
     if(!name || !mobile) {
       return res.status(400).json({ message: "Name and Mobile are required" });
     }
-    const newForm = new Form({ name, email, mobile, message });
+    const newForm = new Form({ name, email, mobile, message, source });
     await newForm.save();
     res.status(201).json({ message: "Form submitted successfully", form: newForm });
   } catch (error) {

@@ -11,6 +11,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     name: "",
     email: "",
     mobile: "",
+    source: 'satyammetroshowstoppers.in',
   });
 
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,7 @@ const handleSubmit = async (e) => {
   setShowFailureAlert(false);
 
   try {
+    console.log("Submitting form data:", formData);
     // 1️⃣ Submit to backend
     const response = await axios.post(
       `${baseurl}/forms/submit`,
@@ -50,7 +52,7 @@ const handleSubmit = async (e) => {
 
     // 3️⃣ Success
     setShowSuccessAlert(true);
-    setFormData({ name: '', mobile: '', email: '' });
+    setFormData({ name: '', mobile: '', email: '', source: 'satyammetroshowstoppers.in' });
 
   } catch (error) {
     console.error(error);
