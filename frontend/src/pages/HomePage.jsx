@@ -9,11 +9,10 @@ import Gallery from "../components/GalleryPage";
 import NRIServices from "../components/NRIServices";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import MobileForm from "../components/MobileForm";
 import MobileFooter from "../components/MobileFooter";
 import BrochureForm from "../components/BrochureForm";
-import OfferPriceForm from "../components/OfferPriceForm";
 import InterestForm from '../components/InterestForm';
+import MobileForm from '../components/MobileForm';
 
 // Popup timing configuration
 const INITIAL_POPUP_DELAY = 3000; // 3 seconds
