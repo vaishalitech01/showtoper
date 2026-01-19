@@ -13,6 +13,8 @@ import MobileFooter from "../components/MobileFooter";
 import BrochureForm from "../components/BrochureForm";
 import InterestForm from '../components/InterestForm';
 import MobileForm from '../components/MobileForm';
+import OfferPriceForm from '../components/OfferPriceForm';
+
 
 // Popup timing configuration
 const INITIAL_POPUP_DELAY = 3000; // 3 seconds

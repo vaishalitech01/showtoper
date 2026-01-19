@@ -1,8 +1,8 @@
-// import React, { useState } from 'react';
-// import { User, Phone, X } from 'lucide-react';
-// import emailjs from '@emailjs/browser';
-// import { emailKeys } from '../key/key';
-// import axios from 'axios';
+import React, { useState } from 'react';
+import { User, Phone, X } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { emailKeys } from '../key/key';
+import axios from 'axios';
 
 const baseurl = import.meta.env.VITE_BASE_API_URL;
 
