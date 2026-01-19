@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+    --clr-p: #9e7242;
+    --clr-s: #f09051;
+}
+
+.animated-gradient {
+    background: linear-gradient(-35deg, var(--clr-s), var(--clr-p), var(--clr-s));
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+    border: 0px;
+    box-shadow: 1px 2px 4px -2px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Hero Swiper Custom Styles */
+.hero-swiper .swiper-pagination-bullet {
+    background: white;
+    opacity: 0.6;
+    width: 8px;
+    height: 8px;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: white;
+}
+
+.hero-swiper .swiper-pagination {
+    bottom: 15px;
+}
+
+.embossed-shadow {
+    box-shadow: inset 2px 2px 5px rgba(158, 114, 66, 0.2), inset -2px -2px 5px rgba(240, 144, 81, 0.1);
+}

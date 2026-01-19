@@ -1,0 +1,19 @@
+# robots.txt for Satyam Metro Showstopper
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://satyammetroshowstoppers.in/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 1
+
+# Allow Google bots
+User-agent: Googlebot
+Allow: /
+
+# Allow Bing bots
+User-agent: Bingbot
+Allow: /
