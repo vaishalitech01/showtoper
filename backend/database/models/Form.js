@@ -6,7 +6,7 @@ const formSchema = new mongoose.Schema({
     mobile: { type: String, required: true },
     message: { type: String },
     source: { type: String, required: true },
-    status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' }
+    status: { type: String, enum: ['in-progress', 'completed', 'cancelled', 'contacted'], default: 'in-progress' }
 }, { timestamps: true });
 
 const Form = mongoose.model('Form', formSchema);
