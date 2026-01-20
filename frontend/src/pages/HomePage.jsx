@@ -24,6 +24,9 @@ const HomePage = () => {
     const [isInterestFormOpen, setIsInterestFormOpen] = useState(false);
     const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
     const [isOfferPriceFormOpen, setIsOfferPriceFormOpen] = useState(false);
+    const [formMode, setFormMode] = useState("");
+    const [offerType, setOfferType] = useState("");
+
 
     useEffect(() => {
       console.log('HomePage mounted - useEffect running');
@@ -78,21 +81,28 @@ const HomePage = () => {
           <BrochureForm onClose={() => setIsBrochureFormOpen(false)} />
         )}
 
-        <Hero onRequestCallBack={() => setIsInterestFormOpen(true)} />
+        <Hero onRequestCallBack={() => {setIsInterestFormOpen(true)
+          setFormMode('download brochure');
+        }} />
            {isInterestFormOpen && (
-        <InterestForm onClose={handleInterestFormClose} />
+        <InterestForm mode={formMode} onClose={handleInterestFormClose} />
       )}
         <MobileForm />
         <About />
 
-        <Price onOfferPriceClick={() => setIsOfferPriceFormOpen(true)} />
+        <Price onOfferPriceClick={(type) => {setIsOfferPriceFormOpen(true)
+          setOfferType(type);
+        }} />
         {isOfferPriceFormOpen && (
-          <OfferPriceForm onClose={() => setIsOfferPriceFormOpen(false)} />
+          <OfferPriceForm
+           type={offerType} onClose={() => setIsOfferPriceFormOpen(false)} />
         )}
 
         <Amenities />
         <Gallery />
-        <FloorPlan onOfferPriceClick={() => setIsOfferPriceFormOpen(true)} />
+        <FloorPlan onOfferPriceClick={(type) => {setIsOfferPriceFormOpen(true)
+          setOfferType(type);
+        }} />
         <Location />
         <NRIServices />
         <Footer />

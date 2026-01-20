@@ -45,7 +45,7 @@ const FloorPlan = ({ onOfferPriceClick }) => {
             </div>
 
             {/* Action Button */}
-            <button onClick={onOfferPriceClick} className="mt-6 bg-linear-to-r from-[#B07E4D] to-[#D99B5C] text-white px-10 py-2.5 rounded-full text-sm font-medium shadow-md hover:opacity-90 transition-opacity hover:cursor-pointer">
+            <button onClick={() => onOfferPriceClick(index === 0 ? "layout plan" : "floor plan")} className="mt-6 bg-linear-to-r from-[#B07E4D] to-[#D99B5C] text-white px-10 py-2.5 rounded-full text-sm font-medium shadow-md hover:opacity-90 transition-opacity hover:cursor-pointer">
               {plan.buttonText}
             </button>
           </div>

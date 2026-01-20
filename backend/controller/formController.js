@@ -24,3 +24,20 @@ export const getForms = async (req, res) => {
     res.status(500).json({ message: "Failed to retrieve forms", error: error.message });
   }
 };
+
+export const updateFormStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (!['pending', 'approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ message: "Invalid status value" });
+    }
+    const updatedForm = await Form.findByIdAndUpdate(id, { status }, { new: true });
+    if (!updatedForm) {
+      return res.status(404).json({ message: "Form not found" });
+    }
+    res.status(200).json({ message: "Form status updated successfully", form: updatedForm });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update form status", error: error.message });
+  }
+};
