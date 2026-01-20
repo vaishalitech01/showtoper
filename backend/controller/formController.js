@@ -27,17 +27,40 @@ export const getForms = async (req, res) => {
 
 export const updateFormStatus = async (req, res) => {
   try {
+    console.log("Update Status Request Params:", req.params);
+    console.log("Update Status Request Body:", req.body);
     const { id } = req.params;
     const { status } = req.body;
-    if (!['pending', 'approved', 'rejected'].includes(status)) {
+
+    const allowedStatus = [
+      'in-progress',
+      'completed',
+      'cancelled',
+      'contacted'
+    ];
+
+    if (!allowedStatus.includes(status)) {
       return res.status(400).json({ message: "Invalid status value" });
     }
-    const updatedForm = await Form.findByIdAndUpdate(id, { status }, { new: true });
+
+    const updatedForm = await Form.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
     if (!updatedForm) {
       return res.status(404).json({ message: "Form not found" });
     }
-    res.status(200).json({ message: "Form status updated successfully", form: updatedForm });
+
+    res.status(200).json({
+      message: "Form status updated successfully",
+      form: updatedForm,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Failed to update form status", error: error.message });
+    res.status(500).json({
+      message: "Failed to update form status",
+      error: error.message,
+    });
   }
 };
