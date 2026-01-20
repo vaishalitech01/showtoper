@@ -11,7 +11,7 @@ const InterestForm = ({ onClose, mode }) => {
     name: '',
     mobile: '',
     email: '',
-    message: 'Interest Form Submission',
+    message: '',
     source:'satyammetroshowstoppers.in',
   });
 
@@ -55,6 +55,8 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setShowSuccessAlert(false);
   setShowFailureAlert(false);
+
+  formData.message = formHeader + ' Inquiry';
 
   if (!validateForm(formData)) {
     return;

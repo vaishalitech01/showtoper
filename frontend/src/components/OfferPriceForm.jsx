@@ -10,7 +10,7 @@ const OfferPriceForm = ({ onClose, type }) => {
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
-    message: 'Offer Price Request',
+    message: '',
     source:'satyammetroshowstoppers.in',
   });
 
@@ -54,6 +54,8 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setShowSuccessAlert(false);
   setShowFailureAlert(false);
+
+  formData.message = formHeader + ' Inquiry';
 
   if (!validateForm(formData)) {
     return;

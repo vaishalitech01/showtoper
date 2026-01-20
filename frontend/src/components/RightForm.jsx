@@ -12,6 +12,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     email: "",
     mobile: "",
     source:'satyammetroshowstoppers.in',
+    message: 'Right Form Inquiry',
   });
 
   const [loading, setLoading] = useState(false);
