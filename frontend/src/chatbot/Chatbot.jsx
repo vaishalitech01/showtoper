@@ -154,10 +154,14 @@ export default function ChatBot({open = true, setOpen}) {
     // 1️⃣ Submit to backend
     try {
       const response = await axios.post(`${baseurl}/forms/submit`, {
-        name: data.name,
-        mobile: data.phone,
-        email: data.email || ''
-      })
+  name: data.name,
+  mobile: data.phone,
+  email: data.email || '',
+  message: `Interest: ${data.interest}
+Flat Type: ${data.flatType}
+User Message: ${data.message || 'No message'}`,
+  source: 'satyammetroshowstoppers.in'
+});
       if (response.status === 201) {
         backendSuccess = true
       }
