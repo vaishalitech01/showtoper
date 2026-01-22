@@ -14,6 +14,7 @@ import BrochureForm from "../components/BrochureForm";
 import InterestForm from '../components/InterestForm';
 import MobileForm from '../components/MobileForm';
 import OfferPriceForm from '../components/OfferPriceForm';
+import DynamicSEO from '../components/DynamicSEO';
 
 
 // Popup timing configuration
@@ -76,6 +77,7 @@ const HomePage = () => {
 
   return (
     <>
+      <DynamicSEO />
     {/* <Header onBrochureClick={() => setIsBrochureFormOpen(true)} /> */}
         {isBrochureFormOpen && (
           <BrochureForm onClose={() => setIsBrochureFormOpen(false)} />
