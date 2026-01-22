@@ -22,4 +22,4 @@ export const regexPatterns = {
   mobilePattern: /^[6-9]\d{9}$/,
 };
 
-export let user_address = "Location not available";
+export let user_address = null;

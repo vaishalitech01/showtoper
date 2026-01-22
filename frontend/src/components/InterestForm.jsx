@@ -65,8 +65,13 @@ const handleSubmit = async (e) => {
     messageTemplate = messageTemplates.brochure;
   }
 
+
+
   const backendMessage = createMessageWithAddress(messageTemplate, formData.name);
   const emailMessage = createMessageWithAddress(messageTemplate, formData.name);
+
+  // console.log("Using backend message template for mode:", backendMessage);
+  //  console.log("Using email message template for mode:", emailMessage);
 
   const submissionData = {
     ...formData,

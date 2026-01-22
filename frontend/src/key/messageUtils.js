@@ -1,12 +1,20 @@
 // Utility function to create messages with user address
 export const createMessageWithAddress = (baseMessage, userName = '') => {
-  const userAddress = window.user_address || "Location not available";
+  const userAddress = window.user_address;
+  let message = '';
   
   if (userName) {
-    return `${baseMessage.replace('${name}', userName)} My address is: ${userAddress}`;
+    message = baseMessage.replace('${name}', userName);
+  } else {
+    message = baseMessage;
   }
   
-  return `${baseMessage} My address is: ${userAddress}`;
+  // Only append address if it's available and not null/undefined
+  if (userAddress && userAddress !== "Location not available") {
+    message += ` My address is: ${userAddress}`;
+  }
+  
+  return message;
 };
 
 // Message templates
