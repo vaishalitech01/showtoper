@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, regexPatterns } from "../key/key";
-import axios from 'axios';
+import axios from "axios";
 
 const baseurl = import.meta.env.VITE_BASE_API_URL;
 
@@ -10,8 +10,8 @@ const MobileForm = () => {
     name: "",
     email: "",
     mobile: "",
-    message: "Mobile Form Submission",
-    source:'satyammetroshowstoppers.in',
+    message:"Hello Satyam Developers, I'm interested in your property and would love to have a brief discussion at your convenience. (this form is submitted from mobile view)",
+    source: "satyammetroshowstoppers.in",
   });
 
   const [loading, setLoading] = useState(false);
@@ -19,86 +19,85 @@ const MobileForm = () => {
   const [showFailureAlert, setShowFailureAlert] = useState(false);
   const [errors, setErrors] = useState({ name: "", email: "", mobile: "" });
 
-const validateForm = (formData) => {
-  const { name, email, mobile } = formData;
-  const { namePattern, emailPattern, mobilePattern } = regexPatterns;
-  const newErrors = { name: "", email: "", mobile: "" };
+  const validateForm = (formData) => {
+    const { name, email, mobile } = formData;
+    const { namePattern, emailPattern, mobilePattern } = regexPatterns;
+    const newErrors = { name: "", email: "", mobile: "" };
 
-  if (!namePattern.test(name)) {
-    newErrors.name = "Name must be 2-50 characters (letters only)";
-  }
-
-  if (email && !emailPattern.test(email)) {
-    newErrors.email = "Invalid email format";
-  }
-
-  if (!mobilePattern.test(mobile)) {
-    newErrors.mobile = "Mobile must be 10 digits";
-  }
-
-  setErrors(newErrors);
-  return !newErrors.name && !newErrors.email && !newErrors.mobile;
-};
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setShowSuccessAlert(false);
-  setShowFailureAlert(false);
-
-  if (!validateForm(formData)) {
-    return;
-  }
-
-  setLoading(true);
-  let backendSuccess = false;
-  let emailSuccess = false;
-
-  // 1️⃣ Submit to backend
-  try {
-    const response = await axios.post(`${baseurl}/forms/submit`, formData);
-    if (response.status === 201) {
-      backendSuccess = true;
+    if (!namePattern.test(name)) {
+      newErrors.name = "Name must be 2-50 characters (letters only)";
     }
-  } catch (error) {
-    console.error('Backend submission failed:', error);
-  }
 
-  // 2️⃣ Send Email via EmailJS
-  try {
-    await emailjs.send(
-      emailKeys.serviceId,
-      emailKeys.templateId,
-      {
-        user_name: formData.name,
-        user_phone: formData.mobile,
-        user_email: formData.email,
-        web_url: credentials.web_url,
-        web_name: credentials.web_name,
-        logo_url: credentials.logo_url,
-        message: 'Mobile form submission'
-      },
-      emailKeys.publicKey
-    );
-    emailSuccess = true;
-  } catch (error) {
-    console.error('Email submission failed:', error);
-  }
+    if (email && !emailPattern.test(email)) {
+      newErrors.email = "Invalid email format";
+    }
 
-  // 3️⃣ Show result
-  if (backendSuccess || emailSuccess) {
-    setShowSuccessAlert(true);
-    setFormData({ name: '', mobile: '', email: '' });
-  } else {
-    setShowFailureAlert(true);
-  }
+    if (!mobilePattern.test(mobile)) {
+      newErrors.mobile = "Mobile must be 10 digits";
+    }
 
-  setLoading(false);
-};
+    setErrors(newErrors);
+    return !newErrors.name && !newErrors.email && !newErrors.mobile;
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setShowSuccessAlert(false);
+    setShowFailureAlert(false);
+
+    if (!validateForm(formData)) {
+      return;
+    }
+
+    setLoading(true);
+    let backendSuccess = false;
+    let emailSuccess = false;
+
+    // 1️⃣ Submit to backend
+    try {
+      const response = await axios.post(`${baseurl}/forms/submit`, formData);
+      if (response.status === 201) {
+        backendSuccess = true;
+      }
+    } catch (error) {
+      console.error("Backend submission failed:", error);
+    }
+
+    // 2️⃣ Send Email via EmailJS
+    try {
+      await emailjs.send(
+        emailKeys.serviceId,
+        emailKeys.templateId,
+        {
+          user_name: formData.name,
+          user_phone: formData.mobile,
+          user_email: formData.email,
+          web_url: credentials.web_url,
+          web_name: credentials.web_name,
+          logo_url: credentials.logo_url,
+          message:
+            "Hello Satyam Developers, I'm interested in your property and would love to have a brief discussion at your convenience. (this form is submitted from mobile view)",
+        },
+        emailKeys.publicKey,
+      );
+      emailSuccess = true;
+    } catch (error) {
+      console.error("Email submission failed:", error);
+    }
+
+    // 3️⃣ Show result
+    if (backendSuccess || emailSuccess) {
+      setShowSuccessAlert(true);
+      setFormData({ name: "", mobile: "", email: "" });
+    } else {
+      setShowFailureAlert(true);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className="block lg:hidden bg-white p-4 shadow-lg">
-
       <h2 className="text-center text-black text-md font-medium mb-4">
         Pre-Register for Best Offers
       </h2>
@@ -121,13 +120,13 @@ const handleSubmit = async (e) => {
             type="text"
             placeholder="Name"
             value={formData.name}
-            onChange={(e) =>
-              setFormData({ ...formData, name: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
             className="w-full border rounded-lg p-2"
           />
-          {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+          {errors.name && (
+            <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+          )}
         </div>
 
         <div>
@@ -140,7 +139,9 @@ const handleSubmit = async (e) => {
             }
             className="w-full border rounded-lg p-2"
           />
-          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
         </div>
 
         <div>
@@ -154,7 +155,9 @@ const handleSubmit = async (e) => {
             required
             className="w-full border rounded-lg p-2"
           />
-          {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
+          {errors.mobile && (
+            <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+          )}
         </div>
 
         <button

@@ -5,6 +5,7 @@ import { contactConfig } from "../config/credential";
 import axios from "axios";
 import poster from "../assets/Poster/ShowStopper_Poster_2.jpeg";
 const baseurl = import.meta.env.VITE_BASE_API_URL;
+// const baseurl = "https://api.satyammetroshowstoppers.in/api/";
 
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     email: "",
     mobile: "",
     source:'satyammetroshowstoppers.in',
-    message: 'Right Form Inquiry',
+    message: 'Hello Satyam Developers, I\'m interested in your property and would love to have a brief discussion at your convenience.',
   });
 
   const [loading, setLoading] = useState(false);

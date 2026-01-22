@@ -45,7 +45,7 @@ if(mode==='callback'){
   formHeader = 'Request a Callback';
 }
 else if(mode==='brochure'){
-  formHeader = 'Brochure';
+  formHeader = 'Download Brochure';
 }
 else if(mode==='download brochure'){
   formHeader = 'Download Brochure';
@@ -56,7 +56,19 @@ const handleSubmit = async (e) => {
   setShowSuccessAlert(false);
   setShowFailureAlert(false);
 
-  formData.message = formHeader + ' Inquiry';
+  // Prepare dynamic message based on mode
+  let dynamicMessage = `Hello Satyam Developers, this is ${formData.name}. I'm interested in your property and would love to have a brief discussion at your convenience.`;
+  
+  if (mode === 'callback') {
+    dynamicMessage = `Hello Satyam Developers, this is ${formData.name}. I would like to request a callback to discuss your property. Please contact me at your convenience.`;
+  } else if (mode === 'brochure' || mode === 'download brochure') {
+    dynamicMessage = `Hello Satyam Developers, this is ${formData.name}. I would like to download the brochure for your property. Please share the details.`;
+  }
+
+  const submissionData = {
+    ...formData,
+    message: dynamicMessage
+  };
 
   if (!validateForm(formData)) {
     return;
@@ -68,7 +80,7 @@ const handleSubmit = async (e) => {
 
   // 1️⃣ Submit to backend
   try {
-    const response = await axios.post(`${baseurl}/forms/submit`, formData);
+    const response = await axios.post(`${baseurl}/forms/submit`, submissionData);
     if (response.status === 201) {
       backendSuccess = true;
     }
@@ -88,7 +100,7 @@ const handleSubmit = async (e) => {
         web_url: credentials.web_url,
         web_name: credentials.web_name,
         logo_url: credentials.logo_url,
-        message: 'Interest form submission'
+        message: dynamicMessage
       },
       emailKeys.publicKey
     );

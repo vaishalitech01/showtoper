@@ -10,7 +10,7 @@ const OfferPriceForm = ({ onClose, type }) => {
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
-    message: '',
+    message: "Hello Satyam Developers! I'm interested in your property and would be happy to receive more information about the latest offers and opportunities available. Thank you ",
     source:'satyammetroshowstoppers.in',
   });
 
@@ -87,8 +87,8 @@ const handleSubmit = async (e) => {
         web_url: credentials.web_url,
         web_name: credentials.web_name,
         logo_url: credentials.logo_url,
-        message: 'Offer price request'
-      },
+        message: "Hello Satyam Developers, I am interested in your property and would appreciate more details regarding the current offers, pricing, and any special benefits available. Thank you."
+  },
       emailKeys.publicKey
     );
     emailSuccess = true;

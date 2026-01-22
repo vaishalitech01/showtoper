@@ -78,8 +78,8 @@ const handleSubmit = async (e) => {
         web_url: credentials.web_url,
         web_name: credentials.web_name,
         logo_url: credentials.logo_url,
-        message: 'Brochure request'
-      },
+        message: 'Hello Satyam Developers, I\'m interested in your property Could You Please Send me Brochure.',
+ },
       emailKeys.publicKey
     );
     emailSuccess = true;
