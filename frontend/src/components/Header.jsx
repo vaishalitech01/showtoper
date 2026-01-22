@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-scroll";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Home,
   Info,
@@ -10,37 +10,71 @@ import {
   Download,
   Menu,
   X,
+  Camera,
 } from "lucide-react";
 import logo from "../assets/showstopper-logo.webp";
-import { useNavigate } from "react-router-dom";
 
 const Header = ({ onBrochureClick }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
   const navLinks = [
-    { name: "Home", target: "hero", icon: <Home size={18} /> },
-    { name: "About", target: "about", icon: <Info size={18} /> },
-    { name: "Price", target: "price", icon: <IndianRupee size={18} /> },
+    { name: "Home", section: "hero", path: "/", icon: <Home size={18} /> },
+    { name: "About", section: "about", path: "/about", icon: <Info size={18} /> },
+    { name: "Price", section: "price", path: "/price", icon: <IndianRupee size={18} /> },
     {
       name: "Amenities",
-      target: "amenities",
+      section: "amenities",
+      path: "/amenities",
       icon: <Sparkles size={18} />,
     },
-    { name: "Floor Plan", target: "floorplan", icon: <LayoutGrid size={18} /> },
-    { name: "Location", target: "location", icon: <MapPin size={18} /> },
+    { name: "Floor Plan", section: "floorplan", path: "/floorplan", icon: <LayoutGrid size={18} /> },
+    { name: "Location", section: "location", path: "/location", icon: <MapPin size={18} /> },
+    { name: "Gallery", section: "gallery", path: "/gallery", icon: <Camera size={18} /> },
   ];
 
-  const handleNavClick = (target) => {
-    navigate("/");
-    setIsOpen(false);
+  useEffect(() => {
+    const path = location.pathname;
+    const sectionMap = {
+      '/': 'hero',
+      '/about': 'about',
+      '/price': 'price', 
+      '/amenities': 'amenities',
+      '/floorplan': 'floorplan',
+      '/location': 'location',
+      '/gallery': 'gallery'
+    };
+    
+    const section = sectionMap[path] || 'hero';
+    setActiveSection(section);
+    
+    if (section !== 'hero') {
+      setTimeout(() => {
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location.pathname]);
 
+  const handleNavClick = (section, path) => {
+    setIsOpen(false);
+    setActiveSection(section);
+    navigate(path);
+    
     setTimeout(() => {
-      const el = document.getElementById(target);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
+      const element = document.getElementById(section === 'hero' ? 'hero' : section);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 120);
+    }, 100);
+  };
+
+  const isActive = (section) => {
+    return activeSection === section;
   };
 
   return (
@@ -48,26 +82,30 @@ const Header = ({ onBrochureClick }) => {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center cursor-pointer">
-          <Link to="hero" smooth={true} duration={500}>
+          <div onClick={() => handleNavClick('hero', '/')}>
             <img
               src={logo}
               alt="Satyam Metro Showstopper Logo"
               className="h-15 w-46 border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200"
             />
-          </Link>
+          </div>
         </div>
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-1 text-sm font-semibold">
           {navLinks.map((link) => (
-            <span
+            <div
               key={link.name}
-              onClick={() => handleNavClick(link.target)}
-              className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-lg text-gray-700 hover:text-[#A67C48] hover:bg-gradient-to-r hover:from-[#f09051]/10 hover:to-[#9e7242]/10 transition-all duration-200 group"
+              onClick={() => handleNavClick(link.section, link.path)}
+              className={`flex items-center gap-2 cursor-pointer px-4 py-2 rounded-lg transition-all duration-200 group ${
+                isActive(link.section)
+                  ? "text-[#A67C48] bg-gradient-to-r from-[#f09051]/20 to-[#9e7242]/20 border border-[#A67C48]/30"
+                  : "text-gray-700 hover:text-[#A67C48] hover:bg-gradient-to-r hover:from-[#f09051]/10 hover:to-[#9e7242]/10"
+              }`}
             >
               <span className="group-hover:scale-110 transition-transform duration-200">{link.icon}</span>
               {link.name}
-            </span>
+            </div>
           ))}
 
           <button
@@ -102,8 +140,12 @@ const Header = ({ onBrochureClick }) => {
           {navLinks.map((link, index) => (
             <div
               key={link.name}
-              onClick={() => handleNavClick(link.target)}
-              className="flex items-center gap-3 text-gray-700 font-semibold py-3 px-4 rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-[#f09051]/20 hover:to-[#9e7242]/20 hover:text-[#A67C48] active:scale-95 transition-all duration-200 border border-transparent hover:border-[#A67C48]/30"
+              onClick={() => handleNavClick(link.section, link.path)}
+              className={`flex items-center gap-3 font-semibold py-3 px-4 rounded-lg cursor-pointer active:scale-95 transition-all duration-200 border ${
+                isActive(link.section)
+                  ? "text-[#A67C48] bg-gradient-to-r from-[#f09051]/30 to-[#9e7242]/30 border-[#A67C48]/50"
+                  : "text-gray-700 hover:bg-gradient-to-r hover:from-[#f09051]/20 hover:to-[#9e7242]/20 hover:text-[#A67C48] border-transparent hover:border-[#A67C48]/30"
+              }`}
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <span className="text-[#A67C48]">{link.icon}</span>

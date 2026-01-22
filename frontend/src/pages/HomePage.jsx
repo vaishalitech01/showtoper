@@ -99,7 +99,9 @@ const HomePage = () => {
         )}
 
         <Amenities />
+      <div id="gallery">
         <Gallery />
+      </div>
         <FloorPlan onOfferPriceClick={(type) => {setIsOfferPriceFormOpen(true)
           setOfferType(type);
         }} />

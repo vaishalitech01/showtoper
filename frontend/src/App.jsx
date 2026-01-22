@@ -66,6 +66,12 @@ function App() {
         {/* 🌐 Public Pages */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<HomePage />} />
+          <Route path="/price" element={<HomePage />} />
+          <Route path="/amenities" element={<HomePage />} />
+          <Route path="/floorplan" element={<HomePage />} />
+          <Route path="/location" element={<HomePage />} />
+          <Route path="/gallery" element={<HomePage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
         </Route>
 
