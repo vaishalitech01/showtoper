@@ -1,11 +1,9 @@
 import React, { useRef, useState } from "react";
 import { User, Phone, Mail, X } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import { credentials, emailKeys, regexPatterns } from "../key/key";
+import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
 import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
 import axios from "axios";
-
-const baseurl = import.meta.env.VITE_BASE_API_URL;
 
 const BrochureForm = ({ onClose }) => {
   const form = useRef();
@@ -97,7 +95,7 @@ const BrochureForm = ({ onClose }) => {
     // 3️⃣ Show result
     if (backendSuccess || emailSuccess) {
       setShowSuccessAlert(true);
-      setFormData({ name: "", mobile: "", email: "" });
+      setFormData({ name: "", mobile: "", email: "", source: "satyammetroshowstoppers.in" });
     } else {
       setShowFailureAlert(true);
     }

@@ -64,3 +64,18 @@ export const updateFormStatus = async (req, res) => {
     });
   }
 };
+
+export const deleteForm = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedForm = await Form.findByIdAndDelete(id);
+    
+    if (!deletedForm) {
+      return res.status(404).json({ message: "Form not found" });
+    }
+    
+    res.status(200).json({ message: "Form deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete form", error: error.message });
+  }
+};

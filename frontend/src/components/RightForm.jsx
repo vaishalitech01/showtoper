@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { credentials, emailKeys, regexPatterns } from "../key/key";
+import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
 import { contactConfig } from "../config/credential";
 import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
 import axios from "axios";
 import poster from "../assets/Poster/ShowStopper_Poster_2.jpeg";
-const baseurl = import.meta.env.VITE_BASE_API_URL;
-
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -64,7 +62,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
         ...formData,
         message: backendMessage
       });
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 200) {
         backendSuccess = true;
       }
     } catch (error) {
@@ -95,7 +93,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     // 3️⃣ Show result
     if (backendSuccess || emailSuccess) {
       setShowSuccessAlert(true);
-      setFormData({ name: "", mobile: "", email: "" });
+      setFormData({ name: "", mobile: "", email: "", source: 'satyammetroshowstoppers.in' });
     } else {
       setShowFailureAlert(true);
     }

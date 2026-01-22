@@ -3,10 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
-import { credentials, emailKeys } from "../key/key";
+import { credentials, emailKeys, baseurl } from "../key/key";
 import axios from "axios";
-
-const baseurl = import.meta.env.VITE_BASE_API_URL;
 
 const randomBot = [
   {
