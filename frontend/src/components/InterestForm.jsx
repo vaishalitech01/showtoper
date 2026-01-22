@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns } from '../key/key';
+import { createMessageWithAddress, messageTemplates } from '../key/messageUtils';
 import axios from 'axios';
 import logo from "../assets/showstopper-logo.webp";
 const baseurl = import.meta.env.VITE_BASE_API_URL;
@@ -11,7 +12,6 @@ const InterestForm = ({ onClose, mode }) => {
     name: '',
     mobile: '',
     email: '',
-    message: '',
     source:'satyammetroshowstoppers.in',
   });
 
@@ -57,17 +57,20 @@ const handleSubmit = async (e) => {
   setShowFailureAlert(false);
 
   // Prepare dynamic message based on mode
-  let dynamicMessage = `Hello Satyam Developers, this is ${formData.name}. I'm interested in your property and would love to have a brief discussion at your convenience.`;
+  let messageTemplate = messageTemplates.general;
   
   if (mode === 'callback') {
-    dynamicMessage = `Hello Satyam Developers, this is ${formData.name}. I would like to request a callback to discuss your property. Please contact me at your convenience.`;
+    messageTemplate = messageTemplates.callback;
   } else if (mode === 'brochure' || mode === 'download brochure') {
-    dynamicMessage = `Hello Satyam Developers, this is ${formData.name}. I would like to download the brochure for your property. Please share the details.`;
+    messageTemplate = messageTemplates.brochure;
   }
+
+  const backendMessage = createMessageWithAddress(messageTemplate, formData.name);
+  const emailMessage = createMessageWithAddress(messageTemplate, formData.name);
 
   const submissionData = {
     ...formData,
-    message: dynamicMessage
+    message: backendMessage
   };
 
   if (!validateForm(formData)) {
@@ -100,7 +103,7 @@ const handleSubmit = async (e) => {
         web_url: credentials.web_url,
         web_name: credentials.web_name,
         logo_url: credentials.logo_url,
-        message: dynamicMessage
+        message: emailMessage
       },
       emailKeys.publicKey
     );

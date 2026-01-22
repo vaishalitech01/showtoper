@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, regexPatterns } from "../key/key";
+import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
 import axios from "axios";
 
 const baseurl = import.meta.env.VITE_BASE_API_URL;
@@ -10,7 +11,6 @@ const MobileForm = () => {
     name: "",
     email: "",
     mobile: "",
-    message:"Hello Satyam Developers, I'm interested in your property and would love to have a brief discussion at your convenience. (this form is submitted from mobile view)",
     source: "satyammetroshowstoppers.in",
   });
 
@@ -53,9 +53,16 @@ const MobileForm = () => {
     let backendSuccess = false;
     let emailSuccess = false;
 
+    // Create messages with address
+    const backendMessage = createMessageWithAddress(messageTemplates.mobile);
+    const emailMessage = createMessageWithAddress(messageTemplates.mobile);
+
     // 1️⃣ Submit to backend
     try {
-      const response = await axios.post(`${baseurl}/forms/submit`, formData);
+      const response = await axios.post(`${baseurl}/forms/submit`, {
+        ...formData,
+        message: backendMessage
+      });
       if (response.status === 201) {
         backendSuccess = true;
       }
@@ -75,8 +82,7 @@ const MobileForm = () => {
           web_url: credentials.web_url,
           web_name: credentials.web_name,
           logo_url: credentials.logo_url,
-          message:
-            "Hello Satyam Developers, I'm interested in your property and would love to have a brief discussion at your convenience. (this form is submitted from mobile view)",
+          message: emailMessage,
         },
         emailKeys.publicKey,
       );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User, Phone, X } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns } from '../key/key';
+import { createMessageWithAddress, messageTemplates } from '../key/messageUtils';
 import axios from 'axios';
 
 const baseurl = import.meta.env.VITE_BASE_API_URL;
@@ -10,7 +11,6 @@ const OfferPriceForm = ({ onClose, type }) => {
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
-    message: "Hello Satyam Developers! I'm interested in your property and would be happy to receive more information about the latest offers and opportunities available. Thank you ",
     source:'satyammetroshowstoppers.in',
   });
 
@@ -55,8 +55,6 @@ const handleSubmit = async (e) => {
   setShowSuccessAlert(false);
   setShowFailureAlert(false);
 
-  formData.message = formHeader + ' Inquiry';
-
   if (!validateForm(formData)) {
     return;
   }
@@ -65,9 +63,16 @@ const handleSubmit = async (e) => {
   let backendSuccess = false;
   let emailSuccess = false;
 
+  // Create messages with address
+  const backendMessage = createMessageWithAddress(messageTemplates.offerPrice, formData.name);
+  const emailMessage = createMessageWithAddress(messageTemplates.offerPrice, formData.name);
+
   // 1️⃣ Submit to backend
   try {
-    const response = await axios.post(`${baseurl}/forms/submit`, formData);
+    const response = await axios.post(`${baseurl}/forms/submit`, {
+      ...formData,
+      message: backendMessage
+    });
     if (response.status === 201) {
       backendSuccess = true;
     }
@@ -87,7 +92,7 @@ const handleSubmit = async (e) => {
         web_url: credentials.web_url,
         web_name: credentials.web_name,
         logo_url: credentials.logo_url,
-        message: "Hello Satyam Developers, I am interested in your property and would appreciate more details regarding the current offers, pricing, and any special benefits available. Thank you."
+        message: emailMessage
   },
       emailKeys.publicKey
     );

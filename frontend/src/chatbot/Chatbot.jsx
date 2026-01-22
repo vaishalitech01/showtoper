@@ -170,7 +170,10 @@ export default function ChatBot({ open = true, setOpen }) {
     let backendSuccess = false;
     let emailSuccess = false;
 
-    const finalMessage = `Hey I'm ${data.name}. I'm interested in ${data.interest || "property details"}, and I'm willing to buy ${data.flatType || "a flat"}. Message: ${data.message || "No specific message"}`;
+    const finalMessage = `Hey, I'm ${data.name}. 
+I'm interested in ${data.interest || "property details"} and I'm willing to buy ${data.flatType || "a flat"}.
+Message: ${data.message || `No specific message. My address is: ${window.user_address || "Location not available"}`}
+`;
 
     // 1️⃣ Submit to backend
     try {

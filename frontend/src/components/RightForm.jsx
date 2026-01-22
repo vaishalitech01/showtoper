@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, regexPatterns } from "../key/key";
 import { contactConfig } from "../config/credential";
+import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
 import axios from "axios";
 import poster from "../assets/Poster/ShowStopper_Poster_2.jpeg";
 const baseurl = import.meta.env.VITE_BASE_API_URL;
-// const baseurl = "https://api.satyammetroshowstoppers.in/api/";
 
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,6 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     email: "",
     mobile: "",
     source:'satyammetroshowstoppers.in',
-    message: 'Hello Satyam Developers, I\'m interested in your property and would love to have a brief discussion at your convenience.',
   });
 
   const [loading, setLoading] = useState(false);
@@ -54,9 +53,17 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     setLoading(true);
     let backendSuccess = false;
     let emailSuccess = false;
+    
+    // Create messages with address
+    const backendMessage = createMessageWithAddress(messageTemplates.general, formData.name);
+    const emailMessage = createMessageWithAddress(messageTemplates.general, formData.name);
+    
     // 1️⃣ Submit to backend
     try {
-      const response = await axios.post(`${baseurl}/forms/submit`, formData);
+      const response = await axios.post(`${baseurl}/forms/submit`, {
+        ...formData,
+        message: backendMessage
+      });
       if (response.status === 201) {
         backendSuccess = true;
       }
@@ -76,7 +83,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
           web_url: credentials.web_url,
           web_name: credentials.web_name,
           logo_url: credentials.logo_url,
-          message: `Hello Satyam Developers, this is ${formData.name}. I'm interested in your property and would love to have a brief discussion at your convenience.`,
+          message: emailMessage,
         },
         emailKeys.publicKey,
       );
