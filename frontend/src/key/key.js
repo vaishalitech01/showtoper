@@ -1,15 +1,15 @@
-// export const emailKeys = {
-//   serviceId: "service_n2966z8",
-//   templateId: "template_1rzu4vd",
-//   publicKey: "emp2B6knUFfGwfYzl",
-  
-// };
 export const emailKeys = {
-  serviceId: "testing_service",
-  templateId: "testing_template",
-  publicKey: "testing_key",
+  serviceId: "service_n2966z8",
+  templateId: "template_1rzu4vd",
+  publicKey: "emp2B6knUFfGwfYzl",
   
 };
+// export const emailKeys = {
+//   serviceId: "testing_service",
+//   templateId: "testing_template",
+//   publicKey: "testing_key",
+  
+// };
 export const credentials={
   web_url: "satyammetroshowstoppers.in",
   web_name: "Satyam Metro Showstoppers",
