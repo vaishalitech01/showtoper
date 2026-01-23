@@ -1,25 +1,31 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://satyammetroshowstoppers.in/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
-
-# Disallow admin areas
-Disallow: /admin/
-Disallow: /api/
-Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /src/
-
-# Allow important pages
-Allow: /
+# Priority crawling for important pages
 Allow: /about
 Allow: /price
 Allow: /amenities
 Allow: /floorplan
 Allow: /location
 Allow: /gallery
-Allow: /privacy
+
+# Sitemap location
+Sitemap: https://satyammetroshowstoppers.in/sitemap.xml
+
+# Crawl optimization
+Crawl-delay: 0.5
+
+# Block unnecessary paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /dist/
+
+# Allow search engines to access important assets
+Allow: /favicon.ico
+Allow: /android-chrome-*.png
+Allow: /apple-touch-icon.png
+Allow: /site.webmanifest
