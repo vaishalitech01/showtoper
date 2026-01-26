@@ -7,12 +7,14 @@ const FloorPlan = ({ onOfferPriceClick }) => {
     {
       title: "Request Master Plan Layout",
       buttonText: "View layout Plan",
-      img: MasterPlanImage, // Replace with actual master plan image
+      img: MasterPlanImage,
+      alt: "One Crest master plan layout - Satyam Metro Developers Kharghar project site plan"
     },
     {
       title: "Request Unit Plan Layout",
       buttonText: "View Floor Plan",
-      img: UnitPlanImage, // Replace with actual unit plan image
+      img: UnitPlanImage,
+      alt: "One Crest unit floor plan - 2 3 4 BHK apartment layouts Satyam Metro Showstopper"
     }
   ];
 
@@ -33,7 +35,7 @@ const FloorPlan = ({ onOfferPriceClick }) => {
             <div className="relative w-full aspect-4/3 overflow-hidden group cursor-pointer">
               <img 
                 src={plan.img} 
-                alt={plan.title} 
+                alt={plan.alt} 
                 className="w-full h-full object-cover"
               />
               {/* Dark Overlay with Text */}

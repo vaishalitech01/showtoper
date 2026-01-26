@@ -13,14 +13,14 @@ import running from '../assets/Amenities/running.jpg';
 
 const Amenities = () => {
   const amenities = [
-    { title: "JOGGING TRACK", img: running },
-    { title: "SENIOR CITIZEN CORNER", img: seniorcitizens },
-    { title: "INDOOR GAMES", img: games },
-    { title: "SWIMMING POOL", img: pool },
-    { title: "KIDS PLAY AREA", img: playarea },
-    { title: "OUTDOOR GYM", img: gymnasium },
-    { title: "CLUB HOUSE", img: clubhouse },
-    { title: "SPA", img: spa },
+    { title: "JOGGING TRACK", img: running, alt: "One Crest jogging track - Premium fitness amenities Satyam Metro Showstopper Kharghar" },
+    { title: "SENIOR CITIZEN CORNER", img: seniorcitizens, alt: "One Crest senior citizen area - Community spaces Satyam Metro Developers Navi Mumbai" },
+    { title: "INDOOR GAMES", img: games, alt: "One Crest indoor games room - Recreation facilities luxury apartments Kharghar" },
+    { title: "SWIMMING POOL", img: pool, alt: "One Crest swimming pool - Premium amenities Satyam Metro Showstopper Sector 20" },
+    { title: "KIDS PLAY AREA", img: playarea, alt: "One Crest children play area - Family amenities luxury residential project Kharghar" },
+    { title: "OUTDOOR GYM", img: gymnasium, alt: "One Crest outdoor gymnasium - Fitness facilities Satyam Metro Developers Navi Mumbai" },
+    { title: "CLUB HOUSE", img: clubhouse, alt: "One Crest clubhouse - Premium community center Satyam Metro Showstopper Kharghar" },
+    { title: "SPA", img: spa, alt: "One Crest spa and wellness center - Luxury amenities Satyam Metro Developers project" },
   ];
 
   const firstSwiperAmenities = amenities.filter((_, i) => i % 2 === 0);
@@ -54,7 +54,7 @@ const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
           <div className="w-full overflow-hidden rounded-[28px] mb-3">
             <img
               src={item.img}
-              alt={item.title}
+              alt={item.alt}
               className="w-full h-57.5 object-cover"
             />
           </div>
@@ -82,7 +82,7 @@ const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
           <div className="w-full overflow-hidden rounded-[28px] mb-3">
             <img
               src={item.img}
-              alt={item.title}
+              alt={item.alt}
               className="w-full h-57.5 object-cover"
             />
           </div>
@@ -103,7 +103,7 @@ const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
               <div className="w-full aspect-4/3 overflow-hidden rounded-[20px] mb-4 shadow-sm">
                 <img 
                   src={item.img} 
-                  alt={item.title} 
+                  alt={item.alt} 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>

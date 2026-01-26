@@ -11,22 +11,22 @@ const Gallery = () => {
     {
       id: 1,
       src: interior1,
-      alt: "Interior Design View"
+      alt: "One Crest luxury apartment interior design - Premium 2 3 4 BHK homes by Satyam Metro Developers"
     },
     {
       id: 2,
       src: interior2,
-      alt: "Satyam Metro Showstopper Interior View"
+      alt: "One Crest modern living room interior - Satyam Metro Showstopper luxury apartments Kharghar"
     },
     {
       id: 3,
       src: interior3,
-      alt: "Modern Apartment Design"
+      alt: "One Crest premium apartment bedroom design - Luxury homes Sector 20 Kharghar Navi Mumbai"
     },
     {
       id: 4,
       src: interior4,
-      alt: "Premium Building Lobby"
+      alt: "One Crest building lobby and entrance - Satyam Metro Developers premium residential project"
     }
   ];
 

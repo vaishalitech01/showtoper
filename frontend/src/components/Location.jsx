@@ -79,7 +79,7 @@ const Location = () => {
             <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#A67C48] shadow-lg animate-bounce">
               <img 
                 src={image2} 
-                alt="Property Location" 
+                alt="One Crest project location marker - Satyam Metro Showstopper Sector 20 Kharghar Navi Mumbai" 
                 className="w-full h-full object-cover"
               />
             </div>

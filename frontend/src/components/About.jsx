@@ -110,7 +110,7 @@ const About = () => {
           <div ref={posterRef} className="rounded-lg overflow-hidden">
             <img
               src={posterImage}
-              alt="Satyam Metro Showstopper Poster"
+              alt="One Crest project poster - Satyam Metro Showstopper luxury apartments Kharghar Navi Mumbai"
               className="w-full h-100 object-contain"
             />
           </div>

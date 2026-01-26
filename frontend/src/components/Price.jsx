@@ -3,10 +3,11 @@ import detailsheet from "../assets/Prices/detailsheet.jpg";
 
 const Price = ({ onOfferPriceClick }) => {
   const priceData = [
-    { type: "2 BHK", area: "900 to 1000 Sq.ft", price: "2.4 cr - 2.65 cr" },
-    { type: "Suite - Lux 3 BHK", area: "1400 to 1550 Sq.ft", price: "3.5 cr - 3.8 cr" },
-    { type: "Suite - Couture 3 BHK", area: "1700 to 1850 Sq.ft", price: "3.8 cr - 4.10 cr" },
-    { type: "Suite - Atelier 4 BHK", area: "2300 to 2500 Sq.ft", price: "5.4 cr - 6 cr" },
+    { type: "2 BHK", area: "950 sq. ft.", price: "Starting from ₹2.46 Cr" },
+    { type: "3 BHK Luxe", area: "1474 sq. ft.", price: "Starting from ₹3.77 Cr" },
+    { type: "3 BHK Couture", area: "1567 sq. ft.", price: "Starting from ₹4.00 Cr" },
+    { type: "4 BHK Atelier", area: "2320 sq. ft.", price: "Starting from ₹5.95 Cr" },
+    { type: "2 + 2 BHK", area: "1909 sq. ft.", price: "Starting from ₹4.94 Cr" },
   ];
 
   return (
@@ -99,7 +100,7 @@ const Price = ({ onOfferPriceClick }) => {
             <div className="border border-gray-300 aspect-[3/2.2] relative overflow-hidden backdrop-blur-2xl bg-white group">
               <img
                 src={detailsheet}
-                alt="Payment Schedule"
+                alt="One Crest price detail sheet - Payment schedule Satyam Metro Showstopper Kharghar pricing"
                 className="w-full h-full object-cover opacity-80 "
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-transparent transition-colors">

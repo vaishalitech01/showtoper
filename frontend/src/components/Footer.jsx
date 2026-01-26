@@ -26,9 +26,19 @@ const Footer = () => {
             <span className="font-bold">Disclaimer:</span> The content is for information purposes only and does not constitute an offer to avail of any service. Prices mentioned are subject to change without notice and properties mentioned are subject to availability. Images for representation purpose only. This is not the official website. Website maintained by Authorized Channel Partner Maha Rera. We may share data with rera registered brokers/companies for further procession.
           </p>
           
+          {/* Developer Info */}
+          <p className="mb-4 text-sm lg:text-base">
+            <span className="font-semibold">Satyam Metro Developers</span> - Premium real estate developer in Navi Mumbai. Previous successful project: <span className="font-semibold text-[#A67C48]">One Crest</span>, a landmark residential development showcasing our commitment to luxury and quality construction.
+          </p>
+          
           {/* Links */}
-          <div className="flex justify-center space-x-2 text-blue-600">
+          <div className="flex justify-center space-x-2 text-blue-600 mb-4">
             <a href="/privacy" className="hover:underline">Privacy Policy | Terms & Conditions</a>
+          </div>
+          
+          {/* Copyright */}
+          <div className="border-t border-gray-300 pt-4 text-xs lg:text-sm text-gray-600">
+            <p>&copy; 2026 Satyam Metro Developers. All rights reserved. | Showstopper Kharghar | One Crest Developer</p>
           </div>
         </div>
       </div>
