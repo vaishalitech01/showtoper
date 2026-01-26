@@ -67,9 +67,9 @@ const Hero = ({ onRequestCallBack }) => {
             <h1 className="text-xl lg:text-xl font-bold text-slate-900 leading-tight">
               SATYAM METRO SHOWSTOPPER'S
             </h1>
-            <h1 className="text-xl lg:text-xl font-bold text-slate-900 leading-tight">
+             <h2 className="text-xl lg:text-xl font-bold text-slate-900 leading-tight">
               <b>ONE CREST</b>
-            </h1>
+            </h2>
 
             <div className="text-sm text-gray-600">
               <p>By Satyam Metro Group</p>
