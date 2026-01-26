@@ -1,5 +1,6 @@
-import React from "react";
-import detailsheet from "../assets/Prices/detailsheet.jpg";
+import React, { useEffect } from "react";
+import oneCrestPriceSheet from "../assets/Prices/one-crest-price-detail-sheet.jpg";
+import { createProductSchema, pushSchemaToGTM } from '../utils/schemaUtils';
 
 const Price = ({ onOfferPriceClick }) => {
   const priceData = [
@@ -9,6 +10,12 @@ const Price = ({ onOfferPriceClick }) => {
     { type: "4 BHK Atelier", area: "2320 sq. ft.", price: "Starting from ₹5.95 Cr" },
     { type: "2 + 2 BHK", area: "1909 sq. ft.", price: "Starting from ₹4.94 Cr" },
   ];
+
+  useEffect(() => {
+    // Push product schema to GTM dataLayer
+    const productSchema = createProductSchema(priceData);
+    pushSchemaToGTM(productSchema, 'price_page_view');
+  }, []);
 
   return (
     <section
@@ -99,7 +106,7 @@ const Price = ({ onOfferPriceClick }) => {
           <div className="border border-orange-300 p-2 bg-white shadow-sm w-full">
             <div className="border border-gray-300 aspect-[3/2.2] relative overflow-hidden backdrop-blur-2xl bg-white group">
               <img
-                src={detailsheet}
+                src={oneCrestPriceSheet}
                 alt="One Crest price detail sheet - Payment schedule Satyam Metro Showstopper Kharghar pricing"
                 className="w-full h-full object-cover opacity-80 "
               />

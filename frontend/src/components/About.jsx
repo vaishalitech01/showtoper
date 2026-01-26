@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import posterImage from "../assets/Poster/ShowStopper_Poster.jpeg";
+import oneCrestPoster from "../assets/Poster/one-crest-project-poster.jpeg";
 
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -109,7 +109,7 @@ const About = () => {
         <div className="w-full lg:w-62.5 shrink-0 mx-auto">
           <div ref={posterRef} className="rounded-lg overflow-hidden">
             <img
-              src={posterImage}
+              src={oneCrestPoster}
               alt="One Crest project poster - Satyam Metro Showstopper luxury apartments Kharghar Navi Mumbai"
               className="w-full h-100 object-contain"
             />

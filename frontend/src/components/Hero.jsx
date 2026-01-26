@@ -1,26 +1,25 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import image1 from "../assets/1.png";
-import image2 from "../assets/2.png";
-import image3 from "../assets/3.jpeg";
-import image4 from "../assets/4.png";
-import image5 from "../assets/5.jpg";
-import image6 from "../assets/6.jpg";
-import image7 from "../assets/7.png";
-import image8 from "../assets/8.png";
+import oneCrestExterior from "../assets/one-crest-exterior-view.png";
+import oneCrestFacade from "../assets/one-crest-building-facade.png";
+import oneCrestTower from "../assets/one-crest-tower-elevation.jpeg";
+import oneCrestComplex from "../assets/one-crest-residential-complex.png";
+import oneCrestAerial from "../assets/one-crest-aerial-view.jpg";
+import oneCrestDesign from "../assets/one-crest-building-design.png";
+import oneCrestProgress from "../assets/one-crest-construction-progress.png";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
 const Hero = ({ onRequestCallBack }) => {
   const images = [
-    { src: image1, alt: "One Crest luxury apartments exterior view - Satyam Metro Developers Kharghar" },
-    { src: image2, alt: "One Crest building facade and architecture - Premium residential project Sector 20 Kharghar" },
-    { src: image3, alt: "One Crest tower elevation - Satyam Metro luxury development Navi Mumbai" },
-    { src: image4, alt: "One Crest residential complex - Modern apartments by Satyam Metro Developers" },
-    { src: image6, alt: "One Crest project aerial view - Premium housing in Kharghar Navi Mumbai" },
-    { src: image7, alt: "One Crest building design - Luxury 2 3 4 BHK apartments Satyam Metro" },
-    { src: image8, alt: "One Crest construction progress - New launch project Kharghar by Satyam Metro" }
+    { src: oneCrestExterior, alt: "One Crest luxury apartments exterior view - Satyam Metro Developers Kharghar" },
+    { src: oneCrestFacade, alt: "One Crest building facade and architecture - Premium residential project Sector 20 Kharghar" },
+    { src: oneCrestTower, alt: "One Crest tower elevation - Satyam Metro luxury development Navi Mumbai" },
+    { src: oneCrestComplex, alt: "One Crest residential complex - Modern apartments by Satyam Metro Developers" },
+    { src: oneCrestAerial, alt: "One Crest project aerial view - Premium housing in Kharghar Navi Mumbai" },
+    { src: oneCrestDesign, alt: "One Crest building design - Luxury 2 3 4 BHK apartments Satyam Metro" },
+    { src: oneCrestProgress, alt: "One Crest construction progress - New launch project Kharghar by Satyam Metro" }
   ];
 
   return (

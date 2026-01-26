@@ -2,25 +2,25 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
-import clubhouse from '../assets/Amenities/clubhouse.jpg';
-import playarea from '../assets/Amenities/playarea.jpg';
-import pool from '../assets/Amenities/pool.jpg';
-import gymnasium from '../assets/Amenities/gymnasium.jpg';
-import games from '../assets/Amenities/games.jpg';
-import seniorcitizens from '../assets/Amenities/seniorcitizens.jpg';
-import spa from '../assets/Amenities/spa.jpg';
-import running from '../assets/Amenities/running.jpg';
+import oneCrestClubhouse from '../assets/Amenities/one-crest-clubhouse.jpg';
+import oneCrestPlayarea from '../assets/Amenities/one-crest-kids-play-area.jpg';
+import oneCrestPool from '../assets/Amenities/one-crest-swimming-pool.jpg';
+import oneCrestGym from '../assets/Amenities/one-crest-outdoor-gym.jpg';
+import oneCrestGames from '../assets/Amenities/one-crest-indoor-games.jpg';
+import oneCrestSeniors from '../assets/Amenities/one-crest-senior-citizen-area.jpg';
+import oneCrestSpa from '../assets/Amenities/one-crest-spa-wellness.jpg';
+import oneCrestTrack from '../assets/Amenities/one-crest-jogging-track.jpg';
 
 const Amenities = () => {
   const amenities = [
-    { title: "JOGGING TRACK", img: running, alt: "One Crest jogging track - Premium fitness amenities Satyam Metro Showstopper Kharghar" },
-    { title: "SENIOR CITIZEN CORNER", img: seniorcitizens, alt: "One Crest senior citizen area - Community spaces Satyam Metro Developers Navi Mumbai" },
-    { title: "INDOOR GAMES", img: games, alt: "One Crest indoor games room - Recreation facilities luxury apartments Kharghar" },
-    { title: "SWIMMING POOL", img: pool, alt: "One Crest swimming pool - Premium amenities Satyam Metro Showstopper Sector 20" },
-    { title: "KIDS PLAY AREA", img: playarea, alt: "One Crest children play area - Family amenities luxury residential project Kharghar" },
-    { title: "OUTDOOR GYM", img: gymnasium, alt: "One Crest outdoor gymnasium - Fitness facilities Satyam Metro Developers Navi Mumbai" },
-    { title: "CLUB HOUSE", img: clubhouse, alt: "One Crest clubhouse - Premium community center Satyam Metro Showstopper Kharghar" },
-    { title: "SPA", img: spa, alt: "One Crest spa and wellness center - Luxury amenities Satyam Metro Developers project" },
+    { title: "JOGGING TRACK", img: oneCrestTrack, alt: "One Crest jogging track - Premium fitness amenities Satyam Metro Showstopper Kharghar" },
+    { title: "SENIOR CITIZEN CORNER", img: oneCrestSeniors, alt: "One Crest senior citizen area - Community spaces Satyam Metro Developers Navi Mumbai" },
+    { title: "INDOOR GAMES", img: oneCrestGames, alt: "One Crest indoor games room - Recreation facilities luxury apartments Kharghar" },
+    { title: "SWIMMING POOL", img: oneCrestPool, alt: "One Crest swimming pool - Premium amenities Satyam Metro Showstopper Sector 20" },
+    { title: "KIDS PLAY AREA", img: oneCrestPlayarea, alt: "One Crest children play area - Family amenities luxury residential project Kharghar" },
+    { title: "OUTDOOR GYM", img: oneCrestGym, alt: "One Crest outdoor gymnasium - Fitness facilities Satyam Metro Developers Navi Mumbai" },
+    { title: "CLUB HOUSE", img: oneCrestClubhouse, alt: "One Crest clubhouse - Premium community center Satyam Metro Showstopper Kharghar" },
+    { title: "SPA", img: oneCrestSpa, alt: "One Crest spa and wellness center - Luxury amenities Satyam Metro Developers project" },
   ];
 
   const firstSwiperAmenities = amenities.filter((_, i) => i % 2 === 0);

@@ -1,19 +1,19 @@
 import React from 'react';
-import MasterPlanImage from '../assets/plans/MasterPlan.webp';
-import UnitPlanImage from '../assets/plans/UnitPlan.webp';
+import oneCrestMasterPlan from '../assets/plans/one-crest-master-plan.webp';
+import oneCrestUnitPlan from '../assets/plans/one-crest-unit-floor-plan.webp';
 
 const FloorPlan = ({ onOfferPriceClick }) => {
   const plans = [
     {
       title: "Request Master Plan Layout",
       buttonText: "View layout Plan",
-      img: MasterPlanImage,
+      img: oneCrestMasterPlan,
       alt: "One Crest master plan layout - Satyam Metro Developers Kharghar project site plan"
     },
     {
       title: "Request Unit Plan Layout",
       buttonText: "View Floor Plan",
-      img: UnitPlanImage,
+      img: oneCrestUnitPlan,
       alt: "One Crest unit floor plan - 2 3 4 BHK apartment layouts Satyam Metro Showstopper"
     }
   ];

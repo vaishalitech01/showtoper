@@ -1,8 +1,8 @@
 import React from 'react';
-import interior1 from '../assets/Gallery/interior1.jpg';
-import interior2 from '../assets/Gallery/interior2.jpg';
-import interior3 from '../assets/Gallery/interior3.webp';
-import interior4 from '../assets/Gallery/interior4.webp';
+import oneCrestInterior from '../assets/Gallery/one-crest-luxury-interior.jpg';
+import oneCrestLiving from '../assets/Gallery/one-crest-living-room.jpg';
+import oneCrestBedroom from '../assets/Gallery/one-crest-bedroom-design.webp';
+import oneCrestLobby from '../assets/Gallery/one-crest-building-lobby.webp';
 
 
 const Gallery = () => {
@@ -10,22 +10,22 @@ const Gallery = () => {
   const galleryImages = [
     {
       id: 1,
-      src: interior1,
+      src: oneCrestInterior,
       alt: "One Crest luxury apartment interior design - Premium 2 3 4 BHK homes by Satyam Metro Developers"
     },
     {
       id: 2,
-      src: interior2,
+      src: oneCrestLiving,
       alt: "One Crest modern living room interior - Satyam Metro Showstopper luxury apartments Kharghar"
     },
     {
       id: 3,
-      src: interior3,
+      src: oneCrestBedroom,
       alt: "One Crest premium apartment bedroom design - Luxury homes Sector 20 Kharghar Navi Mumbai"
     },
     {
       id: 4,
-      src: interior4,
+      src: oneCrestLobby,
       alt: "One Crest building lobby and entrance - Satyam Metro Developers premium residential project"
     }
   ];
