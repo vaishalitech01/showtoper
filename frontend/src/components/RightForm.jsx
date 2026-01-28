@@ -92,6 +92,17 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
 
     // 3️⃣ Show result
     if (backendSuccess || emailSuccess) {
+      // Track conversion with gtag
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
+          'value': 1.0,
+          'currency': 'INR',
+          'event_callback': function() {
+            console.log('Right form conversion tracked');
+          }
+        });
+      }
       setShowSuccessAlert(true);
       setFormData({ name: "", mobile: "", email: "", source: 'satyammetroshowstoppers.in' });
     } else {
@@ -203,6 +214,19 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                 }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  // Track WhatsApp click with gtag
+                  if (typeof gtag !== 'undefined') {
+                    gtag('event', 'conversion', {
+                      'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
+                      'value': 1.0,
+                      'currency': 'INR',
+                      'event_callback': function() {
+                        console.log('WhatsApp contact conversion tracked');
+                      }
+                    });
+                  }
+                }}
                 className="flex items-center gap-3  bg-white hover:bg-gray-200 border border-[#9e7242] rounded-lg px-4 py-3 shadow-md hover:shadow-lg transition-all duration-200 group"
               >
                 <img

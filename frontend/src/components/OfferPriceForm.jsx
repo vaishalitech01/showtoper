@@ -101,6 +101,17 @@ const handleSubmit = async (e) => {
 
   // 3️⃣ Show result
   if (backendSuccess || emailSuccess) {
+    // Track conversion with gtag
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
+        'value': 1.0,
+        'currency': 'INR',
+        'event_callback': function() {
+          console.log('Offer price form conversion tracked');
+        }
+      });
+    }
     setShowSuccessAlert(true);
     setFormData({ name: '', mobile: '', source:'satyammetroshowstoppers.in' });
   } else {

@@ -20,6 +20,19 @@ const MobileFooter = () => {
           href={`https://wa.me/${contactConfig.phoneNumber}?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            // Track WhatsApp click with gtag
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'conversion', {
+                'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
+                'value': 1.0,
+                'currency': 'INR',
+                'event_callback': function() {
+                  console.log('Mobile WhatsApp contact conversion tracked');
+                }
+              });
+            }
+          }}
           className="w-1/3 flex items-center justify-center gap-2 py-3 text-white font-semibold"
         >
           <img
