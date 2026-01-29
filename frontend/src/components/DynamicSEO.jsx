@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { submitToIndexNow } from '../utils/indexNow';
 
 const DynamicSEO = () => {
   const location = useLocation();
   
   const seoData = {
     '/': {
-      title: 'Satyam Metro Showstopper | Best Properties in Kharghar, Navi Mumbai | New Launch 2024',
+      title: 'Satyam Metro Showstopper |Properties in Kharghar, Navi Mumbai | New Launch 2026',
       description: 'Discover the best new launch properties in Kharghar by Satyam Metro Developers. Premium 2, 3 & 4 BHK luxury apartments in Sector 20, Kharghar, Navi Mumbai.',
       keywords: 'best properties in Kharghar, new launch in Kharghar, Satyam Developers Kharghar Navi Mumbai, luxury apartments Kharghar'
     },
@@ -95,6 +96,9 @@ const DynamicSEO = () => {
     if (twitterDescription) {
       twitterDescription.setAttribute('content', currentSEO.description);
     }
+    // Submit current URL to IndexNow for instant indexing
+    const currentUrl = `https://satyammetroshowstoppers.in${location.pathname}`;
+    submitToIndexNow([currentUrl]);
     
   }, [location.pathname]);
 
