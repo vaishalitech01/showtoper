@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import oneCrestPriceSheet from "../assets/Prices/one-crest-price-detail-sheet.jpg";
 import { createProductSchema, pushSchemaToGTM } from '../utils/schemaUtils';
+import { trackButtonClick } from '../utils/gtm';
 
 const Price = ({ onOfferPriceClick }) => {
   const priceData = [
@@ -58,7 +59,10 @@ const Price = ({ onOfferPriceClick }) => {
                     </td>
                     <td className="p-4 text-right">
                       <button
-                        onClick={() => onOfferPriceClick('price-breakup')}
+                        onClick={() => {
+                          onOfferPriceClick('price-breakup');
+                          trackButtonClick('price_breakup_desktop');
+                        }}
                         className="bg-[#A67C48] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[#8e693c] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
                       >
                         Price Breakup
@@ -91,7 +95,10 @@ const Price = ({ onOfferPriceClick }) => {
 
                 {/* Button */}
                 <button
-                  onClick={() => onOfferPriceClick('price-breakup')}
+                  onClick={() => {
+                    onOfferPriceClick('price-breakup');
+                    trackButtonClick('price_breakup_mobile');
+                  }}
                   className="bg-[#A67C48] text-white px-10 py-2 rounded-lg font-medium text-xl hover:bg-[#8e693c] transition-all active:scale-95 cursor-pointer mb-2"
                 >
                   Price Breakup
@@ -119,7 +126,10 @@ const Price = ({ onOfferPriceClick }) => {
           </div>
 
           <button
-            onClick={() => onOfferPriceClick('costing-details')}
+            onClick={() => {
+              onOfferPriceClick('costing-details');
+              trackButtonClick('complete_costing_details');
+            }}
             className="mt-6 w-full animated-gradient text-white px-6 py-4 lg:py-3 rounded-full text-md font-semibold shadow-md hover:bg-[#b07848] transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
           >
             Complete Costing Details

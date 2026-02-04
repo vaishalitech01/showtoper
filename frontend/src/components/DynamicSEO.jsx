@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { submitToIndexNow } from '../utils/indexNow';
+import { trackPageView, testGTM } from '../utils/gtm';
 
 const DynamicSEO = () => {
   const location = useLocation();
@@ -99,6 +100,14 @@ const DynamicSEO = () => {
     // Submit current URL to IndexNow for instant indexing
     const currentUrl = `https://satyammetroshowstoppers.in${location.pathname}`;
     submitToIndexNow([currentUrl]);
+    
+    // Track page view in GTM
+    trackPageView(location.pathname);
+    
+    // Test GTM on first load
+    if (location.pathname === '/') {
+      setTimeout(() => testGTM(), 1000);
+    }
     
   }, [location.pathname]);
 
