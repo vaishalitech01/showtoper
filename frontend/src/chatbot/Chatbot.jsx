@@ -278,7 +278,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
   return (
     <>
       {open && (
-        <div className="fixed bottom-4 right-4 z-50 max-w-sm w-full">
+        <div className="fixed bottom-4 right-2 sm:right-4 z-50 w-[calc(100vw-16px)] sm:w-full max-w-sm">
           {/* Chat Window */}
           <div className="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col h-150">
             {/* Header */}
