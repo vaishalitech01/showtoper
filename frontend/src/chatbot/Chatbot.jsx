@@ -5,27 +5,24 @@ import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, baseurl } from "../key/key";
 import axios from "axios";
+import shitalIcon from "../assets/shital.gif";
 
 const randomBot = [
   {
-    name: "Alok Singh",
-    image:
-      "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWVufGVufDB8fDB8fHww",
-  },
-  {
-    name: "Ravi Kumar",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVufGVufDB8fDB8fHww",
-  },
-  {
     name: "Neha Agarwal",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2lybHxlbnwwfHwwfHx8MA%3D%3D",
+    image: shitalIcon,
   },
   {
     name: "Priya Sharma",
-    image:
-      "https://images.unsplash.com/photo-1586351012965-861624544334?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Z2lybHxlbnwwfHwwfHx8MA%3D%3D",
+    image: shitalIcon,
+  },
+  {
+    name: "Madhavi Joshi",
+    image: shitalIcon,
+  },
+  {
+    name: "Neelam Patil",
+    image: shitalIcon,
   },
 ];
 
@@ -47,6 +44,7 @@ export default function ChatBot({ open = true, setOpen }) {
   const [isLoading, setIsLoading] = useState(false);
   const [autoSubmitTimer, setAutoSubmitTimer] = useState(null);
   const [submissionSuccess, setSubmissionSuccess] = useState(null);
+  const [showBubble, setShowBubble] = useState(true);
   const messagesEndRef = useRef(null);
 
   // Scroll to bottom when messages update
@@ -544,15 +542,53 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
 
       {/* Floating Button */}
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed lg:bottom-6 bottom-20 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-white font-bold text-xl transition hover:scale-110"
-          style={{
-            background: "linear-gradient(135deg, #9e7242 0%, #f09051 100%)",
-          }}
-        >
-          <FiMessageCircle size={24} />
-        </button>
+        <>
+          {/* Animated Chat Bubble */}
+          {showBubble && (
+            <div className="fixed lg:bottom-24 bottom-38 right-10 z-40 max-w-xs">
+              <div className="relative bg-gradient-to-r from-[#9e7242] to-[#f09051] text-white p-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105">
+                <button
+                  onClick={() => setShowBubble(false)}
+                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors"
+                >
+                  <FiX size={14} />
+                </button>
+                <div className="space-y-1">
+                  <p className="font-semibold text-sm">
+                    👋 Hey! I'm {currentBot.name}
+                  </p>
+                  <p className="text-xs opacity-90">
+                    Need help with One Crest Showstopper?
+                  </p>
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="text-xs font-medium bg-white/20 rounded-full px-3 py-1 inline-block mt-2"
+                  >
+                    💬 Let's Chat!
+                  </button>
+                </div>
+                {/* Speech bubble tail */}
+                <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-[#f09051]"></div>
+              </div>
+            </div>
+          )}
+
+          {/* Enhanced Bot Avatar Button */}
+          <button
+            onClick={() => setOpen(true)}
+            className="fixed lg:bottom-6 bottom-20 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-3xl border-4 border-white bg-gradient-to-br from-[#9e7242] to-[#f09051]"
+          >
+            <img
+              src={shitalIcon}
+              alt="Chat with us"
+              className="w-12 h-12 object-cover rounded-full"
+            />
+            {/* Online indicator */}
+            <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white animate-ping">
+              <div className="w-2 h-2 bg-green-300 rounded-full mx-auto mt-0.5 animate-pulse"></div>
+            </div>
+          </button>
+        </>
       )}
 
       <style

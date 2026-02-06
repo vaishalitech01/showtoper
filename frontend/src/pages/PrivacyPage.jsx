@@ -4,7 +4,6 @@ const PrivacyPage = () => {
   return (
     <div className="max-w-6xl mx-auto px-5 py-10 font-sans text-gray-800 leading-relaxed">
       
-      {/* Main Title */}
       <h1 className="text-center mt-4 mb-10 text-3xl md:text-4xl font-semibold text-[#b0824a]">
         Disclaimer & Privacy Policy
       </h1>
@@ -13,78 +12,78 @@ const PrivacyPage = () => {
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-3 text-gray-900">Disclaimer</h2>
         <p>
-          This website is only for the purpose of providing information regarding
-          real estate projects in different regions. By accessing this website,
-          the viewer confirms that the information including brochures and
-          marketing collaterals on this website is solely for informational
-          purposes and the viewer has not relied on this information for making
-          any booking/purchase in any project of the company... 
+          This website is an independent marketing and information platform created
+          for the purpose of providing general information about real estate
+          projects in different regions. All content, including brochures,
+          pricing, layouts, and marketing materials, is shared strictly for
+          informational purposes only.
           <br /><br />
-          This site is for information purpose only and should not be treated as
-          the official website. This is not the official website of developer &
-          property, it belongs to authorised marketing partner for information
-          purpose only.
+          This website is not the official website of any developer or real estate
+          company. It is owned and operated by an authorized marketing partner and
+          does not claim to represent any developer officially. Users are advised
+          to verify all details directly with the respective developer or official
+          sources before making any decisions.
         </p>
       </section>
 
       {/* Privacy Policy */}
       <section className="mb-8">
-        <h2 className="text-xl font-bold mb-3 text-gray-900 text-balance">Privacy Policy</h2>
+        <h2 className="text-xl font-bold mb-3 text-gray-900">Privacy Policy</h2>
         <p>
-          In our endeavor and commitment of protecting your personal information,
-          we have designed this comprehensive privacy policy. This is to keep your
-          interests and information safe on our website.
+          We are committed to protecting your privacy and ensuring transparency in
+          how your personal information is collected and used. This privacy policy
+          explains how we handle user data responsibly and lawfully.
         </p>
       </section>
 
-      {/* Update Policy */}
+      {/* Policy Updates */}
       <section className="mb-8">
-        <h2 className="text-xl font-bold mb-3 text-gray-900 text-balance">Updation of Privacy Policy</h2>
+        <h2 className="text-xl font-bold mb-3 text-gray-900">Updation of Privacy Policy</h2>
         <p>
-          This privacy policy is subject to undergo change and review without any
-          prior notice or approval. So to keep yourself updated on the changes
-          introduced, please keep visiting and reviewing the terms and conditions
-          of this privacy policy.
+          This privacy policy may be updated from time to time without prior
+          notice. Any changes will be reflected on this page, and users are
+          encouraged to review it periodically.
         </p>
       </section>
 
       {/* User Information */}
       <section className="mb-8">
-        <h2 className="text-xl font-bold mb-3 text-gray-900">User Information</h2>
+        <h2 className="text-xl font-bold mb-3 text-gray-900">User Information & Consent</h2>
         <p>
-          By using our website, you agree to abide by the rules laid out by us and
-          consent to collection and use of all such information that you may
-          furnish to, or through, our website. In some cases, while you visit our
-          website, you may not need to provide any personal information. But in
-          certain instances, we must have your personal information in order for
-          us to grant you access to some of the links or sites. Such links/ pages
-          may ask for your name, e-mail address, phone number etc. The information
-          furnished by you is used to provide relevant products and services and
-          to acknowledge receipt of your communication or to send out information
-          and updates to you. You have option of requesting removal from our
-          mailing list. We do not give away your personal information to any third
-          party.
+          Users may browse this website without providing personal information.
+          Personal details such as name, phone number, or email address are
+          collected only when users voluntarily submit them through inquiry or
+          contact forms with clear consent.
+          <br /><br />
+          The information provided by users is used strictly for the purpose of
+          responding to inquiries, sharing relevant project details, and
+          connecting users with authorized real estate service providers based on
+          their request. We do not use personal data for misleading purposes, spam,
+          or unsolicited communication.
+          <br /><br />
+          We do not sell, rent, trade, or disclose user data to any unauthorized
+          third party. User information is shared only with relevant service
+          providers to fulfill the user’s inquiry and only with consent.
         </p>
       </section>
 
-      {/* Security */}
+      {/* Security & Cookies */}
       <section className="mb-8">
-        <h2 className="text-xl font-bold mb-3 text-gray-900 text-balance">Security</h2>
+        <h2 className="text-xl font-bold mb-3 text-gray-900">Data Security & Cookies</h2>
         <p>
-          To ensure security while transferring sensitive information, all the
-          ongoing transmissions between client and server are encrypted using
-          advanced and standard protocols. We also practice restricted access by
-          employees and hold them to high levels of confidentiality. 
-          <span className="block mt-4 font-semibold italic text-gray-700">Use of Cookies:</span>
-          We may use cookies for security, session continuity, and
-          customization purposes. In case of a user opting to reject a cookie,
-          he/ she may not be able to gain access to some of the limited services or
-          use some features of the site. In case of any queries or suggestions
-          regarding privacy statement or your dealings with this web site, please
-          contact:
+          We implement reasonable technical and organizational measures to protect
+          personal information from unauthorized access, misuse, or disclosure.
+          All data transmission between the user and server is encrypted using
+          standard security protocols.
+          <br /><br />
+          <span className="font-semibold">Use of Cookies:</span> We may use cookies
+          to enhance user experience, analyze traffic, and ensure proper website
+          functionality. Users may choose to disable cookies through their browser
+          settings; however, some features of the website may not function
+          properly.
         </p>
       </section>
-      
+
     </div>
   );
 };

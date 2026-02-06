@@ -16,6 +16,8 @@ const OfferPriceForm = ({ onClose, type }) => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showFailureAlert, setShowFailureAlert] = useState(false);
   const [errors, setErrors] = useState({ name: "", mobile: "" });
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [consentError, setConsentError] = useState(false);
 
 const validateForm = (formData) => {
   const { name, mobile } = formData;
@@ -52,6 +54,12 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setShowSuccessAlert(false);
   setShowFailureAlert(false);
+  setConsentError(false);
+
+  if (!consentChecked) {
+    setConsentError(true);
+    return;
+  }
 
   if (!validateForm(formData)) {
     return;
@@ -114,6 +122,7 @@ const handleSubmit = async (e) => {
     }
     setShowSuccessAlert(true);
     setFormData({ name: '', mobile: '', source:'satyammetroshowstoppers.in' });
+    setConsentChecked(false);
   } else {
     setShowFailureAlert(true);
   }
@@ -190,6 +199,28 @@ const handleSubmit = async (e) => {
               />
             </div>
             {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
+          </div>
+
+          {/* Consent Checkbox */}
+          <div className="space-y-1">
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={consentChecked}
+                onChange={(e) => {
+                  setConsentChecked(e.target.checked);
+                  setConsentError(false);
+                }}
+                className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
+              />
+              <span className="text-[10px] text-gray-700 leading-relaxed">
+                I consent to the collection and use of my data for marketing purposes. We do not engage in misleading practices. Read our{' '}
+                <a href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</a>.
+              </span>
+            </label>
+            {consentError && (
+              <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>
+            )}
           </div>
 
           {/* Submit */}

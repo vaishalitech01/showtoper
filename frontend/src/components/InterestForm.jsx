@@ -18,6 +18,8 @@ const InterestForm = ({ onClose, mode }) => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showFailureAlert, setShowFailureAlert] = useState(false);
   const [errors, setErrors] = useState({ name: "", email: "", mobile: "" });
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [consentError, setConsentError] = useState(false);
 
 const validateForm = (formData) => {
   const { name, email, mobile } = formData;
@@ -54,6 +56,12 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setShowSuccessAlert(false);
   setShowFailureAlert(false);
+  setConsentError(false);
+
+  if (!consentChecked) {
+    setConsentError(true);
+    return;
+  }
 
   // Prepare dynamic message based on mode
   let messageTemplate = messageTemplates.general;
@@ -131,6 +139,7 @@ const handleSubmit = async (e) => {
     }
     setShowSuccessAlert(true);
     setFormData({ name: '', mobile: '', email: '', source:'satyammetroshowstoppers.in' });
+    setConsentChecked(false);
     // Notify parent that form was submitted
     setTimeout(() => {
       onClose(true);
@@ -243,6 +252,28 @@ const handleSubmit = async (e) => {
                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-[#A67C52]/50"
               />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+            </div>
+
+            {/* Consent Checkbox */}
+            <div className="space-y-2">
+              <label className="flex items-start gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={consentChecked}
+                  onChange={(e) => {
+                    setConsentChecked(e.target.checked);
+                    setConsentError(false);
+                  }}
+                  className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
+                />
+                <span className="text-[10px] text-gray-700 leading-relaxed">
+                  I consent to the collection and use of my data for marketing purposes. We do not engage in misleading practices. Read our{' '}
+                  <a href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</a>.
+                </span>
+              </label>
+              {consentError && (
+                <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>
+              )}
             </div>
 
             {/* Submit */}

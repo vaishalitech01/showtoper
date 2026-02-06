@@ -17,6 +17,8 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showFailureAlert, setShowFailureAlert] = useState(false);
   const [errors, setErrors] = useState({ name: "", email: "", mobile: "" });
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [consentError, setConsentError] = useState(false);
 
   const validateForm = (formData) => {
     const { name, email, mobile } = formData;
@@ -43,6 +45,12 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     e.preventDefault();
     setShowSuccessAlert(false);
     setShowFailureAlert(false);
+    setConsentError(false);
+
+    if (!consentChecked) {
+      setConsentError(true);
+      return;
+    }
 
     if (!validateForm(formData)) {
       return;
@@ -105,6 +113,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
       }
       setShowSuccessAlert(true);
       setFormData({ name: "", mobile: "", email: "", source: 'satyammetroshowstoppers.in' });
+      setConsentChecked(false);
     } else {
       setShowFailureAlert(true);
     }
@@ -150,7 +159,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
         )}
 
         <form className="" onSubmit={handleSubmit}>
-          <div className="border border-[#9e7242] rounded-lg bg-[#e2ab7116] space-y-4 p-4 embossed-shadow">
+          <div className="rounded-sm bg-[#e2ab7116] space-y-4 p-4 embossed-shadow">
             <div>
               <input
                 type="text"
@@ -160,7 +169,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                   setFormData({ ...formData, name: e.target.value })
                 }
                 required
-                className="w-full border border-[#9e7242] rounded-lg p-2 bg-white outline-none focus:ring-1 focus:ring-[#A67C48]"
+                className="w-full border border-[#9e7242] rounded-sm p-2 bg-white outline-none focus:ring-1 focus:ring-[#A67C48]"
               />
               {errors.name && (
                 <p className="text-red-500 text-xs mt-1">{errors.name}</p>
@@ -175,7 +184,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full border border-[#9e7242]  bg-white rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
+                className="w-full border border-[#9e7242]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
               />
               {errors.email && (
                 <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -191,10 +200,32 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                   setFormData({ ...formData, mobile: e.target.value })
                 }
                 required
-                className="w-full border border-[#9e7242]  bg-white rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
+                className="w-full border border-[#9e7242]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
               />
               {errors.mobile && (
                 <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+              )}
+            </div>
+
+            {/* Consent Checkbox */}
+            <div className="space-y-2">
+              <label className="flex items-start gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={consentChecked}
+                  onChange={(e) => {
+                    setConsentChecked(e.target.checked);
+                    setConsentError(false);
+                  }}
+                  className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
+                />
+                <span className="text-[10px] text-gray-700 leading-relaxed">
+                  I consent to the collection and use of my data for marketing purposes. We do not engage in misleading practices. Read our{' '}
+                  <a href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</a>.
+                </span>
+              </label>
+              {consentError && (
+                <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>
               )}
             </div>
 
@@ -202,7 +233,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="animated-gradient text-white px-6 py-2.5 rounded-full text-sm shadow-md hover:opacity-90"
+                className="animated-gradient text-white px-6 py-2.5 rounded-sm text-sm shadow-md hover:opacity-90"
               >
                 {loading ? "Submitting..." : "Submit"}
               </button>
