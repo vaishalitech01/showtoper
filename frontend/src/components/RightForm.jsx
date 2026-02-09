@@ -10,7 +10,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     name: "",
     email: "",
     mobile: "",
-    source:'satyammetroshowstoppers.in',
+    source: 'satyammetroshowstoppers.in',
   });
 
   const [loading, setLoading] = useState(false);
@@ -59,11 +59,11 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     setLoading(true);
     let backendSuccess = false;
     let emailSuccess = false;
-    
+
     // Create messages with address
     const backendMessage = createMessageWithAddress(messageTemplates.general, formData.name);
     const emailMessage = createMessageWithAddress(messageTemplates.general, formData.name);
-    
+
     // 1️⃣ Submit to backend
     try {
       const response = await axios.post(`${baseurl}/forms/submit`, {
@@ -103,11 +103,11 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
       // Track conversion with gtag
       if (typeof gtag !== 'undefined') {
         gtag('event', 'conversion', {
-          'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
-          'value': 1.0,
-          'currency': 'INR',
-          'event_callback': function() {
-            console.log('Right form conversion tracked');
+          'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
+          // 'value': 1.0,
+          // 'currency': 'INR',
+          'event_callback': function () {
+            console.log('Chatbot form conversion tracked');
           }
         });
       }
@@ -240,20 +240,19 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
             </div>
             <div className="mt-auto p-6 ">
               <a
-                href={`https://wa.me/${
-                  contactConfig.phoneNumber
-                }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
+                href={`https://wa.me/${contactConfig.phoneNumber
+                  }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
                   // Track WhatsApp click with gtag
                   if (typeof gtag !== 'undefined') {
                     gtag('event', 'conversion', {
-                      'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
-                      'value': 1.0,
-                      'currency': 'INR',
-                      'event_callback': function() {
-                        console.log('WhatsApp contact conversion tracked');
+                      'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
+                      // 'value': 1.0,
+                      // 'currency': 'INR',
+                      'event_callback': function () {
+                        console.log('Chatbot form conversion tracked');
                       }
                     });
                   }

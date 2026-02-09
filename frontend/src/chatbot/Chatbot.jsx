@@ -216,9 +216,9 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
       // Track conversion with gtag
       if (typeof gtag !== 'undefined') {
         gtag('event', 'conversion', {
-          'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
-          'value': 1.0,
-          'currency': 'INR',
+          'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
+          // 'value': 1.0,
+          // 'currency': 'INR',
           'event_callback': function() {
             console.log('Chatbot form conversion tracked');
           }
