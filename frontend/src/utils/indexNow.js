@@ -1,5 +1,5 @@
 // IndexNow utility for instant search engine indexing
-const INDEXNOW_KEY = '758d177aa28449c3bff244fbf4ccd39f';
+const INDEXNOW_KEY = 'ba27c0b72e4c754dd4a367f6b76255aea827f59fcbf2ff6672d00fd5050b6b0d';
 const HOST = 'satyammetroshowstoppers.in';
 const KEY_LOCATION = `https://${HOST}/${INDEXNOW_KEY}.txt`;
 
