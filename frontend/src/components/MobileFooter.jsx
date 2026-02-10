@@ -2,7 +2,7 @@ import React from "react";
 import { PhoneCall, MapPin } from "lucide-react";
 import { contactConfig } from "../config/credential";
 
-const MobileFooter = () => {
+const MobileFooter = ({ onRequestCallBack }) => {
   return (
     <>
       {/* Fixed Footer */}
@@ -16,23 +16,24 @@ const MobileFooter = () => {
           <MapPin size={18} />
           SITE VISIT
         </a>
-        <a
-          href={`https://wa.me/${contactConfig.phoneNumber}?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => {
-            // Track WhatsApp click with gtag
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'conversion', {
-                'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
-                // 'value': 1.0,
-                // 'currency': 'INR',
-                'event_callback': function () {
-                  console.log('Chatbot form conversion tracked');
-                }
-              });
-            }
-          }}
+        <button
+          onClick={onRequestCallBack}
+          // href={`https://wa.me/${contactConfig.phoneNumber}?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
+          // target="_blank"
+          // rel="noopener noreferrer"
+          // onClick={() => {
+          //   // Track WhatsApp click with gtag
+          //   if (typeof gtag !== 'undefined') {
+          //     gtag('event', 'conversion', {
+          //       'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
+          //       // 'value': 1.0,
+          //       // 'currency': 'INR',
+          //       'event_callback': function () {
+          //         console.log('Chatbot form conversion tracked');
+          //       }
+          //     });
+          //   }
+          // }}
           className="w-1/3 flex items-center justify-center gap-2 py-3 text-white font-semibold"
         >
           <img
@@ -41,16 +42,16 @@ const MobileFooter = () => {
             className="w-6 h-6"
           />
           WHATSAPP
-        </a>
-        <a
-          href={`tel:+${contactConfig.phoneNumber}`}
+        </button>
+        <button
+          onClick={onRequestCallBack}
+          // href={`tel:+${contactConfig.phoneNumber}`}
           className="w-1/3 flex items-center justify-center gap-2 py-3 text-white font-semibold"
-        >
+         >
           <PhoneCall size={18} />
           CALL
-        </a>
+        </button>
       </div>
-
 
     </>
   );

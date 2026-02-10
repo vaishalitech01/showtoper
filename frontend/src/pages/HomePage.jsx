@@ -110,7 +110,9 @@ const HomePage = () => {
         <Location />
         <NRIServices />
         <Footer />
-        <MobileFooter />
+        <MobileFooter onRequestCallBack={() => {setIsInterestFormOpen(true)
+          setFormMode('download brochure');
+        }}/>
         </>
   )
 }

@@ -127,16 +127,18 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
       <div className=" flex flex-col items-center">
         <div
           onClick={onRequestCallBack}
-          className="animated-gradient  text-white w-full py-1 rounded-b-3xl text-center text-lg cursor-pointer shadow-md"
+          className="animated-gradient text-white w-full py-1 rounded-b-3xl text-center text-lg cursor-pointer shadow-md"
         >
-          {contactConfig.displayPhone}
+          {/* {contactConfig.displayPhone} */}
+          Get a Best Deal
+
         </div>
 
         <button
           onClick={onRequestCallBack}
-          className="mt-1 mb-2 animated-gradient  text-white px-10 py-1 rounded-lg text-lg shadow-inner hover:bg-[#8e693c]"
+          className="mt-1 mb-2 animated-gradient mt-4 text-white px-10 py-1 rounded-lg text-lg shadow-inner hover:bg-[#8e693c]"
         >
-          Request Call Back
+        Click to  Request Call Back
         </button>
       </div>
 
@@ -238,7 +240,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                 {loading ? "Submitting..." : "Submit"}
               </button>
             </div>
-            <div className="mt-auto p-6 ">
+            {/* <div className="mt-auto p-6 ">
               <a
                 href={`https://wa.me/${contactConfig.phoneNumber
                   }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
@@ -268,7 +270,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                   Get Instant Response
                 </span>
               </a>
-            </div>
+            </div> */}
           </div>
         </form>
         <img
