@@ -4,7 +4,7 @@ import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns, baseurl } from '../key/key';
 import { createMessageWithAddress, messageTemplates } from '../key/messageUtils';
 import axios from 'axios';
-import logo from "../assets/showstopper-logo.webp";
+import logo from "../assets/showstopper-logo.avif";
 
 const InterestForm = ({ onClose, mode }) => {
   const [formData, setFormData] = useState({

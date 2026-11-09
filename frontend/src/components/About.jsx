@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import oneCrestPoster from "../assets/Poster/one-crest-project-poster.jpeg";
+import oneCrestPoster from "../assets/Poster/one-crest-project-poster.avif";
 
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false);

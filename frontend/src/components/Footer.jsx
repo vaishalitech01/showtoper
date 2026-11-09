@@ -1,26 +1,25 @@
-import React from 'react';
-
+import showstopperLogo from '../assets/mahaReraQr.avif';
 const Footer = () => {
   return (
     <footer className="w-full font-sans text-[#333]">
       {/* Upper Section: RERA Link */}
-      <div className="py-2 text-center">
-        <h2 className="text-2xl mb-2">RERA Number</h2>
-        <p className="text-md">
-          This project is RERA registered –{' '}
-          <a 
-            href="https://maharera.maharashtra.gov.in" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            maharera.maharashtra.gov.in
-          </a>
-        </p>
-      </div>
+   
 
       {/* Lower Section: Disclaimer */}
       <div className="bg-[#eef6ff] px-6 py-10 md:px-20 ">
+         <div className="py-4 text-center">
+      <img
+        src={showstopperLogo}
+        alt="Showstopper Logo"
+        className="h-24 w-auto mx-auto mb-3 object-contain"
+      />
+
+      <h3 className="text-lg font-semibold mb-2">
+        RERA Number PR1270002601519
+      </h3>
+
+      
+    </div>
         <div className="max-w-6xl mx-auto text-center leading-relaxed text-xs lg:text-base">
           <p className="mb-4">
             <span className="font-bold">Disclaimer:</span> The content is for information purposes only and does not constitute an offer to avail of any service. Prices mentioned are subject to change without notice and properties mentioned are subject to availability. Images for representation purpose only. This is not the official website. Website maintained by Authorized Channel Partner Maha Rera. We may share data with rera registered brokers/companies for further procession.

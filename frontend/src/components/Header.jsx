@@ -12,7 +12,7 @@ import {
   X,
   Camera,
 } from "lucide-react";
-import logo from "../assets/showstopper-logo.webp";
+import logo from "../assets/showstopper-logo.avif";
 
 const Header = ({ onBrochureClick }) => {
   const location = useLocation();
