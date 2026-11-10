@@ -4,7 +4,7 @@ import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
 import { contactConfig } from "../config/credential";
 import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
 import { apiPostRequest } from "../utils/api/post";
-import poster from "../assets/Poster/ShowStopper_Poster_2.jpeg";
+import poster from "../assets/Poster/ShowStopper_Poster_2.avif";
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -321,11 +321,23 @@ const handleSubmit = async (e) => {
             </div> */}
           </div>
         </form>
-        <img
-          src={poster}
-          alt="Satyam Metro Showstopper Logo"
-          className="h-48 w-full mt-4 border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200"
-        />
+      <a
+  href="https://virtualrealty.org.in/properties/14/luxury-residential-developments-featuring-2-3-and-4-bhk-configurations-in-sector-20-kharghar"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="relative block mt-4"
+>
+  {/* AD Label */}
+  <span className="absolute top-2 left-2 z-10 bg-black/80 text-white text-[10px] font-bold tracking-widest px-3 py-1 rounded-sm">
+    AD
+  </span>
+
+  <img
+    src={poster}
+    alt="Satyam Metro Showstopper"
+    className="h-56 w-full border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200 cursor-pointer"
+  />
+</a>
       </div>
     </div>
   );

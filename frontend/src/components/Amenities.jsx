@@ -30,15 +30,17 @@ const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
   return (
     <section id='amenities' className="bg-white py-4 px-5">
       <div className="max-w-7xl mx-auto">
-        <header className="text-center mb-10">
-          <h2 className="text-[28px] font-bold text-[#333] leading-tight mb-2">
-            Satyam Metro Showstopper
-          </h2>
-          <h3 className="text-[26px] font-medium text-[#333]">
-            Amenities
-          </h3>
-        </header>
+       <header className="text-center mb-10">
+  <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
+    Crafted for Exceptional Living
+  </span>
 
+  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
+    World-Class <span className="text-[#A67C48]">Amenities</span>
+  </h2>
+
+  <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
+</header>
         {/* Mobile View: Horizontal Swiper – Screenshot Style */}
 <div className="lg:hidden mb-8">
   <Swiper
@@ -51,7 +53,7 @@ const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
     {firstSwiperAmenities.map((item, index) => (
       <SwiperSlide key={index}>
         <div className="flex flex-col items-center">
-          <div className="w-full overflow-hidden rounded-[28px] mb-3">
+          <div className="w-full overflow-hidden rounded-sm mb-3">
             <img
               src={item.img}
               alt={item.alt}
@@ -79,7 +81,7 @@ const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
     {secondSwiperAmenities.map((item, index) => (
       <SwiperSlide key={index}>
         <div className="flex flex-col items-center">
-          <div className="w-full overflow-hidden rounded-[28px] mb-3">
+          <div className="w-full overflow-hidden rounded-sm mb-3">
             <img
               src={item.img}
               alt={item.alt}
@@ -100,7 +102,7 @@ const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
         <div className="hidden lg:grid lg:grid-cols-4 gap-12">
           {amenities.map((item, index) => (
             <div key={index} className="flex flex-col items-center group">
-              <div className="w-full aspect-4/3 overflow-hidden rounded-[20px] mb-4 shadow-sm">
+              <div className="w-full aspect-4/3 overflow-hidden rounded-sm mb-4 shadow-sm">
                 <img 
                   src={item.img} 
                   alt={item.alt} 

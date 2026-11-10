@@ -23,11 +23,19 @@ const Price = ({ onOfferPriceClick }) => {
       id="price"
       className="bg-white py-4 px-4 lg:px-6 max-w-7xl mx-auto"
     >
-      {/* Page Title */}
-      <h2 className="text-2xl lg:text-3xl font-bold text-slate-800 text-center mb-8 lg:mb-12">
-        Satyam Metro Showstopper Price & Plan
-      </h2>
+    {/* Page Title */}
+<div className="text-center mb-8 lg:mb-12">
+  <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
+    Explore Prices & Floor Plans
+  </span>
 
+  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
+    Satyam Metro Showstopper{" "}
+    <span className="text-[#A67C48]">Price & Plan</span>
+  </h2>
+
+  <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
+</div>
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* --- PRICING SECTION --- */}
         <div className="grow w-full">

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
 import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
 import { apiPostRequest } from "../utils/api/post";
+import { useState } from "react";
+
 const MobileForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -254,7 +256,7 @@ const handleSubmit = async (e) => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full animated-gradient text-white py-2 rounded-full font-medium"
+          className="w-full animated-gradient text-white py-2 rounded-md font-medium"
         >
           {loading ? "Submitting..." : "Submit"}
         </button>

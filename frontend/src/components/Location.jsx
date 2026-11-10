@@ -1,6 +1,6 @@
 import React from 'react';
 import { contactConfig } from '../config/credential';
-import oneCrestFacade from '../assets/one-crest-building-facade.png';
+import oneCrestBuilding from '../assets/one-crest-building-design.avif';
 
 const Location = () => {
   const locationData = [
@@ -78,7 +78,7 @@ const Location = () => {
           <div className="relative">
             <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#A67C48] shadow-lg animate-bounce">
               <img 
-                src={oneCrestFacade} 
+                src={oneCrestBuilding} 
                 alt="One Crest project location marker - Satyam Metro Showstopper Sector 20 Kharghar Navi Mumbai" 
                 className="w-full h-full object-cover"
               />

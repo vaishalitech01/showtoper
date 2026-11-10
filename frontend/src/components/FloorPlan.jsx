@@ -21,9 +21,18 @@ const FloorPlan = ({ onOfferPriceClick }) => {
   return (
     <section id='floorplan' className="bg-white py-4 px-6 max-w-7xl mx-auto">
       {/* Page Title */}
-      <h2 className="text-3xl font-semibold text-slate-800 text-center mb-16">
-        Satyam Metro Showstopper Floor Plans
-      </h2>
+    {/* Floor Plans Heading */}
+<div className="text-center mb-16">
+  <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
+    Thoughtfully Designed Spaces
+  </span>
+
+  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
+    Explore Our <span className="text-[#A67C48]">Floor Plans</span>
+  </h2>
+
+  <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
+</div>
 
       <div className="flex flex-col lg:flex-row justify-center items-center gap-10">
         {plans.map((plan, index) => (

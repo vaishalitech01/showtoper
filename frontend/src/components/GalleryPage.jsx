@@ -116,14 +116,18 @@ const Gallery = () => {
 
         {/* Section Heading */}
         <div className="text-center mb-12">
-          <span className="text-sm uppercase tracking-[0.25em] text-amber-700 font-semibold">
-            Explore the Experience
-          </span>
+        {/* Gallery Heading */}
+<div className="text-center mb-8">
+  <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
+    Explore the Experience
+  </span>
 
-          <h2 className="text-3xl lg:text-4xl font-semibold text-slate-800 mt-3">
-            Satyam Showstopper Gallery
-          </h2>
+  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
+    Satyam Showstopper <span className="text-[#A67C48]">Gallery</span>
+  </h2>
 
+  <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
+</div>
           <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-sm sm:text-base">
             Discover thoughtfully designed interiors, elegant spaces and
             lifestyle amenities at One Crest, Kharghar.

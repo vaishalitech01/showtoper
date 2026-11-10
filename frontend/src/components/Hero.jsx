@@ -1,25 +1,27 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import oneCrestExterior from "../assets/one-crest-exterior-view.png";
-import oneCrestFacade from "../assets/one-crest-building-facade.png";
-import oneCrestTower from "../assets/one-crest-tower-elevation.jpeg";
-import oneCrestComplex from "../assets/one-crest-residential-complex.png";
-import oneCrestAerial from "../assets/one-crest-aerial-view.jpg";
-import oneCrestDesign from "../assets/one-crest-building-design.png";
-import oneCrestProgress from "../assets/one-crest-construction-progress.png";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
+import satyamMetroLogo from "../assets/satyam-metro-logo.avif";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import oneCrestExterior from "../assets/one-crest-exterior-view.avif";
+import swimmingPool from "../assets/luxurious-Poolside-Residential.avif";
+import oneCrestGym from "../assets/one-crest-gym.avif";
+import oneCrestComplex from "../assets/one-crest-residential-complex.avif";
+import oneCrestAerial from "../assets/one-crest-aerial-view.avif";
+import oneCrestDesign from "../assets/one-crest-building-design.avif";
+
 
 const Hero = ({ onRequestCallBack }) => {
   const images = [
     { src: oneCrestExterior, alt: "One Crest luxury apartments exterior view - Satyam Metro Developers Kharghar" },
-    { src: oneCrestFacade, alt: "One Crest building facade and architecture - Premium residential project Sector 20 Kharghar" },
-    { src: oneCrestTower, alt: "One Crest tower elevation - Satyam Metro luxury development Navi Mumbai" },
+    { src: oneCrestDesign, alt: "One Crest building design - Luxury 2 3 4 BHK apartments Satyam Metro" },
+    { src: swimmingPool, alt: "One Crest swimming pool - Luxurious residential amenities Kharghar" },
+    { src: oneCrestGym, alt: "One Crest tower elevation - Satyam Metro luxury development Navi Mumbai" },
     { src: oneCrestComplex, alt: "One Crest residential complex - Modern apartments by Satyam Metro Developers" },
     { src: oneCrestAerial, alt: "One Crest project aerial view - Premium housing in Kharghar Navi Mumbai" },
-    { src: oneCrestDesign, alt: "One Crest building design - Luxury 2 3 4 BHK apartments Satyam Metro" },
-    { src: oneCrestProgress, alt: "One Crest construction progress - New launch project Kharghar by Satyam Metro" }
   ];
 
   return (
@@ -27,27 +29,77 @@ const Hero = ({ onRequestCallBack }) => {
       {/* Wrapper */}
       <div className="relative w-full flex flex-col lg:block">
         {/* Image Section */}
-        <div className="relative md:h-[50vh] h-[25vh] lg:h-[85vh] sm:h-[25vh]  w-full overflow-hidden">
+      
+  {/* Hero Image Slider */}
+        <div className="relative h-[25vh] md:h-[50vh] lg:h-[85vh] w-full overflow-hidden group">
           <Swiper
-            modules={[Autoplay, Pagination]}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            modules={[Autoplay, Pagination, Navigation]}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
             loop={true}
             pagination={{ clickable: true }}
+            navigation={{
+              prevEl: ".hero-prev",
+              nextEl: ".hero-next",
+            }}
             className="h-full w-full hero-swiper"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Godrej Varanya project images"
           >
             {images.map((image, index) => (
-              <SwiperSlide key={index}>
-                <div
-                  className="h-full w-full bg-cover bg-center scale-100"
-                  style={{ backgroundImage: `url('${image.src}')` }}
-                  role="img"
-                  aria-label={image.alt}
-                >
-                  <div className="absolute inset-0 bg-black/20" />
-                </div>
+              <SwiperSlide key={image.src}>
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="h-full w-full object-cover object-center"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
+                  decoding="async"
+                />
               </SwiperSlide>
             ))}
           </Swiper>
+{/* Satyam Metro Logo Watermark */}
+<div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-10 pointer-events-none">
+  <img
+    src={satyamMetroLogo}
+    alt="Satyam Metro"
+    className="
+      w-24 sm:w-32 md:w-36 lg:w-40
+      h-auto
+      object-contain
+      opacity-90
+      drop-shadow-lg
+    "
+  />
+</div>
+          {/* Previous Button */}
+          <button
+            type="button"
+            className="hero-prev absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20
+              flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12
+              rounded-full bg-white/80 text-[var(--clr-p)] shadow-lg
+              backdrop-blur-sm hover:bg-white hover:scale-110 transition-all"
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={26} />
+          </button>
+
+          {/* Next Button */}
+          <button
+            type="button"
+            className="hero-next absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20
+              flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12
+              rounded-full bg-white/80 text-[var(--clr-p)] shadow-lg
+              backdrop-blur-sm hover:bg-white hover:scale-110 transition-all"
+            aria-label="Next image"
+          >
+            <ChevronRight size={26} />
+          </button>
         </div>
 
         {/* Info Card */}

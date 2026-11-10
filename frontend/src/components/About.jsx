@@ -1,6 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import oneCrestPoster from "../assets/Poster/one-crest-project-poster.avif";
-
+import {
+  Crown,
+  Building2,
+  Maximize2,
+  Sparkles,
+  MapPin,
+  Home,
+  Trees,
+  Sofa,
+  Palette,
+} from "lucide-react";
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [posterHeight, setPosterHeight] = useState(0);
@@ -18,9 +28,16 @@ const About = () => {
       id="about"
       className="max-w-7xl mx-auto px-6 py-4 bg-white scroll-mt-20"
     >
-      <h2 className="text-3xl font-semibold text-[#A67C48] text-center mb-10">
-        Satyam Metro Showstopper
-      </h2>
+     <div className="text-center mb-10 mt-10">
+  <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
+    Discover Every Detail
+  </span>
+  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
+    Let’s Take a Closer Look at{" "}
+    <span className="text-[#A67C48]">Satyam Metro Showstoppers</span>
+  </h2>
+  <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
+</div>
 
       <div className="flex flex-col lg:flex-row gap-12 items-start">
         {/* Text Content Column */}
@@ -116,6 +133,68 @@ const About = () => {
           </div>
         </div>
       </div>
+      
+{/* The New Crest Of Luxury */}
+<div className="mt-14 mb-8">
+
+  {/* Heading */}
+  <div className="text-center mb-8">
+    <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
+      Experience Exceptional Living
+    </span>
+
+    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
+      The New Crest Of <span className="text-[#A67C48]">Luxury</span>
+    </h2>
+
+    <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
+  </div>
+
+  {/* Compact Highlights */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-5">
+
+    {[
+      { icon: <Palette />, text: "Co-Branded Italian Living" },
+      { icon: <Building2 />, text: "G+31 Storey Signature Tower" },
+      { icon: <Maximize2 />, text: "30% Larger Carpet Size" },
+      { icon: <Sparkles />, text: "35+ Amenities & Curated Experiences" },
+      { icon: <MapPin />, text: "Kharghar's Prime Location" },
+      { icon: <Home />, text: "Luxury 3 BHK, 4 BHK and select 2 BHK residences" },
+      { icon: <Trees />, text: "Over 1 Lakh Sq. Ft. of Recreational Spaces" },
+      { icon: <Sofa />, text: "Stellar Lobby & Verve Clubhouse furnished with Roberto Cavalli Home Interiors" },
+      { icon: <Crown />, text: "Italian-Inspired Design Sensibility" },
+    ].map((item, index) => (
+      <div
+        key={index}
+        className="flex items-start gap-3 py-2 group"
+      >
+        <div className="shrink-0 text-[#A67C48] mt-0.5">
+          {React.cloneElement(item.icon, {
+            size: 19,
+            strokeWidth: 1.7,
+          })}
+        </div>
+
+        <p className="text-sm md:text-[15px] text-gray-700 font-medium leading-relaxed group-hover:text-[#A67C48] transition-colors">
+          {item.text}
+        </p>
+      </div>
+    ))}
+
+  </div>
+
+  {/* Bottom Accent */}
+  {/* <div className="mt-8 pt-5 border-t border-[#A67C48]/20 text-center">
+    <p className="text-sm md:text-base font-semibold tracking-wide text-slate-800">
+      More Than a Residence.{" "}
+      <span className="text-[#A67C48]">
+        A Statement of Luxury.
+      </span>
+    </p>
+  </div> */}
+
+</div>
+
     </section>
   );
 };
