@@ -25,7 +25,9 @@ export const regexPatterns = {
 export let user_address = null;
 
 // export const baseurl = "http://localhost:3001/api";
+export const baseurl = "https://api.virtualrealty.org.in/api";
+// export const baseurl = "https://api.satyammetroshowstoppers.in/api";
 
-export const baseurl = import.meta.env.VITE_BASE_API_URL;
+// export const baseurl = import.meta.env.VITE_BASE_API_URL;
 
 // chatbot.js ,BrochureForm.jsx,InterestForm.jsx,MobileForm.jsx,offerForm.jsx,RightForm.jsx

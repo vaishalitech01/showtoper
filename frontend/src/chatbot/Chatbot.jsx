@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, baseurl } from "../key/key";
-import axios from "axios";
+import { apiPostRequest } from "../utils/api/post";
 import botIcon1 from "../assets/bot1.gif";
 import botIcon2 from "../assets/bot2.gif";
 import botIcon3 from "../assets/bot3.gif";
@@ -164,81 +164,107 @@ export default function ChatBot({ open = true, setOpen }) {
     setAutoSubmitTimer(timer);
   };
 
-  const submitFormData = async (data) => {
-    let backendSuccess = false;
-    let emailSuccess = false;
 
-    const finalMessage = `Hey, I'm ${data.name}. 
+const submitFormData = async (data) => {
+  let backendSuccess = false;
+  let emailSuccess = false;
+
+  const cleanedMobile = data.phone
+    .replace(/\D/g, "")
+    .slice(-10);
+
+  const finalMessage = `Hey, I'm ${data.name}.
 I'm interested in ${data.interest || "property details"} and I'm willing to buy ${data.flatType || "a flat"}.
 Message: ${data.message || `No specific message. My address is: ${window.user_address || "Location not available"}`}
 `;
 
-    // 1️⃣ Submit to backend
-    try {
-      const response = await axios.post(`${baseurl}/forms/submit`, {
-        name: data.name,
-        mobile: data.phone,
-        email: data.email || "",
+  // 1. Submit to backend
+  try {
+    const contactRequestData = {
+      name: data.name.trim(),
+      mobileNumber: cleanedMobile,
+      email: data.email || "",
+      remark: finalMessage,
+      source: "MANUAL",
+      status: "NEW",
+      propertyName: "Satyam Metro Showstoppers",
+    };
+
+    const response = await apiPostRequest({
+      apiUrl: "/contact-requests",
+      content_type: "application/json",
+      data: contactRequestData,
+    });
+
+    if (response.status === 200 || response.status === 201) {
+      backendSuccess = true;
+    }
+
+  } catch (error) {
+    console.error("Backend submission failed:", error);
+    console.error("Backend response:", error.response?.data);
+    console.error("Status code:", error.response?.status);
+  }
+
+  // 2. Send Email via EmailJS
+  try {
+    await emailjs.send(
+      emailKeys.serviceId,
+      emailKeys.templateId,
+      {
+        user_name: data.name,
+        user_phone: cleanedMobile,
+        user_email:
+          data.email || "Email not provided (This is a chatbot submission)",
+        web_url: credentials.web_url,
+        web_name: credentials.web_name,
+        logo_url: credentials.logo_url,
         message: finalMessage,
-        source: "satyammetroshowstoppers.in",
-      });
-      if (response.status === 201) {
-        backendSuccess = true;
-      }
-    } catch (error) {
-      console.error("Backend submission failed:", error);
-    }
+      },
+      emailKeys.publicKey
+    );
 
-    // 2️⃣ Send Email via EmailJS
-    try {
-      await emailjs.send(
-        emailKeys.serviceId,
-        emailKeys.templateId,
-        {
-          user_name: data.name,
-          user_phone: data.phone,
-          user_email:
-            data.email || "Email not provided (This is a chatbot submission)",
-          web_url: credentials.web_url,
-          web_name: credentials.web_name,
-          logo_url: credentials.logo_url,
-          message: finalMessage,
+    emailSuccess = true;
+
+  } catch (error) {
+    console.error("Email submission failed:", error);
+  }
+
+  // 3. Show result
+  if (backendSuccess || emailSuccess) {
+
+    // Google Ads conversion tracking
+    if (
+      typeof window !== "undefined" &&
+      typeof window.gtag === "function"
+    ) {
+      window.gtag("event", "conversion", {
+        send_to: "AW-17844583964/2mpsCJroou0bEJz8-rxC",
+        event_callback: function () {
+          console.log("Chatbot form conversion tracked");
         },
-        emailKeys.publicKey,
-      );
-      emailSuccess = true;
-    } catch (error) {
-      console.error("Email submission failed:", error);
+      });
     }
 
-    // 3️⃣ Show result
-    if (backendSuccess || emailSuccess) {
-      // Track conversion with gtag
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
-          // 'value': 1.0,
-          // 'currency': 'INR',
-          'event_callback': function() {
-            console.log('Chatbot form conversion tracked');
-          }
-        });
-      }
-      setSubmissionSuccess(true);
-      await simulateBotTyping(
-        `Perfect! ✨ I've received your details. Our team will contact you shortly. Thank you for choosing Satyam Developers! 🎉`,
-        1000,
-      );
-    } else {
-      setSubmissionSuccess(false);
-      await simulateBotTyping(
-        `Sorry, there was an issue submitting your details. Please try again or contact us directly.`,
-        1000,
-      );
-    }
+    setSubmissionSuccess(true);
 
-    setConversationStep("confirmation");
-  };
+    await simulateBotTyping(
+      `Perfect! ✨ I've received your details. Our team will contact you shortly. Thank you for choosing Satyam Developers! 🎉`,
+      1000
+    );
+
+  } else {
+    setSubmissionSuccess(false);
+
+    await simulateBotTyping(
+      `Sorry, there was an issue submitting your details. Please try again or contact us directly.`,
+      1000
+    );
+  }
+
+  setConversationStep("confirmation");
+};
+
 
   const handleMessageSubmit = async () => {
     // Clear auto-submit timer if user completes conversation

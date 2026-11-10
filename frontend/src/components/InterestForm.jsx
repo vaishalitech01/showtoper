@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns, baseurl } from '../key/key';
 import { createMessageWithAddress, messageTemplates } from '../key/messageUtils';
-import axios from 'axios';
+import { apiPostRequest } from "../utils/api/post";
 import logo from "../assets/showstopper-logo.avif";
 
 const InterestForm = ({ onClose, mode }) => {
@@ -52,8 +52,10 @@ else if(mode==='download brochure'){
   formHeader = 'Download Brochure';
 }
 
+
 const handleSubmit = async (e) => {
   e.preventDefault();
+
   setShowSuccessAlert(false);
   setShowFailureAlert(false);
   setConsentError(false);
@@ -65,91 +67,124 @@ const handleSubmit = async (e) => {
 
   // Prepare dynamic message based on mode
   let messageTemplate = messageTemplates.general;
-  
-  if (mode === 'callback') {
+
+  if (mode === "callback") {
     messageTemplate = messageTemplates.callback;
-  } else if (mode === 'brochure' || mode === 'download brochure') {
-    messageTemplate = messageTemplates.brochure;
   }
 
+  const backendMessage = createMessageWithAddress(
+    messageTemplate,
+    formData.name
+  );
 
-
-  const backendMessage = createMessageWithAddress(messageTemplate, formData.name);
-  const emailMessage = createMessageWithAddress(messageTemplate, formData.name);
-
-  // console.log("Using backend message template for mode:", backendMessage);
-  //  console.log("Using email message template for mode:", emailMessage);
-
-  const submissionData = {
-    ...formData,
-    message: backendMessage
-  };
+  const emailMessage = createMessageWithAddress(
+    messageTemplate,
+    formData.name
+  );
 
   if (!validateForm(formData)) {
     return;
   }
 
   setLoading(true);
+
   let backendSuccess = false;
   let emailSuccess = false;
 
-  // 1️⃣ Submit to backend
+  const cleanedMobile = formData.mobile
+    .replace(/\D/g, "")
+    .slice(-10);
+
+  // 1. Submit to backend
   try {
-    const response = await axios.post(`${baseurl}/forms/submit`, submissionData);
-    if (response.status === 201) {
+    const contactRequestData = {
+      name: formData.name.trim(),
+      mobileNumber: cleanedMobile,
+      email: formData.email || "",
+      remark: backendMessage,
+      source: "MANUAL",
+      status: "NEW",
+      propertyName: "Satyam Metro Showstoppers",
+    };
+
+    const response = await apiPostRequest({
+      apiUrl: "/contact-requests",
+      content_type: "application/json",
+      data: contactRequestData,
+    });
+
+    if (response.status === 200 || response.status === 201) {
       backendSuccess = true;
     }
+
   } catch (error) {
-    console.error('Backend submission failed:', error);
+    console.error("Backend submission failed:", error);
+    console.error("Backend response:", error.response?.data);
+    console.error("Status code:", error.response?.status);
   }
 
-  // 2️⃣ Send Email via EmailJS
+  // 2. Send Email via EmailJS
   try {
     await emailjs.send(
       emailKeys.serviceId,
       emailKeys.templateId,
       {
         user_name: formData.name,
-        user_phone: formData.mobile,
-        user_email: formData.email,
+        user_phone: cleanedMobile,
+        user_email: formData.email || "Email not provided",
         web_url: credentials.web_url,
         web_name: credentials.web_name,
         logo_url: credentials.logo_url,
-        message: emailMessage
+        message: emailMessage,
       },
       emailKeys.publicKey
     );
+
     emailSuccess = true;
+
   } catch (error) {
-    console.error('Email submission failed:', error);
+    console.error("Email submission failed:", error);
   }
 
-  // 3️⃣ Show result
+  // 3. Show result
   if (backendSuccess || emailSuccess) {
-    // Track conversion with gtag
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'conversion', {
-          'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
-          // 'value': 1.0,
-          // 'currency': 'INR',
-          'event_callback': function() {
-            console.log('Chatbot form conversion tracked');
-          }
-        });
+
+    // Google Ads conversion tracking
+    if (
+      typeof window !== "undefined" &&
+      typeof window.gtag === "function"
+    ) {
+      window.gtag("event", "conversion", {
+        send_to: "AW-17844583964/2mpsCJroou0bEJz8-rxC",
+        event_callback: function () {
+          console.log("Chatbot form conversion tracked");
+        },
+      });
     }
+
     setShowSuccessAlert(true);
-    setFormData({ name: '', mobile: '', email: '', source:'satyammetroshowstoppers.in' });
+
+    setFormData({
+      name: "",
+      mobile: "",
+      email: "",
+      source: "satyammetroshowstoppers.in",
+    });
+
     setConsentChecked(false);
+
     // Notify parent that form was submitted
     setTimeout(() => {
       onClose(true);
     }, 2000);
+
   } else {
     setShowFailureAlert(true);
   }
 
   setLoading(false);
 };
+
 
 
   return (
@@ -266,10 +301,15 @@ const handleSubmit = async (e) => {
                   }}
                   className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
                 />
-                <span className="text-[10px] text-gray-700 leading-relaxed">
-                  I consent to the collection and use of my data for marketing purposes. We do not engage in misleading practices. Read our{' '}
-                  <a href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</a>.
-                </span>
+                
+<span className="text-[10px] text-gray-700 leading-relaxed">
+  I agree to the{" "}
+  <a href="/privacy" className="text-blue-600 hover:underline">
+    Privacy Policy
+  </a>
+  . Your data is safe and secure with us. Don't worry!
+</span>
+
               </label>
               {consentError && (
                 <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>

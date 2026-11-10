@@ -3,7 +3,7 @@ import { User, Phone, Mail, X } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
 import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
-import axios from "axios";
+import { apiPostRequest } from "../utils/api/post";
 
 const BrochureForm = ({ onClose }) => {
   const form = useRef();
@@ -43,85 +43,130 @@ const BrochureForm = ({ onClose }) => {
     return !newErrors.name && !newErrors.email && !newErrors.mobile;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setShowSuccessAlert(false);
-    setShowFailureAlert(false);
-    setConsentError(false);
+ 
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!consentChecked) {
-      setConsentError(true);
-      return;
+  setShowSuccessAlert(false);
+  setShowFailureAlert(false);
+  setConsentError(false);
+
+  if (!consentChecked) {
+    setConsentError(true);
+    return;
+  }
+
+  if (!validateForm(formData)) {
+    return;
+  }
+
+  setLoading(true);
+
+  let backendSuccess = false;
+  let emailSuccess = false;
+
+  const cleanedMobile = formData.mobile
+    .replace(/\D/g, "")
+    .slice(-10);
+
+  // Create messages with address
+  const backendMessage = createMessageWithAddress(
+    messageTemplates.brochureRequest,
+    formData.name
+  );
+
+  const emailMessage = createMessageWithAddress(
+    messageTemplates.brochureRequest,
+    formData.name
+  );
+
+  // 1. Submit to backend
+  try {
+    const contactRequestData = {
+      name: formData.name.trim(),
+      mobileNumber: cleanedMobile,
+      email: formData.email || "",
+      remark: backendMessage,
+      source: "MANUAL",
+      status: "NEW",
+      propertyName: "Satyam Metro Showstoppers",
+    };
+
+    const response = await apiPostRequest({
+      apiUrl: "/contact-requests",
+      content_type: "application/json",
+      data: contactRequestData,
+    });
+
+    if (response.status === 200 || response.status === 201) {
+      backendSuccess = true;
     }
 
-    if (!validateForm(formData)) {
-      return;
-    }
+  } catch (error) {
+    console.error("Backend submission failed:", error);
+    console.error("Backend response:", error.response?.data);
+    console.error("Status code:", error.response?.status);
+  }
 
-    setLoading(true);
-    let backendSuccess = false;
-    let emailSuccess = false;
+  // 2. Send Email via EmailJS
+  try {
+    await emailjs.send(
+      emailKeys.serviceId,
+      emailKeys.templateId,
+      {
+        user_name: formData.name,
+        user_phone: cleanedMobile,
+        user_email: formData.email || "Email not provided",
+        web_url: credentials.web_url,
+        web_name: credentials.web_name,
+        logo_url: credentials.logo_url,
+        message: emailMessage,
+      },
+      emailKeys.publicKey
+    );
 
-    // Create messages with address
-    const backendMessage = createMessageWithAddress(messageTemplates.brochureRequest, formData.name);
-    const emailMessage = createMessageWithAddress(messageTemplates.brochureRequest, formData.name);
+    emailSuccess = true;
 
-    // 1️⃣ Submit to backend
-    try {
-      const response = await axios.post(`${baseurl}/forms/submit`, {
-        ...formData,
-        message: backendMessage
-      });
-      if (response.status === 201) {
-        backendSuccess = true;
-      }
-    } catch (error) {
-      console.error("Backend submission failed:", error);
-    }
+  } catch (error) {
+    console.error("Email submission failed:", error);
+  }
 
-    // 2️⃣ Send Email via EmailJS
-    try {
-      await emailjs.send(
-        emailKeys.serviceId,
-        emailKeys.templateId,
-        {
-          user_name: formData.name,
-          user_phone: formData.mobile,
-          user_email: formData.email,
-          web_url: credentials.web_url,
-          web_name: credentials.web_name,
-          logo_url: credentials.logo_url,
-          message: emailMessage,
+  // 3. Show result
+  if (backendSuccess || emailSuccess) {
+
+    // Google Ads conversion tracking
+    if (
+      typeof window !== "undefined" &&
+      typeof window.gtag === "function"
+    ) {
+      window.gtag("event", "conversion", {
+        send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
+        value: 1.0,
+        currency: "INR",
+        event_callback: function () {
+          console.log("Brochure form conversion tracked");
         },
-        emailKeys.publicKey,
-      );
-      emailSuccess = true;
-    } catch (error) {
-      console.error("Email submission failed:", error);
+      });
     }
 
-    // 3️⃣ Show result
-    if (backendSuccess || emailSuccess) {
-      // Track conversion with gtag
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
-          'value': 1.0,
-          'currency': 'INR',
-          'event_callback': function() {
-            console.log('Brochure form conversion tracked');
-          }
-        });
-      }
-      setShowSuccessAlert(true);
-      setFormData({ name: "", mobile: "", email: "", source: "satyammetroshowstoppers.in" });
-      setConsentChecked(false);
-    } else {
-      setShowFailureAlert(true);
-    }
+    setShowSuccessAlert(true);
 
-    setLoading(false);
-  };
+    setFormData({
+      name: "",
+      mobile: "",
+      email: "",
+      source: "satyammetroshowstoppers.in",
+    });
+
+    setConsentChecked(false);
+
+  } else {
+    setShowFailureAlert(true);
+  }
+
+  setLoading(false);
+};
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
@@ -230,10 +275,15 @@ const BrochureForm = ({ onClose }) => {
                 }}
                 className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
               />
-              <span className="text-[10px] text-gray-700 leading-relaxed">
-                I consent to the collection and use of my data for marketing purposes. We do not engage in misleading practices. Read our{' '}
-                <a href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</a>.
-              </span>
+             
+<span className="text-[10px] text-gray-700 leading-relaxed">
+  I agree to the{" "}
+  <a href="/privacy" className="text-blue-600 hover:underline">
+    Privacy Policy
+  </a>
+  . Your data is safe and secure with us. Don't worry!
+</span>
+
             </label>
             {consentError && (
               <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>
