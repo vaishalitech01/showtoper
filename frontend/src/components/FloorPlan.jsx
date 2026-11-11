@@ -19,50 +19,79 @@ const FloorPlan = ({ onOfferPriceClick }) => {
   ];
 
   return (
-    <section id='floorplan' className="bg-white py-4 px-6 max-w-7xl mx-auto">
-      {/* Page Title */}
-    {/* Floor Plans Heading */}
-<div className="text-center mb-16">
-  <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
-    Thoughtfully Designed Spaces
-  </span>
+  
+<section
+  id="floorplan"
+  className="bg-white py-10 px-4 sm:px-6 max-w-7xl mx-auto"
+>
+  {/* Section Heading */}
+  <div className="text-center mb-9">
+    <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-semibold text-[#9e7242]">
+      Thoughtfully Designed Spaces
+    </span>
 
-  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
-    Explore Our <span className="text-[#A67C48]">Floor Plans</span>
-  </h2>
+    <h2 className="text-xl md:text-2xl font-bold text-slate-900 mt-2">
+      Explore Our{" "}
+      <span className="text-[#9e7242]">Floor Plans</span>
+    </h2>
 
-  <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
-</div>
+    <div className="w-12 h-[2px] bg-gradient-to-r from-[#9e7242] to-[#f09051] mx-auto mt-3" />
+  </div>
 
-      <div className="flex flex-col lg:flex-row justify-center items-center gap-10">
-        {plans.map((plan, index) => (
-          <div 
-            key={index} 
-            className="w-full max-w-md border border-orange-200 p-4 bg-white shadow-sm flex flex-col items-center"
-          >
-            {/* Image Container with Overlay */}
-            <div className="relative w-full aspect-4/3 overflow-hidden group cursor-pointer">
-              <img 
-                src={plan.img} 
-                alt={plan.alt} 
-                className="w-full h-full object-cover"
-              />
-              {/* Dark Overlay with Text */}
-              {/* <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <span className="text-white text-xl font-bold px-4 text-center">
-                  {plan.title}
-                </span>
-              </div> */}
-            </div>
+  {/* Floor Plan Cards */}
+  
+  <div className="flex flex-col sm:flex-row justify-center items-stretch gap-5 lg:gap-7">
+    {plans.map((plan, index) => (
+      <div
+        key={index}
+        className="
+          w-full sm:max-w-[380px]
+          border border-[#9e7242]/25
+          bg-white p-2.5
+          shadow-sm
+          flex flex-col
+          transition-all duration-300
+          hover:shadow-lg hover:border-[#9e7242]/60
+        "
+      >
+        {/* Plan Image */}
+        <div className="relative w-full aspect-[4/3] overflow-hidden group bg-gray-50">
+          <img
+            src={plan.img}
+            alt={plan.alt}
+            className="
+              w-full h-full object-cover
+              transition-transform duration-500
+              group-hover:scale-[1.03]
+            "
+          />
+        </div>
 
-            {/* Action Button */}
-            <button onClick={() => onOfferPriceClick(index === 0 ? "layout plan" : "floor plan")} className="mt-6 bg-linear-to-r from-[#B07E4D] to-[#D99B5C] text-white px-10 py-2.5 rounded-full text-sm font-medium shadow-md hover:opacity-90 transition-opacity hover:cursor-pointer">
-              {plan.buttonText}
-            </button>
-          </div>
-        ))}
+        {/* Action Button */}
+        <button
+          onClick={() =>
+            onOfferPriceClick(index === 0 ? "layout plan" : "floor plan")
+          }
+          className="
+            animated-gradient
+            w-full mt-3
+            text-white text-xs md:text-sm
+            font-semibold tracking-wide
+            py-2.5 px-4
+            rounded-sm
+            shadow-sm
+            hover:opacity-90
+            transition-all duration-200
+            cursor-pointer
+          "
+        >
+          {plan.buttonText}
+        </button>
       </div>
-    </section>
+    ))}
+  </div>
+</section>
+
   );
 };
 

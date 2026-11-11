@@ -95,6 +95,9 @@ const HomePage = () => {
         <Price onOfferPriceClick={(type) => {setIsOfferPriceFormOpen(true)
           setOfferType(type);
         }} />
+         <FloorPlan onOfferPriceClick={(type) => {setIsOfferPriceFormOpen(true)
+          setOfferType(type);
+        }} />
         {isOfferPriceFormOpen && (
           <OfferPriceForm
            type={offerType} onClose={() => setIsOfferPriceFormOpen(false)} />
@@ -104,9 +107,7 @@ const HomePage = () => {
       <div id="gallery">
         <Gallery />
       </div>
-        <FloorPlan onOfferPriceClick={(type) => {setIsOfferPriceFormOpen(true)
-          setOfferType(type);
-        }} />
+       
         <Location />
         <NRIServices />
         <Footer />

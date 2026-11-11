@@ -18,134 +18,153 @@ const Price = ({ onOfferPriceClick }) => {
     pushSchemaToGTM(productSchema, 'price_page_view');
   }, []);
 
-  return (
-    <section
-      id="price"
-      className="bg-white py-4 px-4 lg:px-6 max-w-7xl mx-auto"
-    >
+
+return (
+  <section
+    id="price"
+    className="bg-white py-8 px-4 lg:px-6 max-w-7xl mx-auto"
+  >
     {/* Page Title */}
-<div className="text-center mb-8 lg:mb-12">
-  <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#A67C48]">
-    Explore Prices & Floor Plans
-  </span>
+    <div className="text-center mb-7 lg:mb-9">
+     <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-semibold text-[#9e7242]">
+      Explore Prices & Floor Plans
+      </span>
 
-  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2">
-    Satyam Metro Showstopper{" "}
-    <span className="text-[#A67C48]">Price & Plan</span>
-  </h2>
+     <h2 className="text-xl md:text-2xl font-bold text-slate-900 mt-2">
+       Satyam Metro Showstopper{" "}
+        <span className="text-[#9e7242]">Price & Plan</span>
+      </h2>
 
-  <div className="w-14 h-[2px] bg-[#A67C48] mx-auto mt-4" />
-</div>
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
-        {/* --- PRICING SECTION --- */}
-        <div className="grow w-full">
-          {/* Desktop Table: Hidden on Mobile, Visible on LG+ */}
-          <div className="hidden lg:block border border-orange-200 rounded-sm overflow-hidden">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-orange-300">
-                  <th className="p-4 text-xl text-slate-900">Type</th>
-                  <th className="p-4 text-xl text-slate-900">Carpet Area</th>
-                  <th className="p-4 text-xl text-slate-900">Price</th>
-                  <th className="p-4"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {priceData.map((item, index) => (
-                  <tr
-                    key={index}
-                    className={`border-b border-orange-100 last:border-0 ${
-                      index % 2 === 1 ? "bg-slate-50/50" : ""
-                    }`}
-                  >
-                    <td className="p-4 text-lg font-medium text-slate-700">
-                      {item.type}
-                    </td>
-                    <td className="p-4 text-lg text-slate-600">{item.area}</td>
-                    <td className="p-4 text-lg font-bold text-slate-900">
-                      {item.price}
-                    </td>
-                    <td className="p-4 text-right">
-                      <button
-                        onClick={() => {
-                          onOfferPriceClick('price-breakup');
-                          trackButtonClick('price_breakup_desktop');
-                        }}
-                        className="bg-[#A67C48] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[#8e693c] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
-                      >
-                        Price Breakup
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      <div className="w-12 h-[2px] mx-auto mt-3 animated-gradient" />
+    </div>
 
-          {/* Mobile Cards: Visible on Mobile, Hidden on LG+ */}
-          <div className="lg:hidden border border-orange-400 rounded-[30px] flex flex-col gap-2">
-            {priceData.map((item, index) => (
-              <div
-                key={index}
-                className={` flex flex-col items-center text-center p-2`}
-              >
-                {/* BHK Type */}
-                <h3 className="text-2xl  text-slate-800 mb-2">{item.type}</h3>
+    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
 
-                {/* Area */}
-                <p className="text-lg text-slate-600 mb-2">
-                  {item.area}{" "}
-                  <span className="text-sm opacity-80">(Carpet Area)</span>
-                </p>
+      {/* PRICING SECTION */}
+      <div className="grow w-full min-w-0">
 
-                {/* Price */}
-                <p className="text-xl  text-slate-900 mb-2">{item.price}</p>
+        {/* Desktop Pricing Table */}
+        <div className="hidden lg:block border border-[#9e7242]/25 overflow-hidden">
+          <table className="w-full text-left border-collapse">
+            <thead className="bg-[#9e7242]/[0.06]">
+              <tr className="border-b border-[#9e7242]/25">
+                <th className="px-4 py-3 text-xs font-semibold text-slate-800">
+                  Type
+                </th>
+                <th className="px-4 py-3 text-xs font-semibold text-slate-800">
+                  Carpet Area
+                </th>
+                <th className="px-4 py-3 text-xs font-semibold text-slate-800">
+                  Price
+                </th>
+                <th className="px-4 py-3"></th>
+              </tr>
+            </thead>
 
-                {/* Button */}
-                <button
-                  onClick={() => {
-                    onOfferPriceClick('price-breakup');
-                    trackButtonClick('price_breakup_mobile');
-                  }}
-                  className="bg-[#A67C48] text-white px-10 py-2 rounded-lg font-medium text-xl hover:bg-[#8e693c] transition-all active:scale-95 cursor-pointer mb-2"
+            <tbody>
+              {priceData.map((item, index) => (
+                <tr
+                  key={index}
+                  className={`border-b border-[#9e7242]/15 last:border-0 transition-colors hover:bg-[#9e7242]/[0.03] ${
+                    index % 2 === 1 ? "bg-slate-50/50" : "bg-white"
+                  }`}
                 >
-                  Price Breakup
-                </button>
-              </div>
-            ))}
-          </div>
+                  <td className="px-4 py-4 text-sm font-semibold text-slate-800">
+                    {item.type}
+                  </td>
+
+                  <td className="px-4 py-4 text-sm text-gray-600">
+                    {item.area}
+                  </td>
+
+                  <td className="px-4 py-4 text-sm font-bold text-slate-900">
+                    {item.price}
+                  </td>
+
+                  <td className="px-4 py-4 text-right">
+                    <button
+                      onClick={() => {
+                        onOfferPriceClick("price-breakup");
+                        trackButtonClick("price_breakup_desktop");
+                      }}
+                      className="bg-[#9e7242] text-white px-4 py-2 text-xs font-semibold rounded-sm hover:bg-[#805b35] transition-colors whitespace-nowrap cursor-pointer"
+                    >
+                      Price Breakup
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        {/* --- RIGHT PREVIEW SECTION --- */}
-        <div className="w-full lg:w-[320px] shrink-0 flex flex-col items-center">
-          <div className="border border-orange-300 p-2 bg-white shadow-sm w-full">
-            <div className="border border-gray-300 aspect-[3/2.2] relative overflow-hidden backdrop-blur-2xl bg-white group">
-              <img
-                src={oneCrestPriceSheet}
-                alt="One Crest price detail sheet - Payment schedule Satyam Metro Showstopper Kharghar pricing"
-                className="w-full h-full object-cover opacity-80 "
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-transparent transition-colors">
-                <span className="sr-only">
-                  Detail Sheet and Payment Schedule
-                </span>
-              </div>
-            </div>
-          </div>
+        {/* Mobile Pricing Cards */}
+        <div className="lg:hidden border border-[#9e7242]/30 divide-y divide-[#9e7242]/20">
+          {priceData.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center px-3 py-4 bg-white"
+            >
+              <h3 className="text-lg font-semibold text-slate-800 mb-1">
+                {item.type}
+              </h3>
 
-          <button
-            onClick={() => {
-              onOfferPriceClick('costing-details');
-              trackButtonClick('complete_costing_details');
-            }}
-            className="mt-6 w-full animated-gradient text-white px-6 py-4 lg:py-3 rounded-full text-md font-semibold shadow-md hover:bg-[#b07848] transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            Complete Costing Details
-          </button>
+              <p className="text-xs text-gray-600 mb-2">
+                {item.area}{" "}
+                <span className="text-gray-400">(Carpet Area)</span>
+              </p>
+
+              <p className="text-base font-bold text-slate-900 mb-3">
+                {item.price}
+              </p>
+
+              <button
+                onClick={() => {
+                  onOfferPriceClick("price-breakup");
+                  trackButtonClick("price_breakup_mobile");
+                }}
+                className="bg-[#9e7242] text-white px-6 py-2 rounded-sm font-semibold text-xs hover:bg-[#805b35] transition-all active:scale-[0.98] cursor-pointer"
+              >
+                Price Breakup
+              </button>
+            </div>
+          ))}
         </div>
       </div>
-    </section>
-  );
+
+      {/* RIGHT PREVIEW SECTION */}
+      <div className="w-full lg:w-[280px] shrink-0 flex flex-col items-center">
+
+        <div className="border border-[#9e7242]/30 p-1.5 bg-white shadow-sm w-full">
+          <div className="border border-gray-200 aspect-[3/2.2] relative overflow-hidden bg-white group">
+            <img
+              src={oneCrestPriceSheet}
+              alt="One Crest price detail sheet - Payment schedule Satyam Metro Showstopper Kharghar pricing"
+              className="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
+            />
+
+            <div className="absolute inset-0 flex items-center justify-center bg-black/[0.03] group-hover:bg-transparent transition-colors">
+              <span className="sr-only">
+                Detail Sheet and Payment Schedule
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          onClick={() => {
+            onOfferPriceClick("costing-details");
+            trackButtonClick("complete_costing_details");
+          }}
+          className="mt-4 w-full animated-gradient text-white px-4 py-3 rounded-sm text-xs font-semibold shadow-sm transition-all hover:shadow-md active:scale-[0.98] cursor-pointer"
+        >
+          Complete Costing Details
+        </button>
+      </div>
+    </div>
+  </section>
+);
+
 };
 
 export default Price;

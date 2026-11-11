@@ -571,35 +571,45 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
       {/* Floating Button */}
       {!open && (
         <>
-          {/* Animated Chat Bubble */}
-          {showBubble && (
-            <div className="fixed lg:bottom-24 bottom-38 right-10 z-40 max-w-xs">
-              <div className="relative bg-gradient-to-r from-[#9e7242] to-[#f09051] text-white p-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105">
-                <button
-                  onClick={() => setShowBubble(false)}
-                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors"
-                >
-                  <FiX size={14} />
-                </button>
-                <div className="space-y-1">
-                  <p className="font-semibold text-sm">
-                    👋 Hey! I'm {currentBot.name}
-                  </p>
-                  <p className="text-xs opacity-90">
-                    Need help with One Crest Showstopper?
-                  </p>
-                  <button
-                    onClick={() => setOpen(true)}
-                    className="text-xs font-medium bg-white/20 rounded-full px-3 py-1 inline-block mt-2"
-                  >
-                    💬 Let's Chat!
-                  </button>
-                </div>
-                {/* Speech bubble tail */}
-                <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-[#f09051]"></div>
-              </div>
-            </div>
-          )}
+        
+
+{/* Animated Chat Bubble */}
+{showBubble && (
+  <div className="fixed lg:bottom-24 bottom-38 right-4 z-40 max-w-[220px]">
+    <div className="relative bg-white/90 backdrop-blur-sm text-slate-900 px-3 py-2.5 border border-[#9e7242]/40 shadow-md rounded-sm transition-all duration-300 hover:bg-white">
+
+      {/* Close Button */}
+      <button
+        onClick={() => setShowBubble(false)}
+        className="absolute -top-2 -right-2 w-5 h-5 bg-white/95 border border-[#9e7242]/50 rounded-full flex items-center justify-center text-gray-500 hover:text-[#9e7242]"
+      >
+        <FiX size={11} />
+      </button>
+
+      <div className="space-y-1">
+        <p className="font-semibold text-xs text-slate-900">
+          👋 Hey! I'm {currentBot.name}
+        </p>
+
+        <p className="text-[10px] text-gray-600 leading-4">
+          Need help with One Crest Showstopper?
+        </p>
+
+        <button
+          onClick={() => setOpen(true)}
+          className="text-[10px] font-semibold text-[#9e7242] border border-[#9e7242]/50 px-2.5 py-1 rounded-sm mt-1 hover:bg-[#9e7242] hover:text-white transition-all"
+        >
+          💬 Let's Chat!
+        </button>
+      </div>
+
+      {/* Speech Bubble Tail */}
+      <div className="absolute -bottom-1.5 right-7 w-2.5 h-2.5 bg-white/90 border-r border-b border-[#9e7242]/40 rotate-45" />
+    </div>
+  </div>
+)}
+
+
 
           {/* Enhanced Bot Avatar Button */}
           <button

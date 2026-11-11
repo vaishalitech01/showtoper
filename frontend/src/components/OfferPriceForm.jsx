@@ -4,7 +4,7 @@ import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns, baseurl } from '../key/key';
 import { createMessageWithAddress, messageTemplates } from '../key/messageUtils';
 import { apiPostRequest } from "../utils/api/post";
-
+import satyamLogo from "../assets/satyam-metro-logo.avif";
 const OfferPriceForm = ({ onClose, type }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -174,115 +174,170 @@ const handleSubmit = async (e) => {
 
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+   
 
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md overflow-hidden relative">
+<div className="fixed inset-0 bg-black/50 flex items-center justify-center p-3 z-50">
 
-        {/* Header */}
-        <div className="bg-[#a37a4c] p-4 flex justify-between items-center">
-          <h2 className="text-white text-2xl font-medium w-full text-center ml-6">
-            {formHeader}
-          </h2>
-          <button onClick={onClose} className="text-white">
-            <X size={24} />
-          </button>
+  <div className="bg-white w-full max-w-md shadow-xl relative overflow-hidden">
+
+    {/* Close */}
+    <button
+      onClick={onClose}
+      aria-label="Close"
+      className="absolute top-2 right-2 text-gray-500 hover:text-[#9e7242] z-10"
+    >
+      <X size={21} />
+    </button>
+
+    {/* Logo */}
+    <div className="flex justify-center pt-5 pb-2">
+      <img
+        src={satyamLogo}
+        alt="Satyam Metro"
+        className="w-40 h-auto object-contain"
+      />
+    </div>
+
+    {/* Heading */}
+    <div className="text-center px-4 pb-2">
+      <h2 className="text-base sm:text-lg font-semibold text-gray-800">
+        Register Here And Avail The{" "}
+        <span className="text-[#f09051]">Best Offers!!</span>
+      </h2>
+    </div>
+
+    {/* Alerts */}
+    {showSuccessAlert && (
+      <div className="mx-4 bg-green-100 text-green-700 text-center text-xs py-2">
+        Request sent successfully ✅
+      </div>
+    )}
+
+    {showFailureAlert && (
+      <div className="mx-4 bg-red-100 text-red-700 text-center text-xs py-2">
+        Failed to send request ❌
+      </div>
+    )}
+
+    {/* Form */}
+    <form
+      className="px-4 pt-1 pb-4 space-y-3"
+      onSubmit={handleSubmit}
+    >
+
+      {/* Name */}
+      <div>
+        <input
+          type="text"
+          placeholder="Name *"
+          value={formData.name}
+          onChange={(e) =>
+            setFormData({ ...formData, name: e.target.value })
+          }
+          required
+          className="w-full border-0 border-b border-gray-300 rounded-none px-3 py-3 text-sm text-gray-800 outline-none focus:border-[#9e7242] placeholder:text-gray-500"
+        />
+
+        {errors.name && (
+          <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+        )}
+      </div>
+
+      {/* Mobile */}
+      <div>
+        <div className="flex items-center border-b border-gray-300 focus-within:border-[#9e7242]">
+          <span className="text-sm text-[#9e7242] px-2">+91</span>
+
+          <input
+            type="tel"
+            inputMode="numeric"
+            placeholder="Mobile No *"
+            value={formData.mobile}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                mobile: e.target.value.replace(/\D/g, "").slice(0, 10)
+              })
+            }
+            required
+            maxLength={10}
+            className="w-full px-2 py-3 text-sm outline-none rounded-none placeholder:text-gray-500"
+          />
         </div>
 
-        {/* Alerts */}
-        {showSuccessAlert && (
-          <div className="bg-green-100 text-green-700 text-center py-2">
-            Request sent successfully ✅
-          </div>
+        {errors.mobile && (
+          <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
         )}
-        {showFailureAlert && (
-          <div className="bg-red-100 text-red-700 text-center py-2">
-            Failed to send request ❌
-          </div>
-        )}
-
-        {/* Form */}
-        <form className="p-8 space-y-6" onSubmit={handleSubmit}>
-
-          {/* Name */}
-          <div>
-            <div className="flex border border-gray-400 rounded-md overflow-hidden">
-              <div className="bg-[#546671] p-3 min-w-12.5 flex justify-center">
-                <User className="text-white" size={20} />
-              </div>
-              <input
-                type="text"
-                placeholder="Name *"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                required
-                className="w-full p-3 outline-none"
-              />
-            </div>
-            {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-          </div>
-
-          {/* Mobile */}
-          <div>
-            <div className="flex border border-gray-400 rounded-md overflow-hidden">
-              <div className="bg-[#546671] p-3 min-w-12.5 flex justify-center">
-                <Phone className="text-white" size={20} />
-              </div>
-              <input
-                type="tel"
-                placeholder="Mobile *"
-                value={formData.mobile}
-                onChange={(e) =>
-                  setFormData({ ...formData, mobile: e.target.value })
-                }
-                required
-                className="w-full p-3 outline-none"
-              />
-            </div>
-            {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
-          </div>
-
-          {/* Consent Checkbox */}
-          <div className="space-y-1">
-            <label className="flex items-start gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={consentChecked}
-                onChange={(e) => {
-                  setConsentChecked(e.target.checked);
-                  setConsentError(false);
-                }}
-                className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
-              />
-            
-<span className="text-[10px] text-gray-700 leading-relaxed">
-  I agree to the{" "}
-  <a href="/privacy" className="text-blue-600 hover:underline">
-    Privacy Policy
-  </a>
-  . Your data is safe and secure with us. Don't worry!
-</span>
-
-            </label>
-            {consentError && (
-              <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>
-            )}
-          </div>
-
-          {/* Submit */}
-          <div className="flex justify-center pt-2">
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-[#a37a4c] text-white px-12 py-3 rounded-full text-xl hover:bg-[#8e6a41]"
-            >
-              {loading ? 'Submitting...' : 'Submit'}
-            </button>
-          </div>
-        </form>
       </div>
-    </div>
+
+      {/* Consent */}
+      <div className="space-y-1 pt-1">
+        <label className="flex items-start gap-2 cursor-pointer">
+
+          <input
+            type="checkbox"
+            checked={consentChecked}
+            onChange={(e) => {
+              setConsentChecked(e.target.checked);
+              setConsentError(false);
+            }}
+            className="mt-0.5 w-3.5 h-3.5 shrink-0 accent-[#9e7242]"
+          />
+
+          <span className="text-[10px] text-gray-500 leading-relaxed">
+            I give my consent for the privacy policy to apply to the
+            processing of the provided data. I authorize the website
+            owner and its representatives to contact me regarding
+            this property through phone, text or WhatsApp.
+            {" "}
+            <a href="/privacy" className="text-[#9e7242] hover:underline">
+              Privacy Policy
+            </a>
+          </span>
+
+        </label>
+
+        {consentError && (
+          <p className="text-red-500 text-xs">
+            Please accept the consent to proceed.
+          </p>
+        )}
+      </div>
+
+      {/* Submit */}
+      <div className="flex justify-center pt-1">
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            background: "linear-gradient(135deg, var(--clr-p), var(--clr-s))"
+          }}
+          className="text-white text-sm font-medium px-8 py-2.5 rounded-sm hover:opacity-90 transition-all disabled:opacity-60 shadow-sm"
+        >
+          {loading ? "Submitting..." : "Get Instant Call Back"}
+        </button>
+      </div>
+
+    </form>
+
+    {/* Contact Footer */}
+    <a
+      href="tel:+919167478723"
+      style={{
+        background: "linear-gradient(135deg, var(--clr-p), var(--clr-s))"
+      }}
+      className="text-white flex items-center justify-center gap-2 py-2.5 hover:opacity-90 transition-all"
+    >
+      <Phone size={17} fill="white" />
+      <span className="text-base font-medium">
+        +91 9167478723
+      </span>
+    </a>
+
+  </div>
+</div>
+
+
   );
 };
 

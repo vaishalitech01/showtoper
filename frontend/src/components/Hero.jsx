@@ -102,57 +102,73 @@ const Hero = ({ onRequestCallBack }) => {
           </button>
         </div>
 
-        {/* Info Card */}
-        <div
-          className="
-        bg-white p-4 shadow-2xl rounded-lg
-        w-[90%] mx-auto mt-4
-        lg:absolute lg:top-6 lg:left-6 lg:mt-0 lg:max-w-sm lg:z-10
+     {/* Info Card */}
+<div
+  className="
+    bg-white p-3 shadow-xl rounded-sm
+    w-[90%] mx-auto mt-3
+    lg:absolute lg:top-25 lg:left-14 lg:mt-0 lg:max-w-[320px] lg:z-10"
+>
+<div className="flex flex-col items-center text-center gap-2">
+
+    <p className="text-xs font-semibold tracking-widest uppercase text-[var(--clr-p)]">
+      Launching Soon
+    </p>
+
+    <h1 className="text-base lg:text-lg font-bold text-slate-900 leading-snug">
+      SATYAM METRO SHOWSTOPPER'S ONE CREST
+    </h1>
+
+    <div className="text-xs text-gray-500 leading-relaxed">
+      <p>By Satyam Metro Group</p>
+      <p>Sector 20, Kharghar</p>
+    </div>
+
+    {/* Offer Box */}
+    <div
+      className="w-full p-2.5 rounded-sm text-white shadow-md"
+      style={{
+        background: "linear-gradient(135deg, var(--clr-p), var(--clr-s))",
+      }}
+    >
+      <div className="border border-dashed border-white/80 p-2 text-left space-y-2">
+        <p className="text-xs font-medium">
+          ◆ One Crest – The Luxury You Deserve
+        </p>
+        <p className="text-xs font-medium">
+          ◆ 2, 3 & 4 BHK Starting At ₹2.4 Cr
+        </p>
+        <p className="text-xs font-medium">
+          ◆ G+31 Floors with Spacious Carpet Areas
+        </p>
+      </div>
+    </div>
+
+    <p className="text-xs font-medium text-gray-600">
+      2, 3 & 4 BHK Luxury Apartments
+    </p>
+
+    <div className="text-lg font-bold text-slate-900">
+      ₹ On Request
+    </div>
+
+    <button
+      onClick={onRequestCallBack}
+      className="
+        w-full text-white text-xs font-semibold
+        py-2.5 px-4 rounded-sm
+        flex items-center justify-center
+        transition-opacity hover:opacity-90
       "
-        >
-          <div className="text-center space-y-2 flex flex-col items-center">
-            <p className="text-gray-600 font-medium tracking-wide">
-              Launching Soon
-            </p>
+      style={{
+        background: "linear-gradient(135deg, var(--clr-p), var(--clr-s))",
+      }}
+    >
+      Download Brochure →
+    </button>
 
-            <h1 className="text-xl lg:text-xl font-bold text-slate-900 leading-tight">
-              SATYAM METRO SHOWSTOPPER'S ONE CREST
-            </h1>
-
-            <div className="text-sm text-gray-600">
-              <p>By Satyam Metro Group</p>
-              <p>At Sector 20, Kharghar</p>
-            </div>
-
-            {/* Offer Box */}
-            <div className="animated-gradient  p-3 rounded-md text-white w-full shadow-lg">
-              <div className="flex flex-col gap-2 border-2 border-dashed border-white p-2 text-left">
-                <p className="flex gap-2">
-                  ◆ One Crest – The Luxury You Deserve
-                </p>
-                <p className="flex gap-2">◆ 2, 3 & 4 BHK Starting At ₹ 2.4 Cr</p>
-                <p className="flex gap-2">
-                  ◆ G+31 Floors with Spacious Carpet Areas
-                </p>
-              </div>
-            </div>
-
-            <p className="text-gray-600 font-medium">
-              2, 3 & 4 BHK Luxuries Apartments
-            </p>
-
-            <div className="text-xl lg:text-2xl font-bold text-slate-900">
-              ₹ On Request
-            </div>
-
-            <button
-              onClick={onRequestCallBack}
-              className="animated-gradient text-white py-2 px-4 rounded-md font-semibold transition-colors flex items-center gap-2 hover:cursor-pointer"
-            >
-              Download Brochure
-            </button>
-          </div>
-        </div>
+  </div>
+</div>
       </div>
     </div>
   );

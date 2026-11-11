@@ -165,181 +165,166 @@ const handleSubmit = async (e) => {
 
 
   return (
-    <div className="hidden lg:flex max-w-md mx-auto bg-white min-h-screen flex-col shadow-lg border border-[#9e7242] sticky top-0">
-      {/* Header */}
-      <div className=" flex flex-col items-center">
-        <div
-          onClick={onRequestCallBack}
-          className="animated-gradient text-white w-full py-1 rounded-b-3xl text-center text-lg cursor-pointer shadow-md"
-        >
-          {/* {contactConfig.displayPhone} */}
-          Get a Best Deal
+  
+<div className="hidden lg:flex max-w-md mx-auto bg-white min-h-screen flex-col shadow-xl border border-[#9e7242]/30 sticky top-0">
 
+  {/* Header */}
+  <div className="flex flex-col items-center">
+
+    <div
+      onClick={onRequestCallBack}
+      className="animated-gradient text-white w-full py-2 text-center text-sm font-semibold tracking-wide cursor-pointer shadow-sm"
+    >
+      Get a Best Deal
+    </div>
+
+    <button
+      onClick={onRequestCallBack}
+      className="animated-gradient mt-3 mb-2 text-white px-7 py-2 text-sm font-semibold rounded-sm shadow-md hover:opacity-90 transition-opacity"
+    >
+      Request a Call Back
+    </button>
+  </div>
+
+  {/* Form Section */}
+  <div className="px-4 py-3 flex flex-col">
+
+    <h2 className="text-center text-slate-800 text-sm font-semibold mb-1">
+      Pre-Register for the Best Offers
+    </h2>
+
+    <p className="text-center text-gray-500 text-[11px] mb-4">
+      Share your details and our team will contact you.
+    </p>
+
+    {/* Alerts */}
+    {showSuccessAlert && (
+      <div className="text-green-600 text-center text-xs mb-3">
+        Submitted successfully ✅
+      </div>
+    )}
+
+    {showFailureAlert && (
+      <div className="text-red-600 text-center text-xs mb-3">
+        Submission failed ❌
+      </div>
+    )}
+
+    <form onSubmit={handleSubmit}>
+      <div className="bg-[#9e7242]/[0.05] border border-[#9e7242]/20 p-3 space-y-3">
+
+        {/* Name */}
+        <div>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={(e) =>
+              setFormData({ ...formData, name: e.target.value })
+            }
+            required
+            className="w-full border border-gray-300 bg-white rounded-sm px-3 py-2.5 text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all focus:border-[var(--clr-p)] focus:ring-1 focus:ring-[var(--clr-p)]/20"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-[10px] mt-1">{errors.name}</p>
+          )}
         </div>
 
-        <button
-          onClick={onRequestCallBack}
-          className="mt-1 mb-2 animated-gradient mt-4 text-white px-10 py-1 rounded-lg text-lg shadow-inner hover:bg-[#8e693c]"
-        >
-        Click to  Request Call Back
-        </button>
-      </div>
+        {/* Email */}
+        <div>
+          <input
+            type="email"
+            placeholder="Email Address (Optional)"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            className="w-full border border-gray-300 bg-white rounded-sm px-3 py-2.5 text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all focus:border-[var(--clr-p)] focus:ring-1 focus:ring-[var(--clr-p)]/20"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>
+          )}
+        </div>
 
-      {/* Form Section */}
-      <div className="px-2 py-4 flex flex-col">
-        <h2 className="text-center text-black text-md mb-2">
-          Pre-Register here for Best Offers
-        </h2>
+        {/* Mobile */}
+        <div>
+          <input
+            type="tel"
+            placeholder="Mobile Number"
+            value={formData.mobile}
+            onChange={(e) =>
+              setFormData({ ...formData, mobile: e.target.value })
+            }
+            required
+            className="w-full border border-gray-300 bg-white rounded-sm px-3 py-2.5 text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all focus:border-[var(--clr-p)] focus:ring-1 focus:ring-[var(--clr-p)]/20"
+          />
+          {errors.mobile && (
+            <p className="text-red-500 text-[10px] mt-1">{errors.mobile}</p>
+          )}
+        </div>
 
-        {/* Alerts */}
-        {showSuccessAlert && (
-          <div className="text-green-600 text-center text-sm mb-2">
-            Submitted successfully ✅
-          </div>
-        )}
-        {showFailureAlert && (
-          <div className="text-red-600 text-center text-sm mb-2">
-            Submission failed ❌
-          </div>
-        )}
+        {/* Consent */}
+        <div className="pt-1">
+          <label className="flex items-start gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={consentChecked}
+              onChange={(e) => {
+                setConsentChecked(e.target.checked);
+                setConsentError(false);
+              }}
+              className="mt-0.5 w-3.5 h-3.5 shrink-0 accent-[var(--clr-p)] cursor-pointer"
+            />
 
-        <form className="" onSubmit={handleSubmit}>
-          <div className="rounded-sm bg-[#e2ab7116] space-y-4 p-4 embossed-shadow">
-            <div>
-              <input
-                type="text"
-                placeholder="Name"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                required
-                className="w-full border border-[#9e7242] rounded-sm p-2 bg-white outline-none focus:ring-1 focus:ring-[#A67C48]"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="email"
-                placeholder="Email (Optional)"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="w-full border border-[#9e7242]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="tel"
-                placeholder="Mobile"
-                value={formData.mobile}
-                onChange={(e) =>
-                  setFormData({ ...formData, mobile: e.target.value })
-                }
-                required
-                className="w-full border border-[#9e7242]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
-              />
-              {errors.mobile && (
-                <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
-              )}
-            </div>
-
-            {/* Consent Checkbox */}
-            <div className="space-y-2">
-              <label className="flex items-start gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={consentChecked}
-                  onChange={(e) => {
-                    setConsentChecked(e.target.checked);
-                    setConsentError(false);
-                  }}
-                  className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
-                />
-                
-<span className="text-[10px] text-gray-700 leading-relaxed">
-  I agree to the{" "}
-  <a href="/privacy" className="text-blue-600 hover:underline">
-    Privacy Policy
-  </a>
-  . Your data is safe and secure with us. Don't worry!
-</span>
-
-              </label>
-              {consentError && (
-                <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>
-              )}
-            </div>
-
-            <div className="flex justify-center pt-2">
-              <button
-                type="submit"
-                disabled={loading}
-                className="animated-gradient text-white px-6 py-2.5 rounded-sm text-sm shadow-md hover:opacity-90"
-              >
-                {loading ? "Submitting..." : "Submit"}
-              </button>
-            </div>
-            {/* <div className="mt-auto p-6 ">
-              <a
-                href={`https://wa.me/${contactConfig.phoneNumber
-                  }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  // Track WhatsApp click with gtag
-                  if (typeof gtag !== 'undefined') {
-                    gtag('event', 'conversion', {
-                      'send_to': 'AW-17844583964/2mpsCJroou0bEJz8-rxC',
-                      // 'value': 1.0,
-                      // 'currency': 'INR',
-                      'event_callback': function () {
-                        console.log('Chatbot form conversion tracked');
-                      }
-                    });
-                  }
-                }}
-                className="flex items-center gap-3  bg-white hover:bg-gray-200 border border-[#9e7242] rounded-lg px-4 py-3 shadow-md hover:shadow-lg transition-all duration-200 group"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-                  alt="WhatsApp"
-                  className="w-5 h-5 group-hover:scale-110 transition-transform duration-200"
-                />
-                <span className="text-gray-700 font-medium text-sm">
-                  Get Instant Response
-                </span>
+            <span className="text-[10px] text-gray-600 leading-relaxed">
+              I agree to the{" "}
+              <a href="/privacy" className="text-[var(--clr-p)] font-semibold hover:underline">
+                Privacy Policy
               </a>
-            </div> */}
-          </div>
-        </form>
-      <a
-  href="https://virtualrealty.org.in/properties/14/luxury-residential-developments-featuring-2-3-and-4-bhk-configurations-in-sector-20-kharghar"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="relative block mt-4"
->
-  {/* AD Label */}
-  <span className="absolute top-2 left-2 z-10 bg-black/80 text-white text-[10px] font-bold tracking-widest px-3 py-1 rounded-sm">
-    AD
-  </span>
+              . Your data is safe and secure with us.
+            </span>
+          </label>
 
-  <img
-    src={poster}
-    alt="Satyam Metro Showstopper"
-    className="h-56 w-full border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200 cursor-pointer"
-  />
-</a>
+          {consentError && (
+            <p className="text-red-500 text-[10px] font-medium mt-1">
+              Please accept the consent to proceed.
+            </p>
+          )}
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="animated-gradient w-full text-white py-2.5 text-xs font-semibold rounded-sm shadow-sm hover:opacity-90 transition-opacity disabled:opacity-60"
+        >
+          {loading ? "Submitting..." : "SUBMIT ENQUIRY"}
+        </button>
+
       </div>
-    </div>
+    </form>
+
+    {/* Advertisement Poster */}
+    <a
+      href="https://virtualrealty.org.in/properties/14/luxury-residential-developments-featuring-2-3-and-4-bhk-configurations-in-sector-20-kharghar"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative block mt-4 overflow-hidden"
+    >
+      <span className="absolute top-2 left-2 z-10 bg-black/80 text-white text-[9px] font-semibold tracking-widest px-2 py-1 rounded-sm">
+        AD
+      </span>
+
+      <img
+        src={poster}
+        alt="Satyam Metro Showstopper"
+        className="h-48 w-full border border-[#9e7242]/50 p-1 object-cover bg-white rounded-sm hover:scale-[1.02] transition-transform duration-200 cursor-pointer"
+      />
+    </a>
+
+  </div>
+</div>
+
   );
 };
 

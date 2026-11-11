@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { User, Phone, X } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns, baseurl } from '../key/key';
 import { createMessageWithAddress, messageTemplates } from '../key/messageUtils';
 import { apiPostRequest } from "../utils/api/post";
-import logo from "../assets/showstopper-logo.avif";
-
+import satyamLogo from "../assets/satyam-metro-logo.avif";
 const InterestForm = ({ onClose, mode }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -187,150 +186,202 @@ const handleSubmit = async (e) => {
 
 
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
 
-      <div className="relative w-full max-w-lg overflow-hidden rounded-xl bg-white shadow-2xl mx-4">
+return (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3">
 
-        {/* Header */}
-        <div className="relative animated-gradient py-4 text-center">
-          <h2 className="text-2xl font-semibold text-white">
-            {formHeader}
-          </h2>
+    <div className="relative w-full max-w-md overflow-hidden bg-white shadow-2xl mx-3">
+
+      {/* Close */}
+      <button
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute right-3 top-3 z-10 text-gray-500 hover:text-[var(--clr-p)] transition-colors"
+      >
+        <X size={21} />
+      </button>
+
+      {/* Logo */}
+      <div className="flex justify-center pt-6 pb-2">
+        <img
+          src={satyamLogo}
+          alt="Satyam Metro Showstopper Logo"
+          className="w-40 h-auto object-contain"
+        />
+      </div>
+
+      {/* Heading */}
+      <div className="px-4 pb-3 text-center">
+        <h2 className="text-base sm:text-lg font-semibold text-gray-800">
+          {formHeader}
+        </h2>
+
+        <p className="mt-1 text-xs text-gray-500">
+          Please enter your details to learn more about this project.
+        </p>
+      </div>
+
+      {/* Alerts */}
+      {showSuccessAlert && (
+        <div className="mx-4 bg-green-100 text-green-700 text-center text-xs py-2">
+          Interest submitted successfully ✅
+        </div>
+      )}
+
+      {showFailureAlert && (
+        <div className="mx-4 bg-red-100 text-red-700 text-center text-xs py-2">
+          Failed to submit interest ❌
+        </div>
+      )}
+
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="px-4 pt-2 pb-4 space-y-3">
+
+        {/* Name and Mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+          {/* Name */}
+          <div>
+            <input
+              type="text"
+              placeholder="Name *"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              required
+              className="w-full rounded-none border-0 border-b border-gray-300 px-3 py-3 text-sm text-gray-800 outline-none focus:border-[var(--clr-p)] placeholder:text-gray-500"
+            />
+
+            {errors.name && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.name}
+              </p>
+            )}
+          </div>
+
+          {/* Mobile */}
+          <div>
+            <div className="flex items-center border-b border-gray-300 focus-within:border-[var(--clr-p)]">
+              <span className="px-2 text-sm text-[var(--clr-p)]">
+                +91
+              </span>
+
+              <input
+                type="tel"
+                inputMode="numeric"
+                placeholder="Mobile *"
+                value={formData.mobile}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    mobile: e.target.value.replace(/\D/g, "").slice(0, 10)
+                  })
+                }
+                required
+                maxLength={10}
+                className="w-full rounded-none px-2 py-3 text-sm outline-none placeholder:text-gray-500"
+              />
+            </div>
+
+            {errors.mobile && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.mobile}
+              </p>
+            )}
+          </div>
+
+        </div>
+
+        {/* Email */}
+        <div>
+          <input
+            type="email"
+            placeholder="Email (Optional)"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            className="w-full rounded-none border-0 border-b border-gray-300 px-3 py-3 text-sm text-gray-800 outline-none focus:border-[var(--clr-p)] placeholder:text-gray-500"
+          />
+
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.email}
+            </p>
+          )}
+        </div>
+
+        {/* Consent */}
+        <div className="space-y-1 pt-1">
+          <label className="flex items-start gap-2 cursor-pointer">
+
+            <input
+              type="checkbox"
+              checked={consentChecked}
+              onChange={(e) => {
+                setConsentChecked(e.target.checked);
+                setConsentError(false);
+              }}
+              className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[var(--clr-p)]"
+            />
+
+            <span className="text-[10px] text-gray-500 leading-relaxed">
+              I agree to the{" "}
+              <a
+                href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--clr-p)] hover:underline"
+              >
+                Privacy Policy
+              </a>
+              . Your data is safe and secure with us.
+            </span>
+
+          </label>
+
+          {consentError && (
+            <p className="text-red-500 text-xs font-medium">
+              Please accept the consent to proceed.
+            </p>
+          )}
+        </div>
+
+        {/* Submit */}
+        <div className="flex justify-center pt-2">
           <button
-            onClick={onClose}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
+            type="submit"
+            disabled={loading}
+            style={{
+              background: "linear-gradient(135deg, var(--clr-p), var(--clr-s))"
+            }}
+            className="w-full sm:w-auto px-10 py-2.5 text-sm font-semibold text-white rounded-sm shadow-sm hover:opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            <X size={28} strokeWidth={3} />
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </div>
 
-        {/* Alerts */}
-        {showSuccessAlert && (
-          <div className="bg-green-100 text-green-700 text-center py-2">
-            Interest submitted successfully ✅
-          </div>
-        )}
+      </form>
 
-        {showFailureAlert && (
-          <div className="bg-red-100 text-red-700 text-center py-2">
-            Failed to submit interest ❌
-          </div>
-        )}
+      {/* Contact Footer */}
+      <a
+        href="tel:+919167478723"
+        style={{
+          background: "linear-gradient(135deg, var(--clr-p), var(--clr-s))"
+        }}
+        className="flex items-center justify-center gap-2 py-2.5 text-white hover:opacity-90 transition-all"
+      >
+        <Phone size={16} fill="white" />
+        <span className="text-base font-medium">
+          +91 9167478723
+        </span>
+      </a>
 
-        {/* Content */}
-        <div className="px-8 pt-6 pb-10 flex flex-col items-center">
-
-          {/* Logo */}
-          {/* <div className="mb-6 bg-black p-4 rounded-sm border border-yellow-600/50 w-full max-w-[320px] text-center shadow-lg">
-            <div className="text-[10px] tracking-[0.3em] text-gray-300 uppercase">
-              Codename
-            </div>
-            <div className="text-2xl font-serif tracking-widest text-[#D4AF37] font-light">
-              SHOWSTOPPER
-            </div>
-            <div className="text-[10px] tracking-[0.2em] text-gray-300 uppercase border-t border-gray-700 mt-1 pt-1">
-              Navi - Mumbai
-            </div>
-          </div> */}
-           <img
-              src={logo}
-              alt="Satyam Metro Showstopper Logo"
-              className="h-15 w-46 mb-4 border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200"
-            />
-
-          <p className="text-gray-700 font-medium mb-6 text-center">
-            Please Enter Your Details To Learn More About This Project
-          </p>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="w-full space-y-4">
-
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex-1">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-[#A67C52]/50"
-                />
-                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-              </div>
-
-              <div className="flex-1">
-                <input
-                  type="text"
-                  placeholder="Mobile"
-                  value={formData.mobile}
-                  onChange={(e) =>
-                    setFormData({ ...formData, mobile: e.target.value })
-                  }
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-[#A67C52]/50"
-                />
-                {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
-              </div>
-            </div>
-
-            <div>
-              <input
-                type="email"
-                placeholder="Email (Optional)"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-[#A67C52]/50"
-              />
-              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-            </div>
-
-            {/* Consent Checkbox */}
-            <div className="space-y-2">
-              <label className="flex items-start gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={consentChecked}
-                  onChange={(e) => {
-                    setConsentChecked(e.target.checked);
-                    setConsentError(false);
-                  }}
-                  className="mt-1 w-4 h-4 text-[#A67C48] border-[#9e7242] rounded focus:ring-[#A67C48]"
-                />
-                
-<span className="text-[10px] text-gray-700 leading-relaxed">
-  I agree to the{" "}
-  <a href="/privacy" className="text-blue-600 hover:underline">
-    Privacy Policy
-  </a>
-  . Your data is safe and secure with us. Don't worry!
-</span>
-
-              </label>
-              {consentError && (
-                <p className="text-red-500 text-xs font-medium">Please accept the consent to proceed</p>
-              )}
-            </div>
-
-            {/* Submit */}
-            <div className="flex justify-center pt-4">
-              <button
-                type="submit"
-                disabled={loading}
-                className="animated-gradient text-white text-xl px-16 py-3 rounded-full shadow-lg hover:brightness-110 active:scale-95"
-              >
-                {loading ? 'Submitting...' : 'Submit'}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default InterestForm;

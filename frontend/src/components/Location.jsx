@@ -53,63 +53,91 @@ const Location = () => {
     }
   ];
 
-  return (
-    <section id='location' className="bg-white py-4 px-2 max-w-7xl mx-auto">
-      {/* Header Section */}
-      <div className="mb-1">
-        <h2 className="text-3xl font-bold text-slate-800 mb-6">Location Details</h2>
-        <p className="text-gray-700 text-lg leading-relaxed">
-          Strategically located in <span className="font-semibold">Sector 20, Kharghar</span> — where every destination is within effortless reach via rail, metro, expressway, and airport routes.
-        </p>
-      </div>
+ 
+return (
+  <section
+    id="location"
+    className="bg-white py-8 px-4 lg:px-6 max-w-7xl mx-auto"
+  >
+    {/* Header Section */}
+    <div className="text-center mb-6 lg:mb-8">
+      <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-semibold text-[#9e7242]">
+        Find Your Perfect Location
+      </span>
 
-      {/* Map Section */}
-      <div className="w-full h-112.5 rounded-lg overflow-hidden border border-gray-200 shadow-sm mb-6 relative">
-        <iframe
-          title="Satyam Metro Showstopper Location"
-          src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.234!2d${contactConfig.propertyLocation.longitude}!3d${contactConfig.propertyLocation.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzUwLjIiTiA3M8KwMDQnMjQuMSJF!5e0!3m2!1sen!2sin!4v1234567890`}
-          className="w-full h-full border-0"
-          allowFullScreen=""
-          loading="lazy"
-        ></iframe>
-        
-        {/* Custom Marker Overlay */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full pointer-events-none z-10">
-          <div className="relative">
-            <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#A67C48] shadow-lg animate-bounce">
-              <img 
-                src={oneCrestBuilding} 
-                alt="One Crest project location marker - Satyam Metro Showstopper Sector 20 Kharghar Navi Mumbai" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-[#A67C48]"></div>
+      <h2 className="text-xl md:text-2xl font-bold text-slate-900 mt-2">
+        Location <span className="text-[#9e7242]">Details</span>
+      </h2>
+
+      <div className="w-12 h-[2px] mx-auto mt-3 animated-gradient" />
+
+      <p className="text-xs md:text-sm text-gray-600 leading-6 max-w-3xl mx-auto mt-4">
+        Strategically located in{" "}
+        <span className="font-semibold text-slate-900">
+          Sector 20, Kharghar
+        </span>{" "}
+        — where every destination is within easy reach through rail, metro,
+        expressway, and airport connectivity.
+      </p>
+    </div>
+
+    {/* Map Section */}
+    <div className="w-full h-[280px] sm:h-[350px] lg:h-[430px] overflow-hidden border border-[#9e7242]/25 shadow-sm mb-7 relative bg-gray-50">
+      <iframe
+        title="Satyam Metro Showstopper Location"
+        src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.234!2d${contactConfig.propertyLocation.longitude}!3d${contactConfig.propertyLocation.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzUwLjIiTiA3M8KwMDQnMjQuMSJF!5e0!3m2!1sen!2sin!4v1234567890`}
+        className="w-full h-full border-0"
+        allowFullScreen
+        loading="lazy"
+      />
+
+      {/* Custom Marker Overlay */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full pointer-events-none z-10">
+        <div className="relative">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 overflow-hidden border-[3px] border-[#9e7242] shadow-lg">
+            <img
+              src={oneCrestBuilding}
+              alt="One Crest project location marker - Satyam Metro Showstopper Sector 20 Kharghar Navi Mumbai"
+              className="w-full h-full object-cover"
+            />
           </div>
+
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[7px] border-r-[7px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#9e7242]" />
         </div>
       </div>
+    </div>
 
-      {/* Connectivity Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-6 px-8">
-        {locationData.map((section, index) => (
-          <div key={index} className="flex flex-col">
-            <h3 className="text-xl font-bold text-slate-900 border-b border-gray-300 pb-3 mb-6">
-              {section.category}
-            </h3>
-            <ul className="space-y-2">
-              {section.items.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 group">
-                  <span className="text-[#A67C48] font-bold text-lg -mt-0.5">✦</span>
-                  <span className="text-gray-700 text-[15px] font-medium group-hover:text-black transition-colors">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-5">
+      {locationData.map((section, index) => (
+        <div
+          key={index}
+          className="border border-[#9e7242]/20 bg-white p-4 shadow-sm transition-all duration-200 hover:border-[#9e7242]/50 hover:shadow-md"
+        >
+          {/* Category Heading */}
+          <h3 className="text-sm font-bold text-slate-900 border-b border-[#9e7242]/20 pb-2.5 mb-3">
+            {section.category}
+          </h3>
+
+          {/* Location Items */}
+          <ul className="space-y-2">
+            {section.items.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-2 group">
+                <span className="text-[#f09051] text-xs mt-1 shrink-0">
+                  ✦
+                </span>
+
+                <span className="text-xs md:text-[13px] text-gray-600 leading-5 font-medium group-hover:text-slate-900 transition-colors">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
 };
 
 export default Location;
