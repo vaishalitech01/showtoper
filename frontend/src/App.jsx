@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import PublicLayout from "./layouts/PublicLayout";
@@ -10,60 +10,88 @@ import AdminPage from "./pages/AdminPage";
 
 function App() {
   useEffect(() => {
-    if (!navigator.geolocation) {
-      console.log("Geolocation not supported");
-      window.user_address = null;
-      return;
-    }
+    const fetchUserLocation = async () => {
+      try {
+        const response = await fetch("https://ipinfo.io/json");
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        // console.log("Latitude:", latitude);
-        // console.log("Longitude:", longitude);
+        if (!response.ok) {
+          throw new Error("Failed to fetch IP location");
+        }
 
-        reverseGeocode(latitude, longitude);
-      },
-      (error) => {
-        console.log("Location permission denied or error:", error.message);
+        const data = await response.json();
+
+        const address = `This is approximate location Based On Users IP Address
+IP: ${data.ip || "Not available"}
+City: ${data.city || "Not available"}
+State: ${data.region || "Not available"}
+Country: ${data.country || "Not available"}`;
+
+        window.user_address = address;
+
+        console.log("User Location:", address);
+      } catch (error) {
+        console.error("IP location error:", error);
         window.user_address = null;
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0,
       }
-    );
+    };
+
+    fetchUserLocation();
   }, []);
 
-  const reverseGeocode = async (lat, lng) => {
-    try {
-      const API_KEY = "AIzaSyDGwpUp3hE5qGlPVPQf056b2sWybbnePo0";
+  // useEffect(() => {
+  //   if (!navigator.geolocation) {
+  //     console.log("Geolocation not supported");
+  //     window.user_address = null;
+  //     return;
+  //   }
 
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`
-      );
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       // console.log("Latitude:", latitude);
+  //       // console.log("Longitude:", longitude);
 
-      const data = await response.json();
+  //       reverseGeocode(latitude, longitude);
+  //     },
+  //     (error) => {
+  //       console.log("Location permission denied or error:", error.message);
+  //       window.user_address = null;
+  //     },
+  //     {
+  //       enableHighAccuracy: true,
+  //       timeout: 10000,
+  //       maximumAge: 0,
+  //     }
+  //   );
+  // }, []);
 
-      if (data.status === "OK") {
-        const address = data.results[0];
-        // console.log("Full Address:", address.formatted_address);
-        
-        // Set user address globally
-        window.user_address = address.formatted_address;
-      } else {
-        window.user_address = null;
-      }
-    } catch (err) {
-      console.error("Geocoding error:", err);
-      window.user_address = null;
-    }
-  };
+  // const reverseGeocode = async (lat, lng) => {
+  //   try {
+  //     const API_KEY = "AIzaSyDGwpUp3hE5qGlPVPQf056b2sWybbnePo0";
+
+  //     const response = await fetch(
+  //       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`
+  //     );
+
+  //     const data = await response.json();
+
+  //     if (data.status === "OK") {
+  //       const address = data.results[0];
+  //       // console.log("Full Address:", address.formatted_address);
+
+  //       // Set user address globally
+  //       window.user_address = address.formatted_address;
+  //     } else {
+  //       window.user_address = null;
+  //     }
+  //   } catch (err) {
+  //     console.error("Geocoding error:", err);
+  //     window.user_address = null;
+  //   }
+  // };
   return (
     <BrowserRouter>
       <Routes>
-
         {/* 🌐 Public Pages */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
@@ -83,7 +111,6 @@ function App() {
 
         {/* Catch all - redirect to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
-
       </Routes>
     </BrowserRouter>
   );
