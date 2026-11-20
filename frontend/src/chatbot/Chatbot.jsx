@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from "react";
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
-
 import { credentials, emailKeys,regexPatterns } from "../key/key";
 import { apiPostRequest } from "../utils/api/post";
 

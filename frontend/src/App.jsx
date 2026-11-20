@@ -91,6 +91,7 @@ Country: ${data.country || "Not available"}`;
   // };
   return (
     <BrowserRouter>
+    
       <Routes>
         {/* 🌐 Public Pages */}
         <Route element={<PublicLayout />}>
