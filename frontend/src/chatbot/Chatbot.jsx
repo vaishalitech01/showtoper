@@ -586,11 +586,11 @@ return(
   </div>
 
   {/* Live Countdown Pill */}
-  {secondsLeft !== null && !submittedRef.current && (
+  {/* {secondsLeft !== null && !submittedRef.current && (
     <span className="text-[8px] font-medium bg-white/20 px-2 py-0.3 rounded-full whitespace-nowrap">
       Auto-submit: {secondsLeft}s
     </span>
-  )}
+  )} */}
 
   <button
     className="p-1 hover:bg-white/20 rounded transition"
